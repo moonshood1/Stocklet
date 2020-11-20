@@ -1,0 +1,31 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %} Modification d'une catégorie {% endblock %}
+
+{% block body %}
+<div class="content-container">
+  <div class="container-fluid">
+        <h1>Modification de la catégorie : {{category.categoryName}} </h1> 
+
+      {{ form_start(form) }}
+      
+            <div class="row my-5">
+                    <div class="col">
+                            <div class="alert alert-light bg-light">
+                                    <h2> Informations générales </h2>
+                                    {{ form_row(form.categoryName) }}
+                                    {{ form_row(form.categoryDescription) }}
+                            </div>
+                    </div>
+                    <div class="col">
+                            <div class="alert alert-light bg-light">
+                                    <h2> Confirmation </h2>
+                                    <hr>
+                                    <button type="submit" class="btn btn-success">Enregistrer la modification </button>
+                            </div>
+                    </div>
+            </div>
+      {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %}

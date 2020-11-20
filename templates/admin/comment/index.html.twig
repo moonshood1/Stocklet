@@ -1,0 +1,45 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Commentaires{% endblock %}
+
+{% block body %}
+    <div class="content-container">
+        <div class="container-fluid">
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-4 text-center uppercase">Administration des Commentaires</h1>
+                </div>
+            </div>
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Date</th>                        
+                        <th scope="col">Auteur</th>
+                        <th scope="col">Commentaire</th>
+                        <th scope="col">Reactions</th>
+                        <th scope="col">Produit</th>
+                        <th scope="col" class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for comment in pagination.data %}
+                    <tr>
+                        <td>{{ comment.createdAt|date('d/m/Y - H:i') }}</td>
+                        <td> {{ comment.author.firstName }} {{ comment.author.lastName }} </td>
+                        <td>{{ comment.content|raw }}</td>
+                        <td>
+                            <i class="fas fa-frown"></i> {{ comment.dislikes|length }}
+                            <i class="fas fa-heart"></i> {{ comment.likes|length }} 
+                            <i class="fas fa-comments"></i> 0
+                        </td>
+                        <td>{{ comment.product.productName }}</td>
+                        <td class="text-center">
+                            <a href="{{ path('admin_comment_delete', {'id': comment.id }) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {{ pagination.display() }}  
+    </div>
+{% endblock %}

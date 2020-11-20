@@ -1,0 +1,136 @@
+{% extends "base.html.twig" %}
+{% block title %}Mon compte{% endblock %}
+{% block body %}
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/user.css"> 
+{% include "partials/header.html.twig" %}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+        {% include "partials/user_menu.html.twig" %}
+        </div>
+        <div class="col-md-9">
+          <div class="contain_right">
+          {% set section_title = "Infos personelles" %}
+            {% include "partials/user_header.html.twig" %}
+            <div class="contain_body">
+              <div class="edition">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="image">
+                      <img
+                      {% if user.picture is null and user.pictureName is null %}
+                          src="https://via.placeholder.com/150C"
+                        {% elseif user.picture is null %}
+                          src="/images/avatar/{{user.pictureName}}"
+                          {% else %}
+                            src="{{ user.picture }}"
+                      {% endif %}
+                        alt=""
+                        class="avatar avatar-medium"
+                      />
+                      &nbsp; {{ user.firstName }} {{ user.lastName }}
+                    </div>          
+                  </div>
+                  <div class="col-md-4 offset-md-2">
+                    <div class="edit">
+                      <a href="{{ path('account_profile') }} " class="edit_button"
+                        ><i class="fas fa-user-edit"></i> Modifier le profil</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="container px-1">
+                <div class="row mx-3 mt-4">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="firstName">Prénoms</label>
+                      <input
+                        type="text"
+                        name="firstName"
+                        id="firstName"
+                        class="form-control"
+                        value="{{ user.firstName }}"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="lastName">Nom</label>
+                      <input
+                        type="text"
+                        name="lastName"
+                        id="lastName"
+                        class="form-control"
+                        value="{{ user.lastName }}"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row mx-3">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label for="city">Url de l'avatar</label>
+                      <input
+                        type="text"
+                        name="city"
+                        id="city"
+                        class="form-control"
+                        value="{{ user.picture }}"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-8">
+                    <div class="form-group">
+                      <label for="quartier">Email</label>
+                      <input
+                        type="text"
+                        name="quartier"
+                        id="quartier"
+                        class="form-control"
+                        value="{{ user.email }}"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row mx-3">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="phoneNumber">Numéro de téléphone</label>
+                      <input
+                        type="text"
+                        name="phoneNumber"
+                        id="phoneNumber"
+                        class="form-control"
+                        value="{{ user.userPhone }}"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <label for="address">Adresse complète</label>
+                      <input
+                        type="text"
+                        name="address"
+                        id="address"
+                        class="form-control"
+                        value="{{ user.address }}"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Utilisateurs Stocklet{% endblock %}
+
+{% block body %}
+    <div class="content-container">
+  <div class="container-fluid">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4 text-center uppercase">Administration des utilisateurs</h1>
+            </div>
+        </div>
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                    <th scope="col">Prénoms </th>
+                    <th scope="col">Nom </th>
+                    <th scope="col">Email </th>
+                    <th scope="col">Adresse </th>
+                    <th scope="col" class="text-center">Telephone </th>
+                    <th scope="col" class="text-center">Nb/Commandes</th>
+                    <th scope="col" class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in pagination.data %}
+                    <tr>
+                        <td>{{ user.firstName }}</td>                      
+                        <td>{{ user.lastName }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.address }}</td>
+                        <td class="text-center">{{ user.userPhone }}</td>
+                        <td class="text-center">{{ user.orders | length  }}</td>
+                        <td class="text-center">
+                            <a href="{{ path('admin_user_show', {'id': user.id} ) }}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                            <a href="{{ path('admin_user_delete', {'id': user.id} ) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {{ pagination.display() }}          
+        </div>
+    </div>
+{% endblock %}

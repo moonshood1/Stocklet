@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+{% block body %}
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/cart.css">
+{% include "partials/header.html.twig" %}
+    <div class="container">
+        <div class="card">
+        {% include "partials/menu.html.twig" %}
+        {% if items | length > 0 %}
+            <div class="card-body">
+                {% for item in items %}
+                <div class="row">
+                    <div class="col-md-1">
+                        <img
+                            {% if item.product.leftPic1URL is null and item.product.leftPic1Name %}
+                                src="/uploads/images/product_left/{{item.product.leftPic1Name}}"
+                            {% else %}
+                                src="{{item.product.leftPic1URL}}"
+                            {% endif %}
+                            alt="Image de {{ item.product.productName }}"class="product product-mini"
+                        />
+                    </div>
+                    <div class="col-md-4">
+                        <p class="productTitle">{{ item.product.productName }}</p>
+                        <p class="brand"><b class="brandy">Marque :</b> {{ item.product.brand }}</p>
+                    </div>
+                    <div class="col-md-2">
+                        <p class="priceTitle">Prix</p>
+                        <p class="price">{{ item.product.unitPrice }} FCFA</p>
+                    </div>
+                    <div class="col-md-2">
+                        <p class="qtyTitle">Quantité</p>
+                        <div class="qty">{{ item.quantity }}</div>
+                    </div>
+                    <div class="col-md-2">
+                        <p class="totalTitle">Total</p>
+                        <p class="total">{{ item.product.unitPrice * item.quantity }} FCFA</p>
+                    </div>
+                    <div class="col-md-1 mt-4">
+                        <a href="{{path('cart_remove', {'id': item.product.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="promo">
+            <p class="promoTitle">
+            <b>Code Promo:</b
+            ><span id="promoCode"
+                >STOCKLET20<i class="fas fa-check-circle"></i></span
+            ><span id="promoMessage"
+                >Felicitations !vous avez 20% de réduction</span
+            >
+            <span id="promoDiscounTitle"
+                >Remise: <span id="promoDiscount">6 000 FCFA</span></span
+            >
+            </p>
+        </div>
+        <hr />
+        <div class="total">
+            <p class="totalAmount float-right">
+            Montant Total à payer: <span id="total"> {{ total }} FCFA</span>
+            </p>
+        </div>
+        <div class="purchase">
+            <p class="float-left">
+            <a href="{{ path('home') }}"><i class="fas fa-arrow-left"></i></a> &nbsp; Retour au
+            menu
+            </p>
+            <p class="float-right"><button id="next"><a href="{{ path('checkout_index') }}" style="text-decoration: none; color: #fff"> Continuer</a></button></p>
+        </div>
+        {% else %}
+            <h3 class="ml-2"> Votre panier est vide</h3><br>
+            <a href="{{ path('home') }}" class="ml-2">Retour à l'accueil pour commander</a>
+        {% endif %}
+    </div>
+{% endblock %}
+{% block javascripts %}
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+{% endblock %}

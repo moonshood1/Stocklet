@@ -1,0 +1,53 @@
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">{{ online.productName }} </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img 
+                                {% if online.leftPic1Url is null %}
+                                    src="/uploads/images/product_left/{{ online.leftPic1Name }}"
+                                {% else %}
+                                    src="{{ online.leftPic1Url }}"
+                                {% endif %} 
+                                alt="" width="100%" height="100%"
+                            />
+                        </div>
+                        <div class="col-md-8">
+                            <p class="modal-brand">par :<i> {{ online.brand }}</i></p>
+                            <p class="modal-price"><b>{{ online.unitPrice }} FCFA</b></p>
+                            <p class="modal-description">
+                                {{ online.productDescription1|raw|slice(0,100) }}...
+                            </p>
+                            <div class="row">
+                                <div class="col-md-4 square-cmd">
+                                    <p>Commandes : <b>{{ online.orders|length }}</b></p>
+                                </div>
+                                <div class="col-md-4 square-cmnt">
+                                    <p>Commentaires : <b>{{ online.comments|length }}</b></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="actions">
+                                    <a href="{{ path('admin_products_show',{'id': online.id})}}" class="btn btn-success"><i class="fas fa-arrow-right"></i>Page complète</a>
+                                    <a href="{{ path('admin_products_edit', {'id': online.id } ) }}" class="btn btn-primary"><i class="fas fa-edit"></i> Modifier</a>
+                                    <a href="{{ path('admin_products_delete', {'id': online.id} ) }}" class="btn btn-danger"><i class="fas fa-trash"></i> Supprimer</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <p class="date">Créé le {{ online.createdAt|date('d/m/Y') }}</p>
+            </div>                            
+        </div>
+    </div>            
+</div> 

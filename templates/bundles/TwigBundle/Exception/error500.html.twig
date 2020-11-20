@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+{% block title %}Erreur Interne{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="/css/500.css">
+<div class="full-screen">
+    <div class='container'>
+        <span class="error-num">5</span>
+        <div class='eye'></div>
+        <div class='eye'></div>
+        <p class="sub-text">Erreur interne! Quelque chose s'est mal passé.Nous <span class="italic">essayons</span> de trouver une solution.</p>
+        <a href="{{ path('home') }}">Retour a Stocklet</a>
+    </div>
+</div>    
+{% endblock %}
+{% block javascripts %}
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(".full-screen").mousemove(function(event) {
+            var eye = $(".eye");
+            var x = (eye.offset().left) + (eye.width() / 2);
+            var y = (eye.offset().top) + (eye.height() / 2);
+            var rad = Math.atan2(event.pageX - x, event.pageY - y);
+            var rot = (rad * (180 / Math.PI) * -1) + 180;
+            eye.css({
+                '-webkit-transform': 'rotate(' + rot + 'deg)',
+                '-moz-transform': 'rotate(' + rot + 'deg)',
+                '-ms-transform': 'rotate(' + rot + 'deg)',
+                'transform': 'rotate(' + rot + 'deg)'
+            });
+        });
+    </script>
+{% endblock %}

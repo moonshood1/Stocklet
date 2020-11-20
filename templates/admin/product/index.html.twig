@@ -1,0 +1,82 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Produits Stocklet{% endblock %}
+
+{% block body %}
+<div class="content-container">
+  <div class="container-fluid">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4 text-center uppercase">Administration des produits de Stocklet</h1>
+        </div>
+    </div>
+        <h3 class="my-4">Produit à la une aujourd'hui</h3>
+        {% if online is null %}
+            <p><i>Aucun produit en ligne aujourd'hui</i></p>
+        {% else %}
+        <div class="blog-card">
+            <div class="meta">
+            {% if online.rightPic1Url is null %}
+                <div class="photo" style="background-image: url(/uploads/images/product_right/{{online.rightPic1Name}})"></div>
+            {% else %}
+                <div class="photo" style="background-image: url({{ online.rightPic1Url }})"></div>
+            {% endif %}
+                <ul class="details">
+                    <li><i class="fas fa-shopping-cart"></i> {{ online.orders | length }}</li>
+                    <li><i class="fas fa-calendar"></i> {{ online.createdAt|date('d/m/Y') }}</li>
+                    <li>
+                        <ul>
+                            <li><i class="fas fa-bookmark"></i> {{ online.category.categoryName }}</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="description">
+                <h1>{{ online.productName }}</h1>
+                <h2>{{ online.brand }}</h2>
+                <p> {{ online.productDescription1 | raw | slice(0,100) }}...</p>
+                    <button type="button" class="btn trigger btn-secondary" data-toggle="modal" data-target=".bd-example-modal-lg">
+                        Aperçu
+                    </button>
+            </div>
+            {% include "admin/partials/product_modal.html.twig" %}
+        </div>
+        {% endif %}
+        <h3 class="my-2">Tableau des produits</h3>
+            <a href="{{ path('admin_products_create') }}" class="btn btn-primary mt-3 mb-3"><i class="fas fa-plus fa-2x"></i></a>
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                    <th scope="col">Nom du produit</th>
+                    <th scope="col" class="text-center">Prix</th>
+                    <th scope="col" class="text-center">Nb/Commandes</th>
+                    <th scope="col" class="text-center">Disponible</th>
+                    <th scope="col" class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for product in pagination.data %}
+                    <tr>
+                        <td>{{ product.productName }}</td>
+                        <td class="text-center">{{ product.unitPrice }} FCFA</td>
+                        <td class="text-center">{{ product.orders | length }}</td>
+                        <td class="text-center">{{ product.productAvailable }}</td>
+                        <td class="text-center">
+                            {% if product.productAvailable == true %}
+                                <a href="{{ path('admin_products_edit', {'id': product.id } ) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                <a href="{{ path('admin_products_delete', {'id': product.id} ) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                <a href="{{ path('admin_products_show', {'id': product.id} ) }} " class="btn btn-secondary"><i class="fas fa-eye"></i></a>
+                            {% else %}
+                                <a href="{{ path('admin_products_edit', {'id': product.id } ) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                <a href="{{ path('admin_products_delete', {'id': product.id} ) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                <a href="{{ path('admin_products_switch', {'id': product.id} ) }}" class="btn btn-warning"><i class="fas fa-check-circle"></i></a>
+                                <a href="{{ path('admin_products_show', {'id': product.id} ) }} " class="btn btn-secondary"><i class="fas fa-eye"></i></a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {{ pagination.display() }}             
+        </div>
+{% endblock %}

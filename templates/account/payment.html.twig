@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Paiement{% endblock %}
+
+{% block body %}
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/user.css"> 
+{% include "partials/header.html.twig" %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            {% include "partials/user_menu.html.twig" %}
+        </div> 
+        <div class="col-md-9">
+            <div class="contain_right">
+                {% set section_title = "Paiement" %}
+                {% include "partials/user_header.html.twig" %}
+                <div class="contain_body">
+                    <div class="container px-1">
+                        <div class="row mx-3 mt-4">  
+                            <h4>Moyen de paiement: <b>Payqin</b></h4>                    
+                        </div>                                           
+                    </div>                                           
+                </div>
+            </div>           
+        </div>
+    </div>
+{% endblock %}

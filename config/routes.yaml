@@ -1,0 +1,11 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+oauth_google_check:
+  path: /oauth/check/{service}
+  controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+
+oauth_facebook_check:
+  path: /oauth/check/{service}
+  controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController

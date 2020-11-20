@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Page introuvable{% endblock %}
+{% block body %}
+<link rel="stylesheet" href="/css/404.css">
+<section class="page_404">
+	<div class="container">
+		<div class="row">	
+            <div class="col-sm-12 text-center">
+                <div class="four_zero_four_bg">
+                    <h1 class="text-center ">403</h1>
+                </div>
+                <div class="contant_box_404">
+                    <h3 class="h2">Vous n'avez pas accès a ce contenu !</h3>	
+                    <a href=" {{ path('home') }} " class="link_404">Retour à Stocklet</a>
+                </div>
+            </div>
+		</div>
+	</div>
+</section>
+{% endblock %}

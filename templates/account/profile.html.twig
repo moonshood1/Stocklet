@@ -1,0 +1,74 @@
+{% extends "base.html.twig" %}
+{% block title %}Modification du compte{% endblock %}
+{% block body %}
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/user.css"> 
+{% include "partials/header.html.twig" %}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+        {% include "partials/user_menu.html.twig" %}
+        </div>
+        <div class="col-md-9">
+          <div class="contain_right">
+          {% set section_title = "Modification des infos personelles" %}
+            {% include "partials/user_header.html.twig" %}
+            <div class="contain_body">
+              <div class="edition">
+                <div class="image">
+                  <img
+                  {% if user.picture is null and user.pictureName is null %}
+                      src="https://via.placeholder.com/150C"
+                    {% elseif user.picture is null %}
+                      src="/images/avatar/{{user.pictureName}}"
+                      {% else %}
+                        src="{{ user.picture }}"
+                  {% endif %}
+                  alt=""
+                  class="avatar avatar-medium"
+                  />
+                  &nbsp; {{ user.firstName }} {{ user.lastName }}
+                </div>
+              </div>
+              {{ form_start(form) }}
+                <div class="container px-1">
+                    <div class="row mx-3 mt-4">
+                      <div class="col-sm-6">
+                          {{ form_row(form.firstName) }}
+                      </div>
+                      <div class="col-sm-6">
+                          {{ form_row(form.lastName) }}
+                      </div>
+                    </div>
+                    <div class="row mx-3">
+                      <div class="col-sm-5">
+                          {{ form_row(form.email) }}
+                      </div>
+                      <div class="col-sm-4">
+                          {{ form_row(form.picture) }}
+                      </div>
+                      <div class="col-sm-3">
+                          {{ form_row(form.imageFile) }}
+                      </div>
+                    </div>
+                    <div class="row mx-3">
+                      <div class="col-md-4">
+                          {{ form_row(form.userPhone) }}
+                      </div>
+                      <div class="col-md-8">
+                          {{ form_row(form.address) }}
+                      </div>
+                    </div>
+                    <div class="ops mt-4">
+                      <a href="{{ path('account_index') }}" class="save_button">Annuler</a> &nbsp;
+                      <button type="submit" class="save_button butt" formnovalidate style="margin-top:0px;">Sauvegarder</button>
+                    </div>
+                </div>
+              </div>
+             {{ form_end(form) }}   
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

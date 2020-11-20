@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %}
+{% block title %}Mes commandes{% endblock %}
+{% block body %}
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/user.css"> 
+    {% include "partials/header.html.twig" %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                {% include "partials/user_menu.html.twig" %}
+            </div>
+            <div class="col-md-9">
+                <div class="contain_right">
+                    {% set section_title = "Historique des commandes" %}
+                    {% include "partials/user_header.html.twig" %}
+                    <div class="contain_body">
+                        <div class="container px-1">
+                            {% if user.orders is empty %}
+                                <div class="row mx-3 mt-3">
+                                    <div class="alert alert-warning">
+                                        <p> Aucune commande sur Stocklet pour le moment </p>
+                                    </div>
+                                    {% else %}
+                                    <table class="table table-hover">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>Produit commandé</th>
+                                                <th class="text-center">Moyen de paiement</th>
+                                                <th>Date de commande</th>
+                                                <th>Montant</th>
+                                            </tr>
+                                        </thead>
+                                        {% for order in user.orders %}
+                                            <tbody>
+                                                <tr>
+                                                    <td> {{ order.products.productName }} </td>
+                                                    <td class="text-center"><img src="https://www.payqin.com/wp-content/uploads/2020/09/n3-1.png" alt="" height="20" width="60"/></td>
+                                                    <td> {{ order.orderDate|date('d/m/Y - H:i') }} </td>
+                                                    <td> {{ order.orderTotalAmount }} FCFA </td>
+                                                </tr>
+                                            </tbody>                                        
+                                        {% endfor %}
+                                    </table>                          
+                            {% endif %}
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

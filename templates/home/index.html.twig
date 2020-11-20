@@ -1,0 +1,462 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+{% block body %}
+<link rel="stylesheet" href="/css/app.css">
+    <style>
+      .wrapper {
+        display: flex;
+        width: 500px;
+      }
+      .navigation {
+        margin-right: 20px;
+        margin-top: 55px;
+      }
+      .navigation ul {
+        margin-top: 50%;
+        list-style: none;
+      }
+      .navigation ul li {
+        padding-top: 5px;
+        cursor: pointer;
+      }
+      .navigation ul li img {
+        border: 3px solid #fff;
+        object-fit: cover;
+      }
+    </style>
+    {% include "partials/header.html.twig" %}
+    <div class="image-principale">
+      <img
+      {% if product.leftPic1URL is null and product.leftPic1Name %}
+        src="/uploads/images/product_left/{{ product.leftPic1Name }}"
+      {% else %}
+        src="{{ product.leftPic1URL }}"
+      {% endif %}
+        alt=""
+        style="width: 100%"
+      />
+      <div class="content">
+        <p class="module-price">
+          {{ product.unitPrice }} FCFA <br /><strike>{{ product.oldUnitPrice }} FCFA</strike> <br />
+        </p>
+        <p class="add_to_cart">
+          <a href="{{ path('cart_add', {'id': product.id}) }}" class="add_to_cart">Commander</a>
+        </p>
+      </div>
+    </div>
+    <div class="wrap" id="all_comments">
+      <div class="left">
+        <h2 class="brand">Stocklet</h2>
+        <div class="wrapper mt-5">
+          <div class="navigation">
+            <ul>
+            {% if product.leftPic1URL is null and product.leftPic1Name %}
+                <li>
+                  <img onclick="preview(this)" id="1" class="normal" src="/uploads/images/product_left/{{ product.leftPic1Name }}" height="61" width="61" alt=""/>
+                </li>
+                <li>
+                  <img onclick="preview(this)" id="2" class="normal" src="/uploads/images/product_left/{{ product.leftPic2Name }}" height="61" width="61" alt=""/>
+                </li>
+                <li>
+                  <img onclick="preview(this)" id="3" class="normal" src="/uploads/images/product_left/{{ product.leftPic3Name }}" height="61" width="61" alt=""/>
+                </li>
+            {% else %}
+                <li>
+                  <img onclick="preview(this)" id="1" class="normal" src="{{ product.leftPic1URL }}" height="61" width="61" alt=""/>
+                </li>
+                <li>
+                  <img onclick="preview(this)" id="2" class="normal" src="{{ product.leftPic2URL }}" height="61" width="61" alt=""/>
+                </li>
+                <li>
+                  <img onclick="preview(this)"id="3" class="normal" src="{{ product.leftPic3URL }}" height="61" width="61" alt="" />
+                </li>            
+            {% endif %}
+            </ul>
+          </div>
+          <img id="0" src="" height="450" width="450" alt="Preview" class="main" />
+        </div>
+      </div>
+      <div class="right">
+        {% if app.user %}
+          <div class="bs-offset-main bs-canvas-anim">
+            <p class="text-right mr-5 mt-2">
+                <a href="#" class="position-fixed" data-toggle="canvas" data-target="#bs-canvas-right" aria-expanded="false" aria-controls="bs-canvas-right"
+                  style="height: 25px;
+                  width: 25px;
+                  background-color: #1a237e;
+                  border-radius: 50%;
+                  display: inline-block;
+                  align-items: center;
+                  text-align: center;">
+                  <i class="fas fa-bars" style="color:#fff"></i>
+                </a>               
+            </p>
+          </div>
+          <div id="bs-canvas-right" class="bs-canvas bs-canvas-anim bs-canvas-right position-fixed h-100" style="background-color: rgb(252, 228, 236); z-index:2;">
+          <header class="bs-canvas-header p-3 overflow-auto" style="background-color: #1a237e">
+            <button type="button" class="bs-canvas-close float-left close" aria-label="Close">
+              <span aria-hidden="true" class="text-light">&times;</span>
+            </button>
+            <h4 class="d-inline-block text-light mb-0 float-right">Menu</h4>
+          </header>
+          <div class="bs-canvas-content py-2">
+            <ul style="list-style: none; color: #1a237e; font-family: AvenirNextLTPro-Bold;">
+              <li><i class="fas fa-user"></i><a href="{{ path('account_index') }}" style="color: #1a237e; font-family: AvenirNextLTPro-Bold;"> Mon compte</a></li>
+              <li class="mt-2"><i class="fas fa-shopping-bag"></i><a href="{{ path('cart_index') }}" style="color: #1a237e; font-family: AvenirNextLTPro-Bold;"> Mon Panier</a></li>
+              <li class="mt-5"><i class="fas fa-power-off"></i><a href=" {{ path('account_logout')}}" style="color: #1a237e; font-family: AvenirNextLTPro-Bold;"> Déconnexion</a></li>
+            </ul>
+          </div>
+        </div>
+        {% else %}
+          <div class="menu">
+            <p class="text-right mr-4 mt-2">
+              <a href=" {{ path('account_login') }} "style="font-family:AvenirNextLTPro-Medium;color: #1e316a;font-size: 16px;">Connexion</a> /
+              <a href=" {{ path('account_register') }} "style="font-family:AvenirNextLTPro-Medium;color: #1e316a;font-size: 16px;">Inscription</a>
+            </p>
+          </div>          
+        {% endif %}
+        <div style="height: 717" class="first">
+          <p class="brand">{{ product.brand }}</p>
+          <p class="productName">{{ product.productName }}</p>
+          <p class="price">{{ product.unitPrice }} FCFA <br><strike>{{ product.oldUnitPrice }} FCFA</strike> </p>
+          <p class="desc1">{{ product.productDescription1 }}</p>
+          <p class="desc2">
+            {{ product.productDescription2 }}
+          </p>
+          {% if product.currentStock == 0 %}
+            <p class="add_to_cart">
+              Malheureusement le stock du produit est epuisé , Revenez dans <b id="time"></b>  pour un nouveau produit
+            </p>
+            {% else %}
+              <p class="add_to_cart">
+                <a href="{{ path('cart_add', {'id': product.id}) }}" class="add_to_cart">Commander</a>
+              </p>
+          {% endif %}
+
+          <p class="ship">
+            Livrasion comprise. Livré sous 7 jours maximum
+          </p>
+        </div>
+        <div style="height: 836" class="second">
+          <p class="spec">Caractéristiques</p>
+          <p class="title1_spec">{{ product.spec1Title }}</p>
+          <p class="content_spec1">{{ product.spec1 }}</p>
+          <p class="title2_spec">{{ product.spec2Title }}</p>
+          <p class="content_spec2"> {{ product.spec2 }}</p>
+          <p class="title3_spec">{{ product.spec3Title }}</p>
+          <p class="content_spec3">{{ product.spec3 }}</p>
+        </div>
+        <div class="owl-carousel" style="height: 350">
+        {% if product.rightPic1Url is empty %}
+              <img src="/uploads/images/product_right/{{ product.rightPic1Name }}" alt="" height="170" width="235"/>
+              <img src="/uploads/images/product_right/{{ product.rightPic2Name }}" alt="" height="170" width="235"/>
+              <img src="/uploads/images/product_right/{{ product.rightPic3Name }}" alt="" height="170" width="235"/>
+              <img src="/uploads/images/product_right/{{ product.rightPic4Name }}" alt="" height="170" width="235"/>
+              <img src="/uploads/images/product_right/{{ product.rightPic5Name }}" alt="" height="170" width="235"/>
+          {% else %}
+            <img src="{{ product.rightPic1Url }}" alt="" height="170" width="235"/>
+            <img src="{{ product.rightPic2Url }}" alt="" height="170" width="235"/>
+            <img src="{{ product.rightPic3Url }}" alt="" height="170" width="235"/>
+            <img src="{{ product.rightPic4Url }}" alt="" height="170" width="235"/>
+            <img src="{{ product.rightPic5Url }}" alt="" height="170" width="235"/>       
+        {% endif %}
+        </div>
+        <div style="height: 677" class="comments">
+          <p class="comment_title">COMMENTAIRES <span class="comments_nb">({{ product.comments|length }})</span>
+          {% if app.user %}
+          {% else %}
+            <a href="{{ path('account_login') }}" class="add_to_cart" style="margin-left: 70px">
+              Connectez-vous pour commenter
+            </a>
+            {% endif %}
+          </p>
+          {% for comment in product.comments %}
+            <div class="row">
+              <div class="col-sm-2">
+              <img 
+                {% if comment.author.picture is null and comment.author.pictureName is null  %}
+                src="https://randomuser.me/api/portraits/men/84.jpg"  
+                {% elseif comment.author.picture is null %}
+                  src="/images/avatar/{{comment.author.pictureName}}" 
+                  {% else %}
+                    src="{{comment.author.picture}}" 
+                {% endif %}
+                alt=""
+                class="avatar avatar-medium"/>
+              </div>
+              <div class="col-sm-8">
+                <small style="font-family: AvenirNextLTPro-Bold; font-size: 14px; color: #1e316a;">{{ comment.author.firstName }} {{ comment.author.lastName }}
+                  <small style="font-family: AvenirNextLTPro-Medium; color: rgba(30, 49, 106, 0.32); font-size: 12px;">inscrit depuis 1 an </small>
+                </small>
+                <p style="font-family: AvenirNextLTPro-Regular;margin-top: 15px;color: #1e316a;font-size: 14px;">{{ comment.content }} <br />
+                  <a href="{{ path('comment_like',{'id': comment.id}) }}" class="btn-btn-link js-like">
+                    {% if app.user and comment.isLikedByUser(app.user) %}
+                      <i class="fas fa-heart" style="font-size: 14px"></i>
+                    {% else %}
+                      <i class="far fa-heart" style="font-size: 14px"></i>
+                    {% endif %}
+                    <span class="js-likes">{{ comment.likes|length }}</span>  
+                  </a> &nbsp;
+                  <a href="{{ path('comment_dislike',{'id': comment.id}) }}" class="btn-btn-link js-dislike">
+                    {% if app.user and comment.isDisLikedByUser(app.user) %}
+                      <i class="fas fa-frown" style="font-size: 14px"></i>
+                    {% else %}
+                      <i class="far fa-frown" style="font-size: 14px"></i>
+                    {% endif %}
+                  </a><span class="js-dislikes">{{ comment.dislikes|length }}</span>  &nbsp;
+                  <span style="color: #ff7d6d; font-family: AvenirNextLTPro-Medium">Répondre</span>
+                </p>
+              </div>
+              <div class="col-sm-2">
+                <small style=" font-family: AvenirNextLTPro-Medium; color: rgba(30, 49, 106, 0.32); font-size: 12px;">{{ comment.createdAt|date('d-m-Y') }}</small>
+              </div>
+            </div>
+          {% endfor %}
+          {% if app.user %}
+            <div class="container mt-4 mb-4">
+              {{ form_start(form, {'attr': {'id':'comment_form'} }) }}
+                  {{ form_row(form.content) }}
+                  {{ form_row(form.submit,{'attr':{'class':'add_to_cart'} }) }}
+              {{ form_end(form) }}
+            </div>
+          {% endif %} 
+        </div>
+        <section style="background-color: #1e316a">
+          <div style="height: 410px" class="contact">
+            <p class="contact_pre" style="color: white;  font-family: 'AvenirNextLTPro-Bold'; font-size: 30px;">
+              Contactez nous quand vous le souhaitez.
+            </p>
+            <div class="contact-card" style="padding-left: 62px; padding-right: 62px; background-color: #fff; width: 490px; ">
+              <p class="message_title">Envoyez nous un mail</p>
+              <p class="message_content">hello@STOCKLET.com</p>
+              <hr />
+              <p class="callus_title">Appelez nous </p>
+              <p class="callus_content">08 99 01 69</p>
+            </div>
+            <p class="features">
+              A Propos &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Garanties &nbsp; &nbsp; &nbsp;
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              &nbsp; FAQ's
+              <br />
+              STOCKLET &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              &nbsp; &nbsp; &nbsp; Livraisons &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Termes & Conditions <br />
+              Bureaux &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; Retours &nbsp; &nbsp; &nbsp;
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Politique de confidentialité <br />
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+    {% if product.currentStock > 0 %}
+      <div class="timer fixed-bottom">
+        <div class="progress">
+        {% set stock = product.currentStock / product.initialStock * 100 %}
+          <div class="pro-done" data-done="{{ stock }}">
+            Le stock du produit est à {{ stock|round }} %
+          </div>
+          <div id="time"></div>
+        </div>
+      </div>
+    {% endif %}
+{% endblock %}
+{% block javascripts %}
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="js/app.js"></script>
+<script>
+// Switch   
+const url = "http://127.0.0.1:8000/demain";
+const v = axios.get(url).then(function (response) {
+  // Initialisation du minuteur
+
+  var x = setInterval(function () {
+    // Date de fin d'affichage(demain) , on parse pour avoir une valeur millisecondes
+    const r = response.data.demain;
+    const d = new Date(r).getTime();
+
+    // Date d'aujourd'hui , on parse pour avoir une valeur millisecondes
+    const n = new Date().getTime();
+    // calcul de la différence entre demain et aujourdhui
+    const diff = d - n;
+
+    // calcul des j , h , m et s en fonctions de la diff
+
+    var h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    var s = Math.floor((diff % (1000 * 60)) / 1000);
+
+    // affichage de la valeur dans le html
+    document.getElementById("time").innerHTML = h + ":" + m + ":" + s;
+
+    // Appel de ma fonction switch à la fin du timer
+    const switchUrl = "http://127.0.0.1:8000/switch";
+    function launchSwitch() {
+      location.replace(switchUrl);
+    }
+    if (diff < 0) {
+      clearInterval(x);
+      launchSwitch();
+    }
+  }, 1000);
+});
+</script>
+<script>
+  /* const urlRes = "http://127.0.0.1:8000/payment/process";
+  const urlCheck = "https://business-api-2.ew.r.appspot.com/api/business/merchant";
+ function dat() {
+  axios.get(urlRes).then(function(response)
+  {
+    const d = response.data;
+
+    axios.post([
+      "https://business-api-2.ew.r.appspot.com/api/business/merchant",
+      d
+    ])
+  });
+ } */
+</script>
+<script>
+  // Carousel
+  var setImg = 1;
+  document.getElementById(0).src = document.getElementById(setImg).src;
+
+  function preview(img) {
+    document.getElementById(0).src = img.src;
+    setImg = img.id;
+  }
+</script>
+
+<script>
+  // Progress bar
+  const pro = document.querySelector(".pro-done");
+  setTimeout(() => {
+    pro.style.width = pro.getAttribute("data-done") + "%";
+    pro.style.opacity = 1;
+  }, 500);
+</script>
+
+<script>
+// Owl Carousel
+$(document).ready(function () {
+  $(".owl-carousel").owlCarousel({
+    loop: true,
+    margin: 10,
+    autoplay: true,
+    autoplayTimeout: 2000,
+    autoplayHoverPause: true,
+    nav: true,
+    responsive: {
+      0: {
+        items: 2,
+      },
+      900: {
+        items: 3,
+      },
+    },
+  });
+});
+</script>
+<script>
+  // Off Canvas
+  jQuery(document).ready(function ($) {
+    var bsDefaults = {
+        offset: false,
+        overlay: true,
+        width: "330px",
+      },
+      bsMain = $(".bs-offset-main"),
+      bsOverlay = $(".bs-canvas-overlay");
+
+    $('[data-toggle="canvas"][aria-expanded="false"]').on("click", function () {
+      var canvas = $(this).data("target"),
+        opts = $.extend({}, bsDefaults, $(canvas).data()),
+        prop = $(canvas).hasClass("bs-canvas-right")
+          ? "margin-right"
+          : "margin-left";
+
+      if (opts.width === "100%") opts.offset = false;
+
+      $(canvas).css("width", opts.width);
+      if (opts.offset && bsMain.length) bsMain.css(prop, opts.width);
+
+      $(canvas + " .bs-canvas-close").attr("aria-expanded", "true");
+      $('[data-toggle="canvas"][data-target="' + canvas + '"]').attr(
+        "aria-expanded",
+        "true"
+      );
+      if (opts.overlay && bsOverlay.length) bsOverlay.addClass("show");
+      return false;
+    });
+
+    $(".bs-canvas-close, .bs-canvas-overlay").on("click", function () {
+      var canvas, aria;
+      if ($(this).hasClass("bs-canvas-close")) {
+        canvas = $(this).closest(".bs-canvas");
+        aria = $(this).add(
+          $('[data-toggle="canvas"][data-target="#' + canvas.attr("id") + '"]')
+        );
+        if (bsMain.length)
+          bsMain.css(
+            $(canvas).hasClass("bs-canvas-right")
+              ? "margin-right"
+              : "margin-left",
+            ""
+          );
+      } else {
+        canvas = $(".bs-canvas");
+        aria = $('.bs-canvas-close, [data-toggle="canvas"]');
+        if (bsMain.length)
+          bsMain.css({
+            "margin-left": "",
+            "margin-right": "",
+          });
+      }
+      canvas.css("width", "");
+      aria.attr("aria-expanded", "false");
+      if (bsOverlay.length) bsOverlay.removeClass("show");
+      return false;
+    });
+  });
+</script>
+
+<script>
+  // Fonction de commentaire
+  var url_comment = "http://127.0.0.1:8000";
+  var comment_form = document.getElementById("comment_form");
+  var comment_list = document.getElementById("all_comments");
+
+  // Envoi des données du formulaire dans la bd
+  comment_form.addEventListener("submit", function (event) {
+    // Comportement par defaut enlevé (on ne recharge plus la page)
+    event.preventDefault();
+    // Appel a ajax
+    let xhr = new XMLHttpRequest();
+
+    // Creation d'une formData pour prendre les elements du formulaire
+    let formData = new FormData(comment_form);
+
+    // Methode post sur l'url pour envoyer les données
+    xhr.open("POST", url_comment);
+    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+    xhr.send(formData);
+
+    // Rechargement de la div des commentaires
+    $("#all_comments").load(location.href + " #all_comments");
+
+    // on vide la textarea quand c'est envoyé
+    var content = document.getElementById("comment_content");
+    content.value = "";
+  });
+</script>
+{% endblock %}

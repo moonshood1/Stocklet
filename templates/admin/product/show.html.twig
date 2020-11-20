@@ -1,0 +1,150 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %} {{ product.productName }} {% endblock %}
+
+{% block body %}
+    <div class="content-container">
+        <div class="container-fluid">      
+            <div class="jumbotron mt-2">
+                <h1 class="display-4">{{ product.productName }}</h1>
+                <hr class="my-4" />
+                <p class="lead">{{ product.productDescription1 }}...</p>
+                <div class="owl-carousel" style="height: 250">
+                {% if product.rightPic1Url is null %}
+                    <img src="/uploads/images/product_right/{{ product.rightPic1Name }}"alt="" height="250" />
+                    <img src="/uploads/images/product_right/{{ product.rightPic2Name }}" alt="" height="250" />
+                    <img src="/uploads/images/product_right/{{ product.rightPic3Name }}" alt="" height="250" />
+                    <img src="/uploads/images/product_right/{{ product.rightPic4Name }}" alt="" height="250" />
+                    <img src="/uploads/images/product_right/{{ product.rightPic5Name }}" alt="" height="250"/> 
+                {% else %}
+                    <img src="{{ product.rightPic1Url }}"alt="" height="250" />
+                    <img src="{{ product.rightPic2Url }}" alt="" height="250" />
+                    <img src="{{ product.rightPic3Url }}" alt="" height="250" />
+                    <img src="{{ product.rightPic4Url }}" alt="" height="250" />
+                    <img src="{{ product.rightPic5Url }}" alt="" height="250"/>                 
+                {% endif %}
+                </div>
+                <hr>
+                <p>Prix affiché <h3>{{ product.unitPrice }} FCFA </h3></p>
+                <p class="text-right">
+                    <a href="#" class="btn btn-primary">Modifier le produit</a>
+                    <a href="#" class="btn btn-warning">Modifier la disponibilité</a>
+                    <a href="#" class="btn btn-danger">Supprimer le produit</a>
+                </p>
+            </div>
+            <div class="row">
+            <div class="col-md-4">
+                <h3>Statistiques principales</h3>
+                <div class="card mt-2" style="width: 18rem;">
+                    <div class="card-body">
+                        <p>Nombre de commandes  : {{ product.orders|length }}</p>  <br>
+                        <p>Nombre de commentaires : {{ product.comments|length }}</p>  <br>
+                        <hr>
+                        <p>Total des ventes (24h): 240 500 FCFA</p> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+            {% if product.orders|length > 0 %}
+                <h3>Details des commandes du produit</h3>
+                    <table class="table table-hover">
+                        <thead class="thead-light">
+                        <th scope="col">#</th>
+                        <th scope="col" class="text-center">Date de commande</th>
+                        <th scope="col" class="text-center">Total</th>
+                        <th scope="col" class="text-center">Action</th>
+                        </thead>
+                        {% for order in product.orders %}
+                            <tbody>
+                            <td>{{order.id}}</td>
+                            <td class="text-center"> {{ order.orderDate|date('d/m/Y') }} </td>
+                            <td class="text-center"> {{ order.orderTotalAmount }} FCFA</td>
+                            <td class="text-center"><a href="{{ path('admin_order_show', {'id': order.id }) }}" class="btn btn-primary"><i class="fas fa-eye"></i></a></td>
+                            </tbody>                          
+                        {% endfor %}                  
+                    </table>
+                </div>                
+            </div>
+            {% else %}
+                <div class="alert alert-warning">Le produit n'a pas encore été commandé</div>
+            {% endif %}
+            </div>
+            <div class="container-fluid">                        
+                <div class="row">
+                    {% if product.comments|length > 0 %}
+                        <div class="col-sm-12">
+                            <h3 class="text-center"> Tous les commentaires sur le produit </h3>
+                            <table class="table table-hover">
+                                <thead class="thead-dark">
+                                <th scope="col">#</th>
+                                <th scope="col">Date de publication</th>
+                                <th scope="col">Commentaire</th>
+                                <th scope="col">Reactions</th>
+                                <th scope="col" class="text-center">Actions</th>
+                                </thead>
+                                {% for comment in product.comments %}
+                                    <tbody>
+                                        <td> {{ comment.id }} </td>
+                                        <td>{{ comment.createdAt|date('d/m/Y H:i') }}</td>
+                                        <td>{{ comment.content }}</td>
+                                        <td>
+                                            <i class="fas fa-frown"></i> {{comment.dislikes|length}}
+                                            <i class="fas fa-heart"></i> {{comment.likes|length}}
+                                            <i class="fas fa-comments"></i> 4
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="#" class="btn btn-danger"
+                                            ><i class="fas fa-trash"></i
+                                            ></a>
+                                        </td>
+                                    </tbody>                                  
+                                {% endfor %}
+                            </table>
+                        </div>                    
+                    {% else %}
+                        <div class="alert alert-warning">Aucun commentaire</div>
+                    {% endif %}
+                </div>
+                <h3>Les 4 utilisateurs ayant le plus commandés le produit</h3>
+                <div class="row">
+                    <div class="card-deck">
+                        <div class="card" style="width: 18rem;">
+                        <img class="avatar-admin mt-2" src="https://www.w3schools.com/bootstrap4/img_avatar3.png" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Card title</h5>
+                            <p class="card-text">Nombre de commandes : 4</p>
+                            <p class="card-text">Total vente : 45 000</p>
+                            <a href="#" class="btn btn-primary">Consulter le profil</a>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>                         
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $(".owl-carousel").owlCarousel({
+      loop: true,
+      margin: 10,
+      autoplay: true,
+      autoplayTimeout: 3000,
+      autoplayHoverPause: true,
+      nav: true,
+      responsive: {
+        0: {
+          items: 1,
+        },
+        900: {
+          items: 3,
+        },
+      },
+    });
+  });
+</script>
+{% endblock %}

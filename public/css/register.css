@@ -1,0 +1,112 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap");
+@font-face {
+  font-family: Gilroy-bold;
+  src: url(../fonts/Gilroy-ExtraBold.otf);
+}
+@font-face {
+  font-family: Gilroy-regular;
+  src: url(../fonts/Gilroy-Light.otf);
+}
+@font-face {
+  font-family: AvenirNextLTPro-Regular;
+  src: url(../fonts/AvenirNextLTPro-Regular.otf);
+}
+@font-face {
+  font-family: AvenirNextLTPro-Bold;
+  src: url(../fonts/AvenirNextLTPro-Bold.otf);
+}
+/* body {
+  background-attachment: fixed;
+  background-color: #bcbcc0;
+} */
+body {
+  background: url(../assets/images/back2.PNG) fixed center;
+}
+
+.card {
+  top: 10px;
+  left: 420px;
+  width: 600px;
+  height: 680px;
+  padding-bottom: 49px;
+  background-color: #fbfbf9;
+  border: 1px solid #eeeeee;
+}
+.title {
+  margin-right: auto;
+  margin-top: 15px;
+  margin-left: 50px;
+  font-size: 45px;
+  color: #1e316a;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: bold;
+}
+
+.welcome {
+  margin-top: 12px;
+  margin-left: 50px;
+  font-size: 20px;
+  color: #161925;
+  font-weight: bold;
+  font-family: Gilroy-bold;
+}
+
+.signup {
+  margin-left: 50px;
+  margin-top: 5px;
+  font-size: 20px;
+  font-family: Gilroy-regular;
+  color: #161925;
+}
+
+.signup a {
+  color: #1e316a;
+  text-decoration: none;
+  font-family: Gilroy-bold;
+}
+
+input {
+  height: 32px;
+  border: 1px solid #bcbcc0;
+  border-radius: 8px;
+  background-color: #f1f0e8;
+}
+
+form button {
+  margin-left: 30px;
+  border-radius: 8px;
+  width: 517px;
+  height: 40px;
+  background-color: #1e316a;
+  color: #ffffff;
+}
+form button:hover {
+  background-color: #f1f0e8;
+  color: #1e316a;
+}
+
+form button p {
+  font-family: Gilroy-bold;
+  font-size: 20px;
+  margin-top: 4px;
+  margin-bottom: 17px;
+}
+
+@media only screen and (max-width: 770px) {
+  body {
+    background: #bcbcc0;
+  }
+  .card {
+    top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    height: auto;
+  }
+  form button {
+    width: auto;
+    height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

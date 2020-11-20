@@ -1,0 +1,23 @@
+{% set route = app.request.attributes.get('_route') %}
+<div class="card-header">
+    <p class= "{% if route == 'cart_index' %}active cart {% else %} nonactive cart {% endif %}">
+        <a href="{{ path('cart_index') }}" style="text-decoration:none;"> 
+            Panier
+        </a>
+    </p>
+    <p class="{% if route == 'checkout_index' %}active delivery{% else %}nonactive delivery{% endif %}">
+        <a href="{{ path('checkout_index') }}" style="text-decoration:none;"> 
+            Informations de livraison
+        </a>
+    </p>
+    <p class="{% if route == 'payment_index' %}active shipping{% else %}nonactive shipping{% endif %}">
+        <a href="{{ path('payment_index') }}" style="text-decoration:none;">
+            Paiement
+        </a>
+    </p>
+    <p class="{% if route == 'confirmation_index' %}active confirmation{% else %}nonactive confirmation{% endif %}">
+        <a href="{{ path('confirmation_index') }}" style="text-decoration:none;">
+            Confirmation
+        </a>
+    </p>
+</div>

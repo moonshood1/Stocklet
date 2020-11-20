@@ -1,0 +1,456 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap");
+@font-face {
+  font-family: Gilroy-bold;
+  src: url(../fonts/Gilroy-ExtraBold.otf);
+}
+@font-face {
+  font-family: Gilroy-regular;
+  src: url(../fonts/Gilroy-Light.otf);
+}
+@font-face {
+  font-family: Gilroy-medium;
+  src: url(../fonts/Gilroy-Medium.ttf);
+}
+body {
+  background-color: #f1f0e8;
+}
+.navbar {
+  background-color: #ffe3e3;
+  padding-top: 0;
+  padding-bottom: 0;
+  height: auto;
+}
+.navbar-brand {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: bold;
+  color: #1e316a !important;
+  font-size: 35px;
+  padding-left: 90px;
+}
+
+.navbar-nav {
+  padding-right: 30px;
+  font-size: 12px;
+  font-family: Gilroy-regular;
+}
+
+.nav-link {
+  color: #1e316a;
+}
+
+.dropdown-menu {
+  font-size: 14px;
+}
+
+.dropdown-item {
+  color: #1e316a;
+}
+
+.dropdown-item:hover {
+  color: #ffff;
+  background-color: #1e316a;
+}
+
+@media (max-width: 992px) {
+  .navbar-expand-lg .navbar-toggler {
+    display: block;
+    background-color: #1e316a;
+    color: #ffff;
+    border-radius: 100%;
+    height: 50px;
+    width: 50px;
+  }
+  .navbar-expand-lg .navbar-toggler {
+    color: #ffff;
+  }
+  .navbar-expand-lg .navbar-toggler i {
+    height: 25px;
+    width: 25px;
+    margin-top: 7px;
+    margin-right: 4px;
+  }
+}
+.card {
+  margin-top: 20px;
+  width: 1200px;
+  border-radius: 50px;
+}
+
+.shippingD {
+  margin-top: 15px;
+  font-family: Gilroy-bold;
+  font-size: 25px;
+}
+.shipped {
+  margin-top: 45px;
+  font-family: Gilroy-bold;
+  font-size: 25px;
+}
+
+.shi {
+  margin-top: 15px;
+  width: 540px;
+  height: 140px;
+  border-radius: 15px;
+  background-color: #fff;
+}
+
+.envoy {
+  padding-left: 15px;
+}
+
+.envoy input {
+  width: 15px;
+  height: 15px;
+}
+
+.envoy label {
+  font-family: Gilroy-bold;
+  font-size: 25px;
+  color: #1e316a;
+}
+
+.envoy p {
+  font-family: Gilroy-medium;
+  font-size: 16px;
+  color: #707070;
+  padding-left: 25px;
+}
+
+.infos {
+  margin-top: 40px;
+  font-family: Gilroy-bold;
+  font-size: 25px;
+}
+
+.payment {
+  margin-top: 15px;
+  width: 540px;
+  height: 140px;
+  border-radius: 15px;
+  background-color: #fff;
+}
+
+.payqinCard {
+  padding-left: 15px;
+}
+
+.payqinCard input {
+  width: 15px;
+  height: 15px;
+}
+
+.payqinCard label {
+  font-family: Gilroy-bold;
+  font-size: 25px;
+  color: #1e316a;
+}
+
+.payqinCard p {
+  font-family: Gilroy-medium;
+  font-size: 16px;
+  color: #707070;
+  padding-left: 25px;
+}
+
+.logo {
+  margin-top: 5px;
+  height: 30px;
+  width: 92px;
+  background-color: #eeeeee;
+  margin-left: 50px;
+  padding-left: 5px;
+  padding-top: 2px;
+}
+
+.card-infos {
+  width: 540px;
+  height: 160px;
+  border-radius: 15px;
+  background-color: #fff;
+}
+
+.card_number {
+  height: 70px;
+  width: 100%;
+}
+.card_number label {
+  font-family: Gilroy-medium;
+  color: #707070;
+  font-size: 15px;
+}
+
+.card_date {
+  margin-left: 15px;
+  display: inline-flex;
+}
+
+.card_date .form-group {
+  padding-right: 15px;
+}
+
+.card_date label {
+  font-family: Gilroy-medium;
+  color: #707070;
+  font-size: 15px;
+}
+.conf {
+  margin-top: 45px;
+  font-family: Gilroy-bold;
+  font-size: 25px;
+}
+
+.confirmation_card {
+  margin-top: 15px;
+  width: 540px;
+  height: 300px;
+  border-radius: 15px;
+  background-color: #fff;
+}
+
+.confirmation_card ul {
+  list-style: none;
+}
+
+.confirm_left {
+  font-family: Gilroy-medium;
+  font-size: 16px;
+  color: #707070;
+}
+
+.confirm_right {
+  font-family: Gilroy-medium;
+  font-size: 16px;
+  color: #707070;
+}
+
+.confirm_right {
+  font-family: Gilroy-bold;
+  font-size: 16px;
+  color: #161925;
+}
+.summary {
+  margin-top: 45px;
+  width: 390px;
+  border-radius: 15px;
+  background-color: #ffe3e3;
+  font-family: Gilroy-regular;
+}
+
+.summaryTitle {
+  color: #1e316a;
+  font-size: 25px;
+  font-family: Gilroy-bold;
+  margin-top: 10px;
+}
+
+.summaryProdPrice {
+  color: #161925;
+  font-family: Gilroy-bold;
+  padding-left: 105px;
+}
+
+.summaryPromoPrice {
+  color: #161925;
+  font-family: Gilroy-bold;
+  padding-left: 60px;
+}
+
+.summaryTotalPrice {
+  color: #161925;
+  font-family: Gilroy-bold;
+  padding-left: 135px;
+}
+.card-header {
+  background-color: #1e316a;
+  height: 70px;
+  width: 1200px;
+  display: flex;
+  color: #ffff;
+  padding-left: 189px;
+  padding-right: 100px;
+  padding-top: 33px;
+  font-size: 18px;
+  font-family: Gilroy-regular;
+  border-radius: 30px;
+}
+
+.card-header p {
+  cursor: pointer;
+  margin-right: 90px;
+}
+
+.card-header p.active {
+  text-decoration: underline;
+}
+
+.card-header p.active a {
+  color: white;
+}
+
+.card-header p.nonactive a {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.payment_purchase {
+  font-size: 16px;
+  font-family: Gilroy-medium;
+  margin-top: 250px;
+}
+
+.payment_purchase i {
+  color: black;
+}
+
+.purchase {
+  font-size: 16px;
+  font-family: Gilroy-medium;
+  margin-top: 25px;
+}
+
+input#payment_form_cardNumber {
+  width: 50%;
+}
+
+input#payment_form_month {
+  width: 70%;
+}
+
+input#payment_form_year {
+  width: 40%;
+}
+input#payment_form_cvv {
+  width: 40%;
+}
+
+.purchase i {
+  color: black;
+}
+
+button#next {
+  color: white;
+  width: 200px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: #1e316a;
+  font-family: Gilroy-bold;
+  margin-top: 15px;
+}
+
+button#next .disabled {
+  background-color: #e0e0e0;
+  color: #424242;
+}
+
+.avatar {
+  max-width: 128px;
+  max-height: 128px;
+  border-radius: 50%;
+}
+.avatar-admin {
+  max-width: 128px;
+  max-height: 128px;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.avatar-medium {
+  max-width: 64px;
+  max-height: 64px;
+}
+
+.avatar-mini {
+  max-width: 24px;
+  max-height: 24px;
+}
+
+.product {
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.product-mini {
+  max-width: 100px;
+  max-height: 100px;
+}
+.depends {
+  display: none;
+}
+
+.onPhone {
+  display: none;
+}
+
+@media only screen and (max-width: 767px) {
+  .container {
+    overflow: hidden;
+  }
+  .depends {
+    display: block;
+  }
+  .depends1 {
+    display: none;
+  }
+  .card {
+    margin-top: 10px;
+    width: auto;
+  }
+  .card-header {
+    height: auto;
+    width: auto;
+    display: flex;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 10px;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  p.nonactive {
+    display: none;
+  }
+
+  p.active {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .summaryProdPrice {
+    padding-left: 70px;
+  }
+
+  .summaryPromoPrice {
+    color: #161925;
+    font-family: Gilroy-bold;
+    padding-left: 25px;
+  }
+
+  .summaryTotalPrice {
+    color: #161925;
+    font-family: Gilroy-bold;
+    padding-left: 105px;
+  }
+  .shi {
+    display: none;
+  }
+
+  .payment {
+    display: none;
+  }
+  .confirmation_card {
+    width: auto;
+    height: auto;
+    border-radius: 15px;
+  }
+
+  .confirm_right,
+  .confirm_left {
+    display: none;
+  }
+
+  .onPhone {
+    display: flex;
+  }
+}

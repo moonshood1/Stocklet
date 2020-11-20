@@ -1,0 +1,50 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Création de produits{% endblock %}
+
+{% block body %}
+    <div class="content-container">
+        <div class="container-fluid">
+            <h1>
+                <a href="{{ path('admin_products_index') }}" class="btn btn-primary" style="border-radius:50%">
+                    <i class="fas fa-arrow-left fa-2x"></i> 
+                </a> 
+                Section de création 
+            </h1>
+            {{ form_start(form) }}
+                <h3 class="text-center"> Informations générales </h3>
+                <div class="row border border-dark rounded bg-light mx-2">
+                    <div class="col-md-3 mt-2"> {{ form_row(form.productName) }} {{ form_row(form.brand) }} {{ form_row(form.initialStock) }} {{ form_row(form.currentStock) }}</div>
+                    <div class="col-md-2 mt-2"> {{ form_row(form.unitPrice) }} {{form_row(form.oldUnitPrice)}} {{ form_row(form.category) }} </div>
+                    <div class="col-md-7 mt-2"> {{ form_row(form.productDescription1,{'attr': {'rows': '4'} }) }} {{ form_row(form.productDescription2 ,{'attr': {'rows': '4'} })}} </div>
+                </div>
+                <h3 class="text-center mt-2"> Details du produit </h3>
+                <div class="row border border-dark rounded bg-light mx-2">
+                    <div class="col-md-4 mt-2"> {{ form_row(form.spec1Title) }} {{ form_row(form.spec1,{'attr': {'rows': '4'} }) }}</div>
+                    <div class="col-md-4 mt-2">{{ form_row(form.spec2Title) }} {{ form_row(form.spec2,{'attr': {'rows': '4'} }) }}</div>
+                    <div class="col-md-4 mt-2">{{ form_row(form.spec3Title) }} {{ form_row(form.spec3,{'attr': {'rows': '4'} }) }}</div>
+                </div>
+                <h3 class="text-center mt-2">Images du produit (URL)</h3>
+                <div class="row border border-dark rounded bg-light mx-2">
+                    <div class="col-md-3 mt-2">{{ form_row(form.leftPic1URL) }} {{ form_row(form.leftPic2URL) }} {{ form_row(form.leftPic3URL) }}</div>
+                    <div class="col-md-3 mt-2">{{ form_row(form.rightPic1Url) }} {{ form_row(form.rightPic2Url) }}</div>
+                    <div class="col-md-3 mt-2"> {{ form_row(form.rightPic3Url) }} {{ form_row(form.rightPic4Url) }}</div>
+                    <div class="col-md-3 mt-2"> {{ form_row(form.rightPic5Url) }}</div>
+                </div>
+                <h3 class="text-center mt-2">Images du produit (UPLOAD)</h3>
+                <div class="row border border-dark rounded bg-light mx-2">
+                    <div class="col-md-3 mt-2">{{ form_row(form.leftPic1File) }} {{ form_row(form.leftPic2File) }} {{ form_row(form.leftPic3File) }}</div>
+                    <div class="col-md-3 mt-2">{{ form_row(form.rightPic1File) }} {{ form_row(form.rightPic2File) }}</div>
+                    <div class="col-md-3 mt-2"> {{ form_row(form.rightPic3File) }} {{ form_row(form.rightPic4File) }}</div>
+                    <div class="col-md-3 mt-2"> {{ form_row(form.rightPic5File) }}</div>
+                </div>
+                <h3 class="text-center mt-2">Disponibilité et Date</h3>
+                <div class="row border border-dark rounded bg-light mx-2 mb-4">
+                    <div class="col-md-4 mt-2">{{ form_row(form.productAvailable) }}</div>
+                    <div class="col-md-4 mt-2">{{ form_row(form.endDate) }}</div>
+                    <div class="col-md-4 my-5"><button type="submit" class="btn btn-success" formnovalidate>Créer</button></div>
+                </div>
+            {{form_end(form)}} 
+        </div>
+    </div>
+{% endblock %}

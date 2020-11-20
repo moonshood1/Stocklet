@@ -1,0 +1,335 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap");
+@font-face {
+  font-family: Gilroy-bold;
+  src: url(../fonts/Gilroy-ExtraBold.otf);
+}
+@font-face {
+  font-family: Gilroy-regular;
+  src: url(../fonts/Gilroy-Light.otf);
+}
+@font-face {
+  font-family: Gilroy-medium;
+  src: url(../fonts/Gilroy-Medium.ttf);
+}
+body {
+  background-color: #f1f0e8;
+}
+.navbar {
+  background-color: #ffe3e3;
+  padding-top: 0;
+  padding-bottom: 0;
+  height: auto;
+}
+.navbar-brand {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: bold;
+  color: #1e316a !important;
+  font-size: 35px;
+  padding-left: 90px;
+}
+
+.navbar-nav {
+  padding-right: 30px;
+  font-size: 12px;
+  font-family: Gilroy-regular;
+}
+
+.nav-link {
+  color: #1e316a;
+}
+
+.dropdown-menu {
+  font-size: 14px;
+}
+
+.dropdown-item {
+  color: #1e316a;
+}
+
+.dropdown-item:hover {
+  color: #ffff;
+  background-color: #1e316a;
+}
+
+@media (max-width: 992px) {
+  .navbar-expand-lg .navbar-toggler {
+    display: block;
+    background-color: #1e316a;
+    color: #ffff;
+    border-radius: 100%;
+    height: 50px;
+    width: 50px;
+  }
+  .navbar-expand-lg .navbar-toggler {
+    color: #ffff;
+  }
+  .navbar-expand-lg .navbar-toggler i {
+    height: 25px;
+    width: 25px;
+    margin-top: 7px;
+    margin-right: 4px;
+  }
+}
+
+.card {
+  margin-top: 35px;
+  width: 250px;
+  height: auto;
+  border-radius: 15px;
+}
+
+.card-header {
+  color: white;
+  background-color: #1e316a;
+  border-radius: 30px 30px 0 0;
+  height: 50px;
+}
+
+.account {
+  font-family: Gilroy-bold;
+  font-size: 20px;
+  color: white;
+}
+
+.card-body {
+  background-color: #ffffff;
+}
+
+.card-body p {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.card-body p a {
+  text-decoration: none;
+  color: #161925;
+  font-family: Gilroy-medium;
+}
+
+.card-body p span {
+  border-radius: 50%;
+  background-color: #eeeeee;
+  height: 34px;
+  width: 34px;
+  padding: 10px;
+}
+
+.card-body span i {
+  font-size: 18px;
+}
+
+.contain_right {
+  border-radius: 15px;
+  margin-top: 35px;
+  width: 768px;
+}
+
+.contain_header {
+  background-color: #ffff;
+  color: #161925;
+  height: 50px;
+  width: 768px;
+  border-bottom: 1px solid #bcbcc0;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+.title {
+  font-family: Gilroy-bold;
+  font-size: 20px;
+  margin-left: 15px;
+  padding-top: 10px;
+}
+
+.contain_body {
+  width: 768px;
+  height: 450px;
+  background-color: #ffffff;
+  padding-top: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.edition {
+  width: 700px;
+  background-color: #eeeeee;
+  height: 80px;
+  border-radius: 15px;
+  margin-left: 45px;
+}
+
+.image {
+  float: left;
+  color: #1e316a;
+  font-family: Gilroy-bold;
+  font-size: 18px;
+}
+
+.image img {
+  margin-top: 10px;
+  margin-left: 15px;
+}
+
+.edit {
+  float: right;
+  margin-right: 15px;
+  margin-top: 20px;
+}
+
+.edit_button {
+  width: 90px;
+  height: 60px;
+  color: #1e316a;
+  font-family: Gilroy-medium;
+  font-size: 14px;
+  border: 1px solid #1e316a;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.save_button {
+  width: 90px;
+  height: 60px;
+  color: #1e316a;
+  font-family: Gilroy-medium;
+  font-size: 14px;
+  border: 1px solid #1e316a;
+  padding: 10px;
+  border-radius: 5px;
+  margin-left: 25px;
+}
+
+.save_button a {
+  text-decoration: none;
+}
+
+.save_button.butt {
+  width: 150px;
+  height: 40px;
+  margin-top: 45px;
+}
+
+.form-group label {
+  color: #707070;
+  font-size: 14px;
+  font-family: Gilroy-medium;
+}
+
+.form-group input {
+  font-family: Gilroy-bold;
+  color: #707070;
+  font-size: 16px;
+}
+
+.vl {
+  border-left: 2px solid #bcbcc0;
+  height: 150px;
+  position: absolute;
+  left: 45%;
+  margin-left: -3px;
+  top: 25%;
+}
+
+.paymentCard {
+  width: 700px;
+  height: 120px;
+  background-color: #ffff;
+  border: 1px solid black;
+  border-radius: 15px;
+  margin-bottom: 40px;
+}
+
+.paymentCard p#cardNumb {
+  color: #1e316a;
+  font-family: Gilroy-bold;
+  font-size: 20px;
+  margin-left: 30px;
+  margin-top: 15px;
+}
+
+.paymentCard p span {
+  color: #161925;
+  font-family: Gilroy-bold;
+}
+.paymentCard p#cardDetailsDate {
+  font-size: 14px;
+  margin-left: 30px;
+  font-family: Gilroy-medium;
+}
+
+.paymentCard p#cardDetailsDate img {
+  width: 300px;
+  width: 60px;
+  float: right;
+  margin-right: 15px;
+}
+
+.avatar {
+  max-width: 128px;
+  max-height: 128px;
+  border-radius: 50%;
+}
+.avatar-admin {
+  max-width: 128px;
+  max-height: 128px;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.avatar-medium {
+  max-width: 64px;
+  max-height: 64px;
+}
+
+.avatar-mini {
+  max-width: 24px;
+  max-height: 24px;
+}
+
+.product {
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.product-mini {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.depends {
+  display: none;
+}
+
+@media only screen and (max-width: 767px) {
+  .depends {
+    display: block;
+  }
+  .depends1 {
+    display: none;
+  }
+
+  .card {
+    display: none;
+  }
+  .contain_right {
+    border-radius: 15px;
+    margin-top: 20spx;
+    width: auto;
+  }
+  .contain_body {
+    width: auto;
+    height: auto;
+    padding-top: 15px;
+  }
+  .contain_header {
+    height: 50px;
+    width: auto;
+  }
+  .edition {
+    display: none;
+  }
+  .edit {
+    display: none;
+  }
+}

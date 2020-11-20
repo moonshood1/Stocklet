@@ -1,0 +1,399 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap");
+@font-face {
+  font-family: Gilroy-bold;
+  src: url(../fonts/Gilroy-ExtraBold.otf);
+}
+@font-face {
+  font-family: Gilroy-regular;
+  src: url(../fonts/Gilroy-Light.otf);
+}
+@font-face {
+  font-family: Gilroy-medium;
+  src: url(../fonts/Gilroy-Medium.ttf);
+}
+
+body {
+  background-color: #f1f0e8;
+}
+
+.navbar {
+  background-color: #ffe3e3;
+  padding-top: 0;
+  padding-bottom: 0;
+  height: auto;
+}
+.navbar-brand {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: bold;
+  color: #1e316a !important;
+  font-size: 35px;
+  padding-left: 90px;
+}
+
+.navbar-nav {
+  padding-right: 30px;
+  font-size: 12px;
+  font-family: Gilroy-regular;
+}
+
+.nav-link {
+  color: #1e316a;
+}
+
+.dropdown-menu {
+  font-size: 14px;
+}
+
+.dropdown-item {
+  color: #1e316a;
+}
+
+.dropdown-item:hover {
+  color: #ffff;
+  background-color: #1e316a;
+}
+
+@media (max-width: 992px) {
+  .navbar-expand-lg .navbar-toggler {
+    display: block;
+    background-color: #1e316a;
+    color: #ffff;
+    border-radius: 100%;
+    height: 50px;
+    width: 50px;
+  }
+  .navbar-expand-lg .navbar-toggler {
+    color: #ffff;
+  }
+  .navbar-expand-lg .navbar-toggler i {
+    height: 25px;
+    width: 25px;
+    margin-top: 7px;
+    margin-right: 4px;
+  }
+}
+
+.card {
+  margin-top: 20px;
+  width: 1200px;
+}
+.card-header {
+  background-color: #1e316a;
+  height: 70px;
+  width: 1200px;
+  display: flex;
+  color: #ffff;
+  padding-left: 189px;
+  padding-right: 100px;
+  padding-top: 33px;
+  font-size: 18px;
+  font-family: Gilroy-regular;
+}
+
+.card-header p {
+  cursor: pointer;
+  margin-right: 90px;
+}
+
+.card-header p.active {
+  text-decoration: underline;
+}
+
+.card-header p.active a {
+  color: white;
+}
+
+.card-header p.nonactive a {
+  color: rgba(255, 255, 255, 0.5);
+}
+.card-body {
+  width: 100%;
+  background-color: #ffffff;
+  height: 200px;
+  margin-top: 5px;
+}
+
+.productTitle {
+  font-size: 25px;
+  color: #1e316a;
+  font-family: Gilroy-bold;
+  margin-left: 19px;
+}
+.brandy {
+  font-size: 16px;
+  font-family: Gilroy-bold;
+  color: #1e316a;
+}
+.brand {
+  margin-top: 7px;
+  margin-left: 19px;
+  color: #707070;
+  font-family: Gilroy-medium;
+}
+
+.priceTitle {
+  color: #707070;
+  font-family: Gilroy-medium;
+  font-size: 16px;
+}
+.price {
+  font-size: 16px;
+  color: #1e316a;
+  font-family: Gilroy-bold;
+}
+
+.qtyTitle {
+  color: #707070;
+  font-family: Gilroy-medium;
+  font-size: 16px;
+}
+
+.qty {
+  width: 50px;
+  height: 40px;
+  background-color: #ffe3e3;
+  color: #161925;
+  font-family: Gilroy-medium;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.totalTitle {
+  color: #707070;
+  font-family: Gilroy-medium;
+  font-size: 20px;
+}
+
+.total {
+  font-size: 16px;
+  color: #1e316a;
+  font-family: Gilroy-bold;
+}
+
+.promo b {
+  font-family: Gilroy-bold;
+  color: black;
+  font-size: 20px;
+}
+
+.promo {
+  font-family: Gilroy-medium;
+  font-size: 20px;
+  color: #1e316a;
+  margin-top: 25px;
+}
+
+.promo span#promoCode {
+  margin-left: 10px;
+  width: 200px;
+  height: 60px;
+  background-color: #e4c4c0;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.promo span#promoMessage {
+  margin-left: 25px;
+  font-size: 16px;
+  color: #161925;
+}
+
+.promo span#promoDiscounTitle {
+  margin-left: 220px;
+  float: right;
+  font-size: 16px;
+  color: #707070;
+  font-family: Gilroy-medium;
+}
+
+.promo span#promoDiscount {
+  font-size: 16px;
+  color: #1e316a;
+  font-family: Gilroy-bold;
+}
+
+.total {
+  margin-top: 0;
+}
+.totalAmount {
+  color: #707070;
+  font-size: 16px;
+  font-family: Gilroy-medium;
+}
+
+.totalAmount span {
+  color: #1e316a;
+  font-family: Gilroy-bold;
+}
+
+.purchase {
+  font-size: 16px;
+  font-family: Gilroy-medium;
+  margin-top: 150px;
+}
+
+.purchase button {
+  color: white;
+  width: 200px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: #1e316a;
+  font-family: Gilroy-bold;
+}
+
+.purchase i {
+  color: black;
+}
+.avatar {
+  max-width: 128px;
+  max-height: 128px;
+  border-radius: 50%;
+}
+.avatar-admin {
+  max-width: 128px;
+  max-height: 128px;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.avatar-medium {
+  max-width: 64px;
+  max-height: 64px;
+}
+
+.avatar-mini {
+  max-width: 24px;
+  max-height: 24px;
+}
+
+.product {
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.product-mini {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+@media only screen and (max-width: 767px) {
+  .container {
+    overflow: hidden;
+  }
+  .card {
+    margin-top: 10px;
+    width: auto;
+    text-align: center;
+  }
+  .card-header {
+    height: auto;
+    width: auto;
+    display: flex;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 10px;
+    font-size: 18px;
+    text-align: center;
+  }
+  .card-body {
+    height: auto;
+    text-align: center;
+  }
+
+  p.nonactive {
+    display: none;
+  }
+  p.active {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .product {
+    max-width: 100px;
+    max-height: 100px;
+  }
+
+  .productTitle {
+    font-size: 16px;
+    margin-left: 0px;
+  }
+  .brandy {
+    font-size: 12px;
+  }
+  .brand {
+    margin-top: 0px;
+    margin-left: 0px;
+    font-size: 12px;
+  }
+  .priceTitle {
+    font-size: 16px;
+  }
+  .price {
+    font-size: 12px;
+  }
+  .qtyTitle {
+    color: #707070;
+    font-family: Gilroy-medium;
+    font-size: 16px;
+  }
+
+  .qty {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding-top: 1px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .totalTitle {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+
+  .total {
+    font-size: 12px;
+  }
+  .promo {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  .promo b {
+    font-size: 16px;
+  }
+
+  .promo span#promoCode {
+    width: 100px;
+    height: 40px;
+    border-radius: 8px;
+    font-size: 12px;
+  }
+
+  .promo span#promoMessage {
+    font-size: 12px;
+  }
+
+  .promo span#promoDiscounTitle {
+    margin-left: 220px;
+    float: right;
+    font-size: 12px;
+  }
+
+  .promo span#promoDiscount {
+    font-size: 12px;
+  }
+  .totalAmount {
+    font-size: 14px;
+  }
+  .purchase {
+    font-size: 14px;
+    margin-top: 70px;
+  }
+
+  .purchase button {
+    width: 150px;
+    height: 40px;
+  }
+}

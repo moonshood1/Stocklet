@@ -1,0 +1,121 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Commande - {{ order.id }} {% endblock %}
+
+{% block body %}
+    <div class="content-container">
+        <div class="container-fluid">
+            <div class="row mt-4">
+                <div class="col-md-5">
+                <div class="card">
+                    <div class="card-header">
+                    <h5>Le produit commandé</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                            <p>
+                                Nom du produit : <br />
+                                <b>{{ order.products.productName }}</b>
+                            </p>
+                            </div>
+                            <div class="col-md-6">
+                            <p>
+                                Prix Unitaire : <br />
+                                <b>{{ order.products.unitPrice }} FCFA</b>
+                            </p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-4">
+                    <div class="card-header">
+                    <h5>Le client</h5>
+                    </div>
+                    <div class="card-body">
+                    <div class="container">
+                        <div class="row">
+                        <div class="col-md-6">
+                            <p>
+                            Nom du client : <br>
+                            <b> {{ order.users.firstName }} {{ order.users.lastName }} </b>
+                            </p>
+                            <p>
+                            Nombre de commande sur le site: <br />
+                            <b>{{ order.users.orders|length }}</b>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <p>
+                            Date d'inscription: 26/03/2019
+                            </p>
+                            <br>
+                            <p>
+                            Montant Total des commandes: <br />
+                            <b>125 000 FCFA</b>
+                            </p>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <div class="col-md-7">
+                <div class="card">
+                    <div class="card-header">
+                    <h5>La commande</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="container">
+                        <div class="row">
+                            <div class="col-md-4">
+                            <p>
+                                Quantité cmdée : <br />
+                                <b>{{ order.productQuantity }}</b>
+                            </p>
+                            </div>
+                            <div class="col-md-4">
+                            <p>
+                                Prix du Produit : <br />
+                                <b>{{ order.productUnitPrice }} FCFA</b>
+                            </p>
+                            </div>
+                            <div class="col-md-4">
+                            <p>
+                                Montant total : <br />
+                                <b>{{ order.orderTotalAmount }} FCFA</b>
+                            </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                            <p>
+                                Mode de paiement : <br />
+                                <b>PayQin</b>
+                            </p>
+                            </div>
+                            <div class="col-md-4">
+                            <p>
+                                Mode de livraison : <br />
+                                <b>Envoy</b>
+                            </p>
+                            </div>
+                            <div class="col-md-4">
+                            <p>
+                                Statut de la commande : <br />
+                                <b>Terminée</b>
+                            </p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">Commande passée le {{ order.orderDate|date('d/m/Y') }} </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
