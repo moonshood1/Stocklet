@@ -116,6 +116,9 @@ class CheckoutController extends AbstractController
         $session = $request->getSession();
         $currentStock = $cartservice->getFullCart()[0]['product']->getCurrentStock();
 
+        // Appel du chrono pour le numéro de facture du client
+        $chrono = $this->getUser()->getChrono();
+
         // Creation de la commande et attribution des différentes valeurs
         $order = new Order();
         $order->setProductQuantity($cartservice->getFullCart()[0]['quantity'])
@@ -126,7 +129,8 @@ class CheckoutController extends AbstractController
               ->setShippingCity($session->get('shippingCity'))
               ->setShippingDistrict($session->get('shippingDistrict'))
               ->setShippingAddress1($session->get('shippingAddress1'))
-              ->setShippingAddress2($session->get('shippingAddress2'));
+              ->setShippingAddress2($session->get('shippingAddress2'))
+              ->setInvoiceNumber('STK -'.date('Y').'-'.date('m').'-'.'INV'.'-'.$chrono);
 
         $manager->persist($order);
 

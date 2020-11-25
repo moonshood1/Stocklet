@@ -58,7 +58,7 @@
                 {% for product in pagination.data %}
                     <tr>
                         <td>{{ product.productName }}</td>
-                        <td class="text-center">{{ product.unitPrice }} FCFA</td>
+                        <td class="text-center">{{ product.unitPrice|number_format(0,'','  ') }} FCFA</td>
                         <td class="text-center">{{ product.orders | length }}</td>
                         <td class="text-center">{{ product.productAvailable }}</td>
                         <td class="text-center">

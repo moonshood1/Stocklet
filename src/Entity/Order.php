@@ -79,9 +79,20 @@ class Order
      */
     private $payments;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Promo::class, mappedBy="orders")
+     */
+    private $promos;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $invoiceNumber;
+
     public function __construct()
     {
         $this->payments = new ArrayCollection();
+        $this->promos = new ArrayCollection();
     }
 
     /**
@@ -250,6 +261,46 @@ class Order
                 $payment->setOrders(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Promo[]
+     */
+    public function getPromos(): Collection
+    {
+        return $this->promos;
+    }
+
+    public function addPromo(Promo $promo): self
+    {
+        if (!$this->promos->contains($promo)) {
+            $this->promos[] = $promo;
+            $promo->addOrder($this);
+        }
+
+        return $this;
+    }
+
+    public function removePromo(Promo $promo): self
+    {
+        if ($this->promos->contains($promo)) {
+            $this->promos->removeElement($promo);
+            $promo->removeOrder($this);
+        }
+
+        return $this;
+    }
+
+    public function getInvoiceNumber(): ?string
+    {
+        return $this->invoiceNumber;
+    }
+
+    public function setInvoiceNumber(?string $invoiceNumber): self
+    {
+        $this->invoiceNumber = $invoiceNumber;
 
         return $this;
     }

@@ -56,10 +56,21 @@ class AdminOrderController extends AbstractController
      * @param Order $order
      * @return void
      */
-    public function show(Order $order)
+    public function show(Order $order,EntityManagerInterface $manager)
     {
+        // Nombre total de commandes sur le site
+        $total = $manager->createQuery(
+            'SELECT SUM(o.orderTotalAmount) as total
+             FROM App\Entity\User u
+             JOIN u.orders o
+             WHERE u.id = :id_util')
+             ->setParameter('id_util',$order->getUsers()->getId())
+             ->getSingleScalarResult();
+
+
         return $this->render('admin/order/show.html.twig',[
-            'order' => $order
+            'order' => $order,
+            'total'=> $total
         ]);
     }
 }

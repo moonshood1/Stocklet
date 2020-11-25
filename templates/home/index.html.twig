@@ -2,6 +2,8 @@
 
 {% block title %}Home{% endblock %}
 {% block body %}
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="/css/app.css">
     <style>
       .wrapper {
@@ -119,7 +121,7 @@
         <div style="height: 717" class="first">
           <p class="brand">{{ product.brand }}</p>
           <p class="productName">{{ product.productName }}</p>
-          <p class="price">{{ product.unitPrice }} FCFA <br><strike>{{ product.oldUnitPrice }} FCFA</strike> </p>
+          <p class="price">{{ product.unitPrice|number_format(0,'','  ') }} FCFA <br><strike>{{ product.oldUnitPrice|number_format(0,'','  ') }} FCFA</strike> </p>
           <p class="desc1">{{ product.productDescription1 }}</p>
           <p class="desc2">
             {{ product.productDescription2 }}
@@ -166,7 +168,7 @@
           <p class="comment_title">COMMENTAIRES <span class="comments_nb">({{ product.comments|length }})</span>
           {% if app.user %}
           {% else %}
-            <a href="{{ path('account_login') }}" class="add_to_cart" style="margin-left: 70px">
+            <a href="{{ path('account_login') }}" class="add_to_cart" style="margin-left: 30px">
               Connectez-vous pour commenter
             </a>
             {% endif %}
@@ -190,7 +192,7 @@
                   <small style="font-family: AvenirNextLTPro-Medium; color: rgba(30, 49, 106, 0.32); font-size: 12px;">inscrit depuis 1 an </small>
                 </small>
                 <p style="font-family: AvenirNextLTPro-Regular;margin-top: 15px;color: #1e316a;font-size: 14px;">{{ comment.content }} <br />
-                  <a href="{{ path('comment_like',{'id': comment.id}) }}" class="btn-btn-link js-like">
+                  <a href="{{ path('comment_like',{'id': comment.id}) }}" class="btn-btn-link js-like" style="text-decoration:none;">
                     {% if app.user and comment.isLikedByUser(app.user) %}
                       <i class="fas fa-heart" style="font-size: 14px"></i>
                     {% else %}
@@ -198,7 +200,7 @@
                     {% endif %}
                     <span class="js-likes">{{ comment.likes|length }}</span>  
                   </a> &nbsp;
-                  <a href="{{ path('comment_dislike',{'id': comment.id}) }}" class="btn-btn-link js-dislike">
+                  <a href="{{ path('comment_dislike',{'id': comment.id}) }}" class="btn-btn-link js-dislike" style="text-decoration:none;">
                     {% if app.user and comment.isDisLikedByUser(app.user) %}
                       <i class="fas fa-frown" style="font-size: 14px"></i>
                     {% else %}
@@ -235,23 +237,23 @@
               <p class="callus_content">08 99 01 69</p>
             </div>
             <p class="features">
-              A Propos &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Garanties &nbsp; &nbsp; &nbsp;
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-              &nbsp; FAQ's
-              <br />
-              STOCKLET &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-              &nbsp; &nbsp; &nbsp; Livraisons &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Termes & Conditions <br />
-              Bureaux &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-              &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; Retours &nbsp; &nbsp; &nbsp;
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Politique de confidentialité <br />
+            <div class="row" style="padding:0; margin:0;">
+              <div class="col-md-2">
+                <p><a href="{{ path('contact_index') }}" style="color:#fff">  Contacts</a></p>
+                <p><a href="{{ path('about_index') }}" style="color:#fff">  A Propos</a></p>
+                <p><a href="{{ path('offices_index') }}" style="color:#fff">  Bureaux</a></p>
+              </div>
+              <div class="col-md-4">
+                <p class="text-center"><a href="{{ path('garanties_index') }}" style="color:#fff"> Garanties</a></p>
+                <p class="text-center"><a href="{{ path('livraisons_index') }}" style="color:#fff"> Livraisons</a></p>
+                <p class="text-center"><a href="{{ path('retours_index') }}" style="color:#fff"> Retours</a></p>
+              </div>
+              <div class="col-md-6">
+                <p><a href="{{ path('faq_index') }}" style="color:#fff"> FAQ's</a></p>
+                <p><a href="{{ path('terms_index') }}" style="color:#fff"> Termes & Conditions</a></p>
+                <p><a href="{{ path('privacy_index') }}" style="color:#fff"> Politique de confidentialité</a></p>
+              </div>
+            </div>
             </p>
           </div>
         </section>
@@ -274,6 +276,8 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="/js/owl.carousel.min.js"></script>
 <script src="js/app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script>
 // Switch   
 const url = "http://127.0.0.1:8000/demain";
@@ -431,6 +435,7 @@ $(document).ready(function () {
 </script>
 
 <script>
+/* 
   // Fonction de commentaire
   var url_comment = "http://127.0.0.1:8000";
   var comment_form = document.getElementById("comment_form");
@@ -457,6 +462,6 @@ $(document).ready(function () {
     // on vide la textarea quand c'est envoyé
     var content = document.getElementById("comment_content");
     content.value = "";
-  });
+  }); */
 </script>
 {% endblock %}

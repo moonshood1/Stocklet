@@ -23,7 +23,7 @@ class AdminHomeController extends AbstractController
             GROUP BY p 
             ORDER BY total DESC'
         )->setMaxResults(1)->getResult();
-
+        
         // Tous les utilisateurs
         $users = $manager->createQuery('SELECT COUNT(u) FROM App\Entity\User u')->getSingleScalarResult();
         // Tous les commentaires

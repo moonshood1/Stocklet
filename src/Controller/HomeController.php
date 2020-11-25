@@ -43,11 +43,16 @@ class HomeController extends AbstractController
                     ->setAuthor($this->getUser())
                     ->setCreatedAt(new DateTime('now'));
 
-                if ($request->isXmlHttpRequest()) {
+               /*  if ($request->isXmlHttpRequest()) {
                     $manager->persist($comment);
                     $manager->flush();
                     return new JsonResponse('ok',200,[],true);
-                }
+                } */
+
+                $manager->persist($comment);
+                $manager->flush();
+
+                return $this->redirectToRoute("home");
         }
 
         return $this->render('home/index.html.twig', [

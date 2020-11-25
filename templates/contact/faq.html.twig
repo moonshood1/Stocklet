@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FAQ{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="/css/contact.css">
+{% include "partials/header.html.twig" %}
+    <div class="container mt-3">
+      <h2 class="text-center">Foire aux questions</h2>
+      <hr style="border-top: 4px solid #1e316a" />
+      <div class="row">
+        <div class="col">
+          <p class="mt-4"></p>
+            <button
+              class="btn btn-primary"
+              type="button"
+              data-toggle="collapse"
+              data-target="#collapseExample"
+              aria-expanded="false"
+              aria-controls="collapseExample"
+            >
+              Le bouton de commande n'apparait pas
+            </button>
+          </p>
+          <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                On ne peut commander que lorsqu'il y'a du stock sur le produit .
+                 Lorsque le bouton est absent, vous devez attendre que le prochain produit soit affiché pour commander de nouveau
+            </div>
+          </div>
+          <p class="mt-4">
+            <button
+              class="btn btn-primary"
+              type="button"
+              data-toggle="collapse"
+              data-target="#collapseExample2"
+              aria-expanded="false"
+              aria-controls="collapseExample2"
+            >
+            A quoi sert le minuteur ?
+            </button>
+          </p>
+          <div class="collapse" id="collapseExample2">
+            <div class="card card-body">Le minuteur indique le temps d'affichage restant pour le produit à la une. Une fois le temps ecoulé , le produit est remplacé definitivement</div>
+          </div>
+          <p class="mt-4"></p>
+            <button
+              class="btn btn-primary"
+              type="button"
+              data-toggle="collapse"
+              data-target="#collapseExample3"
+              aria-expanded="false"
+              aria-controls="collapseExample3"
+            >
+              Comment laisser un commentaire ?
+            </button>
+          </p>
+          <div class="collapse" id="collapseExample3">
+            <div class="card card-body">Afin de commenter , vous devez vous connecter !</div>
+          </div>
+          <p class="mt-4"></p>
+            <button
+              class="btn btn-primary"
+              type="button"
+              data-toggle="collapse"
+              data-target="#collapseExample4"
+              aria-expanded="false"
+              aria-controls="collapseExample4"
+            >
+              Comment modifier son mot de passe ?
+            </button>
+          </p>
+          <div class="collapse" id="collapseExample4">
+            <div class="card card-body">Au trigger de l'onglet de droite , Allez dans la rubrique profil, puis dans modification de mot de passe. <br>
+                NB : Les utilisateurs connectés par google ou facebook ne peuvent le faire.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

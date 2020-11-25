@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contacts{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="/css/contact.css">
+{% include "partials/header.html.twig" %}
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-6">
+          <h2 class="text-right">Contactez nous</h2>
+          <p class="text-right">
+            Remplissez le formulaire pour contacter les
+            administrateurs de Stocklet
+          </p>
+          <p class="mt-5 text-right mail_logo">
+            <i class="fas fa-envelope fa-2x"></i> <br />
+            <p class="text-right mail_content" style="margin-top: -10px;"> louisroger@live.fr</p>
+          </p>
+          <p class="mt-2 text-right phone_logo">
+            <i class="fas fa-phone fa-2x"></i> <br />
+            <p class="text-right mail_content" style="margin-top: -10px;"> +225 08 99 01 69</p>
+          </p>
+        </div>
+        <div class="col-md-6">
+          <form action="">
+              <div class="form-group">
+                <input type="text" name="name" id="name" class="form-control" placeholder="Votre Nom">
+              </div>
+              <div class="form-group">
+                <input type="email" name="email" id="email" class="form-control" placeholder="Entrez une adresse email valide">
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" id="message" rows="5" placeholder="Votre message"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg btn-block">Envoyer</button>
+          </form>
+        </div>
+      </div>
+    </div>
+{% endblock %}

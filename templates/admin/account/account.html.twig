@@ -22,7 +22,11 @@
             <div class="card-body">
               <h5 class="card-title text-center">{{ user.firstName }} {{ user.lastName }} </h5>
               <p class="card-text text-center text-muted">
-                <small> membre depuis le 21/10/2020</small>
+                <small> membre depuis le {% if user.registeredAt %}
+                  {{ user.registeredAt|date('d/m/Y')}}
+                {% else %}
+                    (Date non enregistrée)
+                  {% endif %}</small>
               </p>
               <hr />
               <div class="row">

@@ -1,0 +1,52 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Code Promo{% endblock %}
+
+{% block body %}
+<div class="content-container">
+    <div class="container-fluid">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4 text-center uppercase">Administration des Code promo</h1>
+            </div>
+        </div>
+        <h2>Listing des codes promos </h2>
+        <a href="{{ path('admin_promo_create') }}" class="btn btn-primary mt-3 mb-3"><i class="fas fa-plus fa-2x"></i></a>
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Code Promo</th>
+                    <th scope="col" class="text-center">% de réduction </th>
+                    <th scope="col">Nombre de commandes</th>
+                    <th scope="col">Nombre de clients</th>
+                    <th scope="col" class="text-center">Etat</th>
+                    <th scope="col" class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for promo in pagination.data %}
+                    <tr>
+                        <td> {{ promo.promoCode }} </td>
+                        <td class="text-center"> {{ promo.promoReduction }} </td>
+                        <td> {{ promo.orders|length }} </td>
+                        <td> {{ promo.users|length }} </td>
+                        <td class="text-center"> {{ promo.isActive }} </td>
+                        <td class="text-center">
+                            <a href="{{ path('admin_promo_edit', {'id': promo.id } ) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                            <a href="{{ path('admin_promo_switch', {'id': promo.id} ) }}" class="btn btn-info">
+                                {% if promo.isActive == true %}
+                                    <i class="fas fa-times-circle"></i>
+                                    {% else %}
+                                    <i class="fas fa-check-circle"></i>
+                                {% endif %}
+                            </a>
+                            <a href="{{ path('admin_promo_delete', {'id': promo.id} ) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>                                           
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {{ pagination.display() }}     
+    </div>
+</div>
+{% endblock %}

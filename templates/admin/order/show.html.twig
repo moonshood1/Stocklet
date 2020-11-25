@@ -49,12 +49,16 @@
                         </div>
                         <div class="col-md-6">
                             <p>
-                            Date d'inscription: 26/03/2019
+                            Date d'inscription:{% if order.users.registeredAt %}
+                                {{ order.users.registeredAt|date('d/m/Y') }}
+                             {% else %}
+                             Date non enregistrée
+                                 {% endif %} 
                             </p>
                             <br>
                             <p>
                             Montant Total des commandes: <br />
-                            <b>125 000 FCFA</b>
+                            <b>{{ total|number_format(0,'','  ') }} FCFA</b>
                             </p>
                         </div>
                         </div>

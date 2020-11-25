@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\User;
 use App\Services\Pagination\PaginationService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -53,10 +54,21 @@ class AdminUserController extends AbstractController
      * @param User $user
      * @return void
      */
-    public function show(User $user)
+    public function show(User $user,EntityManagerInterface $manager)
     {
+
+        // Nombre total de commandes sur le site
+        $total = $manager->createQuery(
+            'SELECT SUM(o.orderTotalAmount) as total
+             FROM App\Entity\User u
+             JOIN u.orders o
+             WHERE u.id = :id_util')
+             ->setParameter('id_util',$user->getId())
+             ->getSingleScalarResult();
+
         return $this->render('admin/user/show.html.twig',[
-            'user' => $user
+            'user' => $user,
+            'total' => $total
         ]);
     }    
 }

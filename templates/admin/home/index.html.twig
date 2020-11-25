@@ -88,7 +88,7 @@
       {% for prod in mostOrdered %}
         <div class="card mb-3">
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-5">
               <img class="card-img-top"
                 {% if prod.rightPic1Name is null and prod.rightPic1Url %}
                   src="{{ prod.rightPic1Url }}" 
@@ -99,12 +99,12 @@
                 {% endif %}
                 height="300">
             </div>
-            <div class="col-md-8">
+            <div class="col-md-7">
               <div class="card-body">
                 <h5 class="card-title">{{ prod.productName }}</h5>
                 <p class="card-text">{{ prod.productDescription1 }}</p>
                 <hr>
-                <p class="card-text">Prix du Produit : {{ prod.unitPrice }} FCFA </p> <br>
+                <p class="card-text">Prix du Produit : {{ prod.unitPrice|number_format(0,'','  ') }} FCFA </p> <br>
                 <p class="card-text">Nombre Total de commandes: <b>{{ prod.total }} </b></p>
               </div>
             </div>

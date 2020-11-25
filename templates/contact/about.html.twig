@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}A Propos{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="/css/contact.css">
+{% include "partials/header.html.twig" %}
+    <div class="container mt-5">
+      <div class="row mt-5">
+        <div class="col-md-5" style="padding: 0; margin: 0">
+          <img
+            src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
+            alt=""
+            width="100%"
+          />
+        </div>
+        <div class="col-md-7" style="margin: 0">
+          <h2>A propos de Stocklet</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam et
+            doloribus recusandae sequi est libero cumque nesciunt eos alias, non
+            eius ex maxime nobis reprehenderit sit suscipit soluta magni
+            maiores.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam et
+            doloribus recusandae sequi est libero cumque nesciunt eos alias, non
+            eius ex maxime nobis reprehenderit sit suscipit soluta magni
+            maiores.
+          </p>
+          <p class="text-right">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam et
+            <button type="submit" class="btn btn-primary btn-lg mt-3">
+              <a href="{{ path('contact_index') }}" style="text-decoration: none">Nous contacter</a>
+            </button>
+          </p>
+        </div>
+      </div>
+    </div>
+{% endblock %}

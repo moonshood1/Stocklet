@@ -5,11 +5,11 @@
             {% else %}
             {{ product.productName }}
           {% endif %}  &nbsp; <span>x {{qty}}</span> &nbsp;
-            <span class="summaryProdPrice">{{ product.unitPrice }} FCFA</span>
+            <span class="summaryProdPrice">{{ product.unitPrice|number_format(0,'','  ') }} FCFA</span>
           </p>
           <hr />
-          <p class="summaryPromo">Promocode: <b style="font-family: Gilroy-bold">STOCKLET20</b><span class="summaryPromoPrice">5 000 FCFA</span></p>
-        <hr />
-        <p class="summaryTotal">Total à payer :<span class="summaryTotalPrice">{{ total }} FCFA</span></p>
+          {# <p class="summaryPromo">Promocode: <b style="font-family: Gilroy-bold">STOCKLET20</b><span class="summaryPromoPrice">5 000 FCFA</span></p>
+        <hr />  #}
+        <p class="summaryTotal">Total à payer :<span class="summaryTotalPrice">{{ total|number_format(0,'','  ') }} FCFA</span></p>
     </div>
 </div>

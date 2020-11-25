@@ -1,0 +1,24 @@
+{% extends "admin/base.html.twig" %}
+{% block title %} Création d'un code {% endblock %}
+
+{% block body %}
+    <div class="content-container">
+        <div class="container-fluid">
+            <h1> 
+                <a href="{{ path('admin_promo_index') }}" class="btn btn-primary" style="border-radius:50%">
+                    <i class="fas fa-arrow-left fa-2x"></i> 
+                </a>
+                Ajout d'un code promo
+            </h1>
+            {{ form_start(form) }}
+            <div class="row">
+                <div class="col">
+                    <div class="alert alert-light bg-light">
+                        {{ form_widget(form) }}
+                    </div>
+                    <button type="submit" class="btn btn-success">Créer un code promo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

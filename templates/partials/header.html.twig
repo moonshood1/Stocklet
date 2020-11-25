@@ -45,19 +45,19 @@
                 </a>
               </div>
               <div class="depends">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="{{ path('account_index') }}">
                   <i class="fas fa-user"></i> Infos personnelles
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="{{ path('account_profile') }}">
                   <i class="fas fa-edit"></i>Modifier les Infos
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="{{ path('account_payment_index') }}">
                   <i class="fas fa-wallet"></i> Paiements
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="{{ path('account_password') }}">
                   <i class="fas fa-lock"></i> Mot de passe
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="{{ path('account_orders') }}">
                   <i class="fas fa-list"></i> Commandes
                 </a>                
               </div>
@@ -65,7 +65,7 @@
                 <i class="fa fa-shopping-bag"></i> Mon Panier
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="{{ path('contact_index') }}">
                 <i class="fas fa-phone"></i> Contacts
               </a>
               <a class="dropdown-item" href="{{ path('account_logout') }}">
@@ -75,6 +75,42 @@
           </li>
         </ul>
       </div>
+    {% else %}
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false">
+              Menu
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{{ path('home') }}">
+                <i class="fas fa-home"></i> Accueil
+              </a>
+              <div class="depends1">
+                <a class="dropdown-item" href="{{ path('account_login') }}">
+                  <i class="fas fa-sign-in-alt"></i> Connexion
+                </a>
+              </div>
+              <div class="depends">
+                <a class="dropdown-item" href="{{ path('account_register') }}">
+                  <i class="fas fa-user-plus"></i> Inscription
+                </a>             
+              </div>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{ path('contact_index') }}">
+                <i class="fas fa-phone"></i> Contacts
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>      
     {% endif %}
     </nav>
     

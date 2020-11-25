@@ -29,7 +29,7 @@
                     </div>
                     <div class="col-md-2">
                         <p class="priceTitle">Prix</p>
-                        <p class="price">{{ item.product.unitPrice }} FCFA</p>
+                        <p class="price">{{ item.product.unitPrice|number_format(0,'','  ') }} FCFA</p>
                     </div>
                     <div class="col-md-2">
                         <p class="qtyTitle">Quantité</p>
@@ -37,7 +37,7 @@
                     </div>
                     <div class="col-md-2">
                         <p class="totalTitle">Total</p>
-                        <p class="total">{{ item.product.unitPrice * item.quantity }} FCFA</p>
+                        <p class="total">{{ (item.product.unitPrice * item.quantity)|number_format(0,'','  ') }} FCFA</p>
                     </div>
                     <div class="col-md-1 mt-4">
                         <a href="{{path('cart_remove', {'id': item.product.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
@@ -46,6 +46,7 @@
                 {% endfor %}
             </div>
         </div>
+        {#
         <div class="promo">
             <p class="promoTitle">
             <b>Code Promo:</b
@@ -58,11 +59,11 @@
                 >Remise: <span id="promoDiscount">6 000 FCFA</span></span
             >
             </p>
-        </div>
+        </div> #}
         <hr />
         <div class="total">
             <p class="totalAmount float-right">
-            Montant Total à payer: <span id="total"> {{ total }} FCFA</span>
+            Montant Total à payer: <span id="total"> {{ total|number_format(0,'','  ') }} FCFA</span>
             </p>
         </div>
         <div class="purchase">

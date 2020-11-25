@@ -26,7 +26,7 @@
                     <tr>
                         <td>{{ order.users.firstname  }}</td>
                         <td >{{ order.products.productName }}</td>
-                        <td class="">{{ order.OrderTotalAmount }} FCFA</td>
+                        <td class="">{{ order.OrderTotalAmount|number_format(0,'','  ') }} FCFA</td>
                         <td class="">{{ order.orderDate | date("d/m/Y") }}</td>
                         <td class="text-center">
                             <a href="{{ path('admin_order_delete', {'id' : order.id }) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>

@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap");
+@font-face {
+  font-family: Gilroy-bold;
+  src: url(../fonts/Gilroy-ExtraBold.otf);
+}
+@font-face {
+  font-family: Gilroy-regular;
+  src: url(../fonts/Gilroy-Light.otf);
+}
+@font-face {
+  font-family: Gilroy-medium;
+  src: url(../fonts/Gilroy-Medium.ttf);
+}
+
+body {
+  background-color: #f1f0e8;
+}
+
+.navbar {
+  background-color: #ffe3e3;
+  padding-top: 0;
+  padding-bottom: 0;
+  height: auto;
+}
+.navbar-brand {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: bold;
+  color: #1e316a !important;
+  font-size: 35px;
+  padding-left: 90px;
+}
+
+.navbar-nav {
+  padding-right: 30px;
+  font-size: 12px;
+  font-family: Gilroy-regular;
+}
+
+.nav-link {
+  color: #1e316a;
+}
+
+.dropdown-menu {
+  font-size: 14px;
+}
+
+.dropdown-item {
+  color: #1e316a;
+}
+
+.dropdown-item:hover {
+  color: #ffff;
+  background-color: #1e316a;
+}
+
+@media (max-width: 992px) {
+  .navbar-expand-lg .navbar-toggler {
+    display: block;
+    background-color: #1e316a;
+    color: #ffff;
+    border-radius: 100%;
+    height: 50px;
+    width: 50px;
+  }
+  .navbar-expand-lg .navbar-toggler {
+    color: #ffff;
+  }
+  .navbar-expand-lg .navbar-toggler i {
+    height: 25px;
+    width: 25px;
+    margin-top: 7px;
+    margin-right: 4px;
+  }
+}
+
+.avatar {
+  max-width: 128px;
+  max-height: 128px;
+  border-radius: 50%;
+}
+.avatar-admin {
+  max-width: 128px;
+  max-height: 128px;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.avatar-medium {
+  max-width: 64px;
+  max-height: 64px;
+}
+
+.avatar-mini {
+  max-width: 24px;
+  max-height: 24px;
+}
+
+h2 {
+  font-family: Gilroy-bold;
+  font-size: 35px;
+  color: #1e316a;
+}
+
+h3,
+h4 {
+  font-family: Gilroy-bold;
+  color: #1e316a;
+}
+
+p {
+  font-family: Gilroy-medium;
+  font-size: 18px;
+}
+
+i {
+  color: #1e316a;
+}
+
+input.form-control {
+  background-color: #f1f0e8;
+}
+
+textarea.form-control {
+  background-color: #f1f0e8;
+}
+
+button {
+  color: #ffff !important;
+  background-color: #1e316a !important;
+}
+
+button:hover {
+  color: #1e316a !important;
+  background-color: #ffff !important;
+}
+
+button a {
+  color: #ffff;
+}
+
+@media only screen and (max-width: 767px) {
+}

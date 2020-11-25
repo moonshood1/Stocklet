@@ -29,7 +29,7 @@ class ProductType extends ApplicationType
             ->add('productDescription2', TextareaType::class, $this->getConfiguration("Seconde description du produit",""))
             ->add('unitPrice',IntegerType::class,$this->getConfiguration("Prix du produit",""))
             ->add('oldUnitPrice',IntegerType::class,$this->getConfiguration("ancien prix du produit",""))
-            ->add('productAvailable',ChoiceType::class,['choices' => ['Indisponible' => false,'Disponible'=>true]])
+            ->add('productAvailable',ChoiceType::class,$this->getConfiguration("Affichage à la une","",['choices' => ['Indisponible' => false,'Disponible'=>true]]))
             ->add('brand',TextType::class,$this->getConfiguration("Marque du Produit",""))
             ->add('initialStock',IntegerType::class,$this->getConfiguration("Stock de départ du produit","", ['attr' => ['min' => 1,'step' => 1 ]]))
             ->add('currentStock',IntegerType::class,$this->getConfiguration("Stock de actuel du produit","", ['attr' => ['min' => 1,'step' => 1 ]]))
@@ -56,7 +56,7 @@ class ProductType extends ApplicationType
             ->add('rightPic3File', FileType::class,$this->getConfiguration("Upload de l'image de doite 3",""),['required'=> false])
             ->add('rightPic4File', FileType::class,$this->getConfiguration("Upload de l'image de doite 4",""),['required'=> false])
             ->add('rightPic5File', FileType::class,$this->getConfiguration("Upload de l'image de doite 5",""),['required'=> false])
-            ->add('category', EntityType::class,['class'=> Category::class,'choice_label'=> 'categoryName'])
+            ->add('category', EntityType::class,$this->getConfiguration("Catégorie du produit","",['class'=> Category::class,'choice_label'=> 'categoryName']))
         ;
     }
 

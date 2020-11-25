@@ -120,6 +120,16 @@ class User implements UserInterface
     private $RegisteredAt;
 
     /**
+     * @ORM\ManyToMany(targetEntity=Promo::class, mappedBy="users")
+     */
+    private $promos;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $chrono;
+
+    /**
      * 
      * Permet de mettre en place un date d'inscription par default
      * @ORM\PrePersist
@@ -128,6 +138,18 @@ class User implements UserInterface
     {
         if (empty($this->RegisteredAt)) {
             $this->RegisteredAt = new \DateTime();
+        }
+    }
+
+    /**
+     * 
+     * Permet d'initialiser le chrono
+     * @ORM\PrePersist
+     */
+    public function prePersistChrono() 
+    {
+        if (empty($this->chrono)) {
+            $this->chrono = 1;
         }
     }
 
@@ -166,6 +188,7 @@ class User implements UserInterface
         $this->likes = new ArrayCollection();
         $this->dislikes = new ArrayCollection();
         $this->paymentCards = new ArrayCollection();
+        $this->promos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -485,6 +508,46 @@ class User implements UserInterface
     public function setRegisteredAt(?\DateTimeInterface $RegisteredAt): self
     {
         $this->RegisteredAt = $RegisteredAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Promo[]
+     */
+    public function getPromos(): Collection
+    {
+        return $this->promos;
+    }
+
+    public function addPromo(Promo $promo): self
+    {
+        if (!$this->promos->contains($promo)) {
+            $this->promos[] = $promo;
+            $promo->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePromo(Promo $promo): self
+    {
+        if ($this->promos->contains($promo)) {
+            $this->promos->removeElement($promo);
+            $promo->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    public function getChrono(): ?int
+    {
+        return $this->chrono;
+    }
+
+    public function setChrono(?int $chrono): self
+    {
+        $this->chrono = $chrono;
 
         return $this;
     }    
