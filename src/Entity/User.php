@@ -28,26 +28,32 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
+     * @Assert\Email(message="L'adresse saisie n'est pas de type email")
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
      */
     private $password;
     
     /**
      * @Assert\EqualTo(propertyPath="password", message="Les mots de passe sont différents"))
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
      */
     public $confirmPassword;
 

@@ -16,6 +16,31 @@
   src: url(../fonts/antipasto.bold.ttf);
 }
 
+/* css du loader */
+#loader {
+  border: 12px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 12px solid #444444;
+  width: 70px;
+  height: 70px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.center {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
 /* Grand conteneur */
 .wrap {
   display: flex;
@@ -75,7 +100,7 @@
 /**  Barre de progression et Timer */
 .progress {
   background-color: #1a237e;
-  height: 40px;
+  height: 50px;
   width: 100%;
 }
 .pro-done {
@@ -85,7 +110,7 @@
   display: flex;
   opacity: 0;
   height: 100%;
-  font-size: 25px;
+  font-size: 30px;
   font-family: AvenirNextLTPro-Medium;
   text-align: center;
   justify-content: center;
@@ -97,7 +122,7 @@
   margin-bottom: 5px;
   margin-left: auto;
   padding: 5px;
-  font-size: 25px;
+  font-size: 30px;
   font-family: AvenirNextLTPro-Medium;
   color: white;
 }
@@ -106,6 +131,9 @@
   font-size: 22px;
   font-family: AvenirNextLTPro-Medium;
   color: #1a237e;
+}
+.tel {
+  display: none;
 }
 
 /* Barre de navigation  */
@@ -171,13 +199,23 @@
   }
 }
 
+/* Zoom sur image de gauche */
+.zoomed {
+  -webkit-box-shadow: -5px -5px 35px #000000;
+  -moz-box-shadow: 5px 5px 35px #000000;
+  box-shadow: 5px 5px 35px #000000;
+  border: 10px solid white;
+  background-color: #fff;
+  z-index: 10;
+}
+
 /* premier contenu */
 
 .first {
   background-color: rgba(251, 251, 249, 0);
   margin-top: 120px;
   margin-left: 62px;
-  margin-bottom: 140px;
+  margin-bottom: 70px;
 }
 
 .first .brand {
@@ -261,7 +299,7 @@
   background: rgba(0, 0, 0, 0.5);
   color: #f1f1f1;
   width: 100%;
-  padding: 20px;
+  padding-left: 15px;
 }
 
 a.add_to_cart {
@@ -279,7 +317,7 @@ a.add_to_cart {
 /* Second contenu */
 
 .second {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color:/* rgba(255, 255, 255, 0.5)*/ #fff;
   margin-top: 5px;
   padding-left: 62px;
 }
@@ -339,7 +377,7 @@ a.add_to_cart {
 }
 /* Carousel */
 .owl-carousel {
-  margin-top: 64px;
+  margin-top: 0px;
 }
 
 /* Commentaires  */
@@ -364,7 +402,7 @@ a.add_to_cart {
   font-family: AvenirNextLTPro-Medium;
 }
 
-.comments .add_to_cart {
+.comment_butt {
   padding: 14px 32px 11px 34px;
   font-size: 10px;
   text-align: center;
@@ -373,10 +411,24 @@ a.add_to_cart {
   text-decoration: none;
   font-family: AvenirNextLTPro-Medium;
   border: 2px solid #1e316a;
-  margin-left: 20px;
+  margin-left: 50px;
+}
+.comment_butt:hover {
+  background-color: #ffffff;
+  color: #1e316a;
 }
 
-.comments .add_to_cart:hover {
+.comment_action_butt {
+  padding: 14px 32px 11px 34px;
+  font-size: 10px;
+  text-align: center;
+  background-color: #1e316a;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: AvenirNextLTPro-Medium;
+  border: 2px solid #1e316a;
+}
+.comment_action_butt:hover {
   background-color: #ffffff;
   color: #1e316a;
 }
@@ -483,12 +535,27 @@ nav {
   .menu {
     display: none;
   }
+
+  .progress {
+    height: 35px;
+  }
+
   .pro-done {
-    font-size: 20px;
+    padding-top: 5px;
+    text-align: center;
+    font-size: 13px;
   }
 
   .progress #time {
     font-size: 18px;
+  }
+  .tel {
+    display: flex;
+    font-size: 20px;
+  }
+
+  .pc {
+    display: none;
   }
 
   .first {

@@ -1,5 +1,4 @@
 // fonction de like
-
 function onClickBtnLike(event) {
   event.preventDefault();
 

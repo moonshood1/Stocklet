@@ -1,0 +1,42 @@
+<style>
+    .footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   height:45px;
+   width: 100%;
+   background-color: #1e316a;
+   color: white;
+}
+a {
+    text-decoration: none;
+    padding-right: 15px;
+    color: white;
+}
+
+a:hover {
+    color:white;
+}
+
+@media only screen and (max-width: 767px) {
+    .footer {
+        display:none;
+    }
+}
+</style>
+<footer class="footer">
+    <div class="container">
+        <div class="row mt-2">
+            <div class="col-md-4">
+                <span class="footer-link"><a href="{{ path('home') }}">STOCKLET</a></span>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-6">
+                <span class="footer-link"><a href="{{ path('contact_index') }}">Nous Contacter</a></span>
+                <span class="footer-link"><a href="{{ path('about_index') }}">A Propos</a></span>
+                <span class="footer-link"><a href="{{ path('faq_index') }}">FAQ's</a></span>
+                <span class="footer-link"><a href="{{ path('livraisons_index') }}">Livraisons</a></span>    
+            </div>
+        </div>
+    </div>
+</footer>

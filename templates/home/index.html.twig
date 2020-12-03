@@ -28,24 +28,17 @@
       }
     </style>
     {% include "partials/header.html.twig" %}
+    {% include "partials/loader.html.twig" %}
     <div class="image-principale">
-      <img
-      {% if product.leftPic1URL is null and product.leftPic1Name %}
-        src="/uploads/images/product_left/{{ product.leftPic1Name }}"
-      {% else %}
-        src="{{ product.leftPic1URL }}"
-      {% endif %}
-        alt=""
-        style="width: 100%"
-      />
-      <div class="content">
-        <p class="module-price">
-          {{ product.unitPrice }} FCFA <br /><strike>{{ product.oldUnitPrice }} FCFA</strike> <br />
-        </p>
-        <p class="add_to_cart">
-          <a href="{{ path('cart_add', {'id': product.id}) }}" class="add_to_cart">Commander</a>
-        </p>
-      </div>
+      {% include "partials/carouselPhone.html.twig" %}    
+        <div class="content">
+          <p class="module-price">
+            {{ product.unitPrice }} FCFA <br /><strike>{{ product.oldUnitPrice }} FCFA</strike> <br />
+          </p>
+          <p class="add_to_cart">
+            <a href="{{ path('cart_add', {'id': product.id}) }}" class="add_to_cart">Commander</a>
+          </p>
+        </div>
     </div>
     <div class="wrap" id="all_comments">
       <div class="left">
@@ -111,12 +104,34 @@
           </div>
         </div>
         {% else %}
-          <div class="menu">
-            <p class="text-right mr-4 mt-2">
-              <a href=" {{ path('account_login') }} "style="font-family:AvenirNextLTPro-Medium;color: #1e316a;font-size: 16px;">Connexion</a> /
-              <a href=" {{ path('account_register') }} "style="font-family:AvenirNextLTPro-Medium;color: #1e316a;font-size: 16px;">Inscription</a>
+        <div class="bs-offset-main bs-canvas-anim">
+            <p class="text-right mr-5 mt-2">
+                <a href="#" class="position-fixed" data-toggle="canvas" data-target="#bs-canvas-right" aria-expanded="false" aria-controls="bs-canvas-right"
+                  style="height: 25px;
+                  width: 25px;
+                  background-color: #1a237e;
+                  border-radius: 50%;
+                  display: inline-block;
+                  align-items: center;
+                  text-align: center;">
+                  <i class="fas fa-bars" style="color:#fff"></i>
+                </a>               
             </p>
-          </div>          
+          </div>
+          <div id="bs-canvas-right" class="bs-canvas bs-canvas-anim bs-canvas-right position-fixed h-100" style="background-color: rgb(252, 228, 236); z-index:2;">
+          <header class="bs-canvas-header p-3 overflow-auto" style="background-color: #1a237e">
+            <button type="button" class="bs-canvas-close float-left close" aria-label="Close">
+              <span aria-hidden="true" class="text-light">&times;</span>
+            </button>
+            <h4 class="d-inline-block text-light mb-0 float-right">Menu</h4>
+          </header>
+          <div class="bs-canvas-content py-2">
+            <ul style="list-style: none; color: #1a237e; font-family: AvenirNextLTPro-Bold;">
+              <li class="mt-2"><i class="fas fa-sign-in-alt"></i><a href="{{ path('account_login') }}" style="color: #1a237e; font-family: AvenirNextLTPro-Bold;"> Connexion</a></li>
+              <li class="mt-2"><i class="fas fa-user-plus"></i><a href=" {{ path('account_register')}}" style="color: #1a237e; font-family: AvenirNextLTPro-Bold;"> Inscription</a></li>
+            </ul>
+          </div>
+        </div>         
         {% endif %}
         <div style="height: 717" class="first">
           <p class="brand">{{ product.brand }}</p>
@@ -149,7 +164,7 @@
           <p class="title3_spec">{{ product.spec3Title }}</p>
           <p class="content_spec3">{{ product.spec3 }}</p>
         </div>
-        <div class="owl-carousel" style="height: 350">
+        <div class="owl-carousel owl-theme" style="height: 350">
         {% if product.rightPic1Url is empty %}
               <img src="/uploads/images/product_right/{{ product.rightPic1Name }}" alt="" height="170" width="235"/>
               <img src="/uploads/images/product_right/{{ product.rightPic2Name }}" alt="" height="170" width="235"/>
@@ -168,9 +183,8 @@
           <p class="comment_title">COMMENTAIRES <span class="comments_nb">({{ product.comments|length }})</span>
           {% if app.user %}
           {% else %}
-            <a href="{{ path('account_login') }}" class="add_to_cart" style="margin-left: 30px">
-              Connectez-vous pour commenter
-            </a>
+            <a href="{{ path('account_login') }}" class="comment_butt"> Connectez-vous pour commenter </a>
+            <a href="{{ path('account_login') }}" class="comment_text">Connectez-vous</a>
             {% endif %}
           </p>
           {% for comment in product.comments %}
@@ -219,7 +233,7 @@
             <div class="container mt-4 mb-4">
               {{ form_start(form, {'attr': {'id':'comment_form'} }) }}
                   {{ form_row(form.content) }}
-                  {{ form_row(form.submit,{'attr':{'class':'add_to_cart'} }) }}
+                  {{ form_row(form.submit,{'attr':{'class':'comment_action_butt'} }) }}
               {{ form_end(form) }}
             </div>
           {% endif %} 
@@ -264,7 +278,8 @@
         <div class="progress">
         {% set stock = product.currentStock / product.initialStock * 100 %}
           <div class="pro-done" data-done="{{ stock }}">
-            Le stock du produit est à {{ stock|round }} %
+            <span class="pc">Le stock du produit est à {{ stock|round }} %</span> 
+            <span class="tel">{{ stock|round }} %</span>
           </div>
           <div id="time"></div>
         </div>
@@ -276,6 +291,8 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="/js/owl.carousel.min.js"></script>
 <script src="js/app.js"></script>
+<script src="/js/zoomify.js"></script>
+<script src="js/loader.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script>
@@ -340,7 +357,9 @@ const v = axios.get(url).then(function (response) {
     setImg = img.id;
   }
 </script>
-
+<script>
+  $(".main").zoomify();
+</script>
 <script>
   // Progress bar
   const pro = document.querySelector(".pro-done");
@@ -359,7 +378,6 @@ $(document).ready(function () {
     autoplay: true,
     autoplayTimeout: 2000,
     autoplayHoverPause: true,
-    nav: true,
     responsive: {
       0: {
         items: 2,
