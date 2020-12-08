@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Order;
 use App\Form\CheckoutType;
 use App\Services\Cart\CartService;
+use App\Services\Mailer\MailerService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -116,7 +117,7 @@ class CheckoutController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @Route("/finalisation", name="order_confirmed")
      */
-    public function final(CartService $cartservice,Request $request,EntityManagerInterface $manager)
+    public function final(CartService $cartservice,Request $request,EntityManagerInterface $manager,MailerService $mailerService)
     {
         // Initialisation de la session  et du stock actuel
         $session = $request->getSession();
@@ -147,6 +148,14 @@ class CheckoutController extends AbstractController
         
         // On vide le panier apres commande
         $cartservice->clearCart();
+
+        // Envoi du mail à la fin de la commande 
+        $mailerService->sendOrderDetails(
+            $this->getUser()->getEmail(),
+            $order,$session->get('invoiceNumber'),
+            $this->getUser()->getFirstName(),
+            $this->getUser()->getLastName());
+
 
         return $this->redirectToRoute("home");
     }

@@ -34,5 +34,20 @@ class MailerService
 
         $this->mailer->send($email); 
     }
+
+    public function sendOrderDetails($userEmail,$details,$invoiceNumber,$userFirstName, $userLastName)
+    {
+        $email = (new TemplatedEmail())
+                ->from('payqin@stocklet.ci')
+                ->to($userEmail)
+                ->subject('Details de la commande:'.$invoiceNumber)
+                ->htmlTemplate("partials/emails/detailsOrder.html.twig")
+                ->context([
+                    'firstName'=> $userFirstName,
+                    'lastName' => $userLastName,
+                    'details' => $details,
+                    'invoice' => $invoiceNumber,
+                ]);
+    }
    
 }
