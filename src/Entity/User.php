@@ -136,6 +136,11 @@ class User implements UserInterface
     private $chrono;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $token;
+
+    /**
      * 
      * Permet de mettre en place un date d'inscription par default
      * @ORM\PrePersist
@@ -554,6 +559,18 @@ class User implements UserInterface
     public function setChrono(?int $chrono): self
     {
         $this->chrono = $chrono;
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): self
+    {
+        $this->token = $token;
 
         return $this;
     }    

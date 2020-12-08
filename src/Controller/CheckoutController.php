@@ -2,12 +2,8 @@
 
 namespace App\Controller;
 
-use DateTime;
 use App\Entity\Order;
-use App\Entity\Payment;
-use App\Entity\PaymentCard;
 use App\Form\CheckoutType;
-use App\Form\PaymentFormType;
 use App\Services\Cart\CartService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +18,7 @@ class CheckoutController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @Route("/checkout", name="checkout_index")
      */
-    public function index(CartService $cartservice,EntityManagerInterface $manager,Request $request)
+    public function index(CartService $cartservice,Request $request)
     {
             // Création de la nouvelle commande au clique sur le formulaire de commande
 
@@ -41,6 +37,7 @@ class CheckoutController extends AbstractController
                 $session->set('shippingDistrict',$shippingDistrict);
                 $session->set('shippingAddress1',$shippingAddress1);
                 $session->set('shippingAddress2',$shippingAddress2);
+                $session->set('invoiceNumber',sha1(mt_rand(1, 200) . 'SALT').'-'.date('Y').'-'.date('m').'-'.$this->getUser()->getId());
 
                 return $this->redirectToRoute("payment_index");
             }; 
@@ -51,7 +48,6 @@ class CheckoutController extends AbstractController
             'total' => $cartservice->getTotal(),
             'qty' => $cartservice->getFullCart()[0]['quantity'],
             'user'=>$this->getUser()
-
         ]);
     }
 
@@ -64,16 +60,11 @@ class CheckoutController extends AbstractController
      */
     public function payment(CartService $cartservice)
     {
-        $paymentCard = new PaymentCard();
-        
-        $form = $this->createForm(PaymentFormType::class,$paymentCard);
-
         return $this->render('checkout/payment.html.twig', [
             'product' => $cartservice->getFullCart()[0]['product'],
             'total' => $cartservice->getTotal(),
             'qty' => $cartservice->getFullCart()[0]['quantity'],
             'user'=> $this->getUser(),
-            'form' => $form->createView()
         ]);
     }
 
@@ -107,6 +98,21 @@ class CheckoutController extends AbstractController
     }
 
     /**
+     * @Route("/checkout-failed", name="checkout_failed")
+     * @param CartService $cartservice
+     */
+    public function failed(CartService $cartservice)
+    {
+        $this->addFlash('error',"Un problème est survenu pendant votre paiement, nous vous prions de verifier le solde de votre wallet ou de réessayer");
+        return $this->render('checkout/failed.html.twig', [
+            'product' => $cartservice->getFullCart()[0]['product'],
+            'total' => $cartservice->getTotal(),
+            'qty' => $cartservice->getFullCart()[0]['quantity'],
+            'user'=> $this->getUser(),
+        ]);        
+    }
+
+    /**
      * @IsGranted("ROLE_USER")
      * @Route("/finalisation", name="order_confirmed")
      */
@@ -130,7 +136,7 @@ class CheckoutController extends AbstractController
               ->setShippingDistrict($session->get('shippingDistrict'))
               ->setShippingAddress1($session->get('shippingAddress1'))
               ->setShippingAddress2($session->get('shippingAddress2'))
-              ->setInvoiceNumber('STK -'.date('Y').'-'.date('m').'-'.'INV'.'-'.$chrono);
+              ->setInvoiceNumber($session->get('invoiceNumber'));
 
         $manager->persist($order);
 
@@ -150,14 +156,18 @@ class CheckoutController extends AbstractController
      *
      * @return Response
      */
-    public function sendData()
+    public function sendData(CartService $cartservice,Request $request)
     {  
+        $session = $request->getSession();
+
         $shopId = "5dea9f276f0d90123988ed74";
-        $amount = 2;
-        $customerNumber = "123";
-        $orderNumber = "142";
-        $trash = "5dea9f276f0d90123988ed74;2;RoJv4p2xL7L8H6XLUQbpSqbE";
-        $hash = md5($trash);
+        $amount = $cartservice->getTotal();
+        $customerNumber = $this->getUser()->getId();
+        $orderNumber = $session->get('invoiceNumber');
+        $secret = "RoJv4p2xL7L8H6XLUQbpSqbE";
+        $signature = $shopId.';'.$amount.';'.$secret;
+        $trash = md5($signature);
+        $hash = strtoupper($trash);
 
         return $this->json([
             'shopId' => $shopId,

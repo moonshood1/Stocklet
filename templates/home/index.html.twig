@@ -4,7 +4,9 @@
 {% block body %}
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/app.css">
+<link rel="stylesheet" href="https://unpkg.com/@pqina/flip/dist/flip.min.css"/>
+<link rel="stylesheet" href="/css/app2.css">
+<link rel="stylesheet" href="/css/timer2.css">
     <style>
       .wrapper {
         display: flex;
@@ -33,7 +35,7 @@
       {% include "partials/carouselPhone.html.twig" %}    
         <div class="content">
           <p class="module-price">
-            {{ product.unitPrice }} FCFA <br /><strike>{{ product.oldUnitPrice }} FCFA</strike> <br />
+            {{ product.unitPrice|number_format(0,'','  ') }} FCFA <br /><strike>{{ product.oldUnitPrice|number_format(0,'','  ') }} FCFA</strike> <br />
           </p>
           <p class="add_to_cart">
             <a href="{{ path('cart_add', {'id': product.id}) }}" class="add_to_cart">Commander</a>
@@ -221,7 +223,7 @@
                       <i class="far fa-frown" style="font-size: 14px"></i>
                     {% endif %}
                   </a><span class="js-dislikes">{{ comment.dislikes|length }}</span>  &nbsp;
-                  <span style="color: #ff7d6d; font-family: AvenirNextLTPro-Medium">Répondre</span>
+                  {# <span style="color: #ff7d6d; font-family: AvenirNextLTPro-Medium">Répondre</span> #}
                 </p>
               </div>
               <div class="col-sm-2">
@@ -262,7 +264,7 @@
                 <p class="text-center"><a href="{{ path('livraisons_index') }}" style="color:#fff"> Livraisons</a></p>
                 <p class="text-center"><a href="{{ path('retours_index') }}" style="color:#fff"> Retours</a></p>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6 mb-4">
                 <p><a href="{{ path('faq_index') }}" style="color:#fff"> FAQ's</a></p>
                 <p><a href="{{ path('terms_index') }}" style="color:#fff"> Termes & Conditions</a></p>
                 <p><a href="{{ path('privacy_index') }}" style="color:#fff"> Politique de confidentialité</a></p>
@@ -274,14 +276,30 @@
       </div>
     </div>
     {% if product.currentStock > 0 %}
-      <div class="timer fixed-bottom">
-        <div class="progress">
-        {% set stock = product.currentStock / product.initialStock * 100 %}
-          <div class="pro-done" data-done="{{ stock }}">
-            <span class="pc">Le stock du produit est à {{ stock|round }} %</span> 
-            <span class="tel">{{ stock|round }} %</span>
+      <div class="progress-container fixed-bottom">
+      {% set stock = product.currentStock / product.initialStock * 100 %}
+        <div class="progress-progression" data-done="{{ stock }}">
+          <span class="progress-content pc">{% if stock > 30 %} Le stock du produit est à  {{ stock|round }} % {% else %} {{ stock|round }} % {% endif %}</span>
+          <span class="progress-content tel">{{ stock|round }} %</span>
+        </div>
+        <div class="progress-countdown">
+          <div class="tick" data-did-init="handleTickInit">
+            <div
+              data-repeat="true"
+              data-layout="horizontal fit"
+              data-transform="preset(d, h, m, s) -> delay"
+            >
+              <div class="tick-group">
+                <div
+                  data-key="value"
+                  data-repeat="true"
+                  data-transform="pad(00) -> split -> delay"
+                >
+                  <span data-view="flip"></span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div id="time"></div>
         </div>
       </div>
     {% endif %}
@@ -289,6 +307,7 @@
 {% block javascripts %}
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/@pqina/flip/dist/flip.min.js"></script>
 <script src="/js/owl.carousel.min.js"></script>
 <script src="js/app.js"></script>
 <script src="/js/zoomify.js"></script>
@@ -296,56 +315,31 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script>
-// Switch   
-const url = "http://127.0.0.1:8000/demain";
-const v = axios.get(url).then(function (response) {
-  // Initialisation du minuteur
+// fonction de timer + appel du switch à la fin
 
-  var x = setInterval(function () {
-    // Date de fin d'affichage(demain) , on parse pour avoir une valeur millisecondes
-    const r = response.data.demain;
-    const d = new Date(r).getTime();
+  $(document).ready(
+      $.get("http://127.0.0.1:8000/demain",function (data,status) {
+    window.localStorage.setItem('productDate',data.demain)
+  }));
+  
+      function handleTickInit(tick) {
+        // format of due date is ISO8601
+        // https://en.wikipedia.org/wiki/ISO_8601
 
-    // Date d'aujourd'hui , on parse pour avoir une valeur millisecondes
-    const n = new Date().getTime();
-    // calcul de la différence entre demain et aujourdhui
-    const diff = d - n;
+        // '2018-01-15T10:00:00+01:00'  to count down to the 15th of January 2018 at 10 o'clock in timezone GMT+1
 
-    // calcul des j , h , m et s en fonctions de la diff
+        // create the countdown counter
+        var counter = Tick.count.down(window.localStorage.getItem('productDate'));
 
-    var h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    var s = Math.floor((diff % (1000 * 60)) / 1000);
+        counter.onupdate = function (value) {
+          tick.value = value;
+        };
 
-    // affichage de la valeur dans le html
-    document.getElementById("time").innerHTML = h + ":" + m + ":" + s;
-
-    // Appel de ma fonction switch à la fin du timer
-    const switchUrl = "http://127.0.0.1:8000/switch";
-    function launchSwitch() {
-      location.replace(switchUrl);
-    }
-    if (diff < 0) {
-      clearInterval(x);
-      launchSwitch();
-    }
-  }, 1000);
-});
-</script>
-<script>
-  /* const urlRes = "http://127.0.0.1:8000/payment/process";
-  const urlCheck = "https://business-api-2.ew.r.appspot.com/api/business/merchant";
- function dat() {
-  axios.get(urlRes).then(function(response)
-  {
-    const d = response.data;
-
-    axios.post([
-      "https://business-api-2.ew.r.appspot.com/api/business/merchant",
-      d
-    ])
-  });
- } */
+        counter.onended = function () {
+          // redirect, uncomment the next line
+          window.location = 'http://127.0.0.1:8000/switch';
+        };
+      }
 </script>
 <script>
   // Carousel
@@ -362,7 +356,7 @@ const v = axios.get(url).then(function (response) {
 </script>
 <script>
   // Progress bar
-  const pro = document.querySelector(".pro-done");
+  const pro = document.querySelector(".progress-progression");
   setTimeout(() => {
     pro.style.width = pro.getAttribute("data-done") + "%";
     pro.style.opacity = 1;

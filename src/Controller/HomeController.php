@@ -25,7 +25,6 @@ class HomeController extends AbstractController
      */
     public function index(ProductRepository $product,Request $request,EntityManagerInterface $manager,CommentRepository $commentRepo):Response
     {
-
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);

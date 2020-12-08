@@ -1,0 +1,11 @@
+Bonjour {{ username }}<br>
+
+Bienvenue sur Stocklet.ci , suite a votre inscription , nous vous envoyons cet email qui contient votre token de confirmation de compte
+<br>
+Veuillez suivre ce lien afin de confirmer votre inscription
+<br>
+
+<a href="{{ url('account_confirm',{'token': token}) }}">Cliquez pour confirmer </a>
+
+<br>
+Ce lien expire dans {{ expiration_date|date('d-m-Y H:i:s') }}

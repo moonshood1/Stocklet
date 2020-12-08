@@ -1,0 +1,101 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Livraison et paiement {% endblock %}
+
+{% block body %}
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/ultime2.css"> 
+{% include "partials/header.html.twig" %}
+{% include "partials/loader.html.twig" %}
+    <div class="container">
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+      <div class="card">
+      {% include "partials/menu.html.twig" %}
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <p class="shipped">
+            Livraison <br />
+            <small style="font-family: Gilroy-regular; font-size: 15px">
+              Le moyen de livraison par defaut
+            </small>
+            <span class="otherShi">
+              <b style="font-size: 16px">ENVOY</b>
+            </span>
+          </p>
+          <div class="shi">
+            <div class="row">
+              <div class="col-md-7 mt-2 ml-1">
+                <div class="envoy">
+                  <input type="radio" id="envoy" name="envoy" checked />
+                  <label for="envoy">Envoy</label>
+                  <p>Livraison dans les 5 jours</p>
+                </div>
+              </div>
+              <div class="col-md-3 offset-md-1 mt-2">
+                <div class="logo">
+                  <img
+                    src="/images/logo/envoy.jpg"
+                    alt=""
+                    height="40"
+                    width="85"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="infos">
+            Paiement <br />
+            <small style="font-family: Gilroy-regular; font-size: 15px">
+              Le moyen de paiment par defaut
+            </small>
+            <span class="otherCard">
+              <b style="font-size: 16px">PayQin Wallet</b>
+            </span>
+          </p>
+          <div class="payment">
+            <div class="row">
+              <div class="col-md-7 mt-2 ml-1">
+                <div class="payqinCard">
+                  <input type="radio" id="payqin" name="payqin" checked />
+                  <label for="payqin">PayQin Wallet</label>
+                  <p>
+                    A safe and secure environment for your internet transactions
+                    anywhere in the world.
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-3 offset-md-1 mt-2">
+                <div class="logo">
+                  <img
+                    src="https://www.payqin.com/wp-content/uploads/2020/09/n3-1.png"
+                    alt=""
+                    height="25"
+                    width="85"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 offset-md-2">
+        {% include "partials/summary.html.twig" %}
+          <p class="float-left"><button id="next"><a href="{{ path('payment_process') }}" style="text-decoration: none; color: #fff">Continuer</a></button></p>
+        </div>
+      </div>
+      <div class="payment_purchase">
+        <hr />
+        <p class="float-left">
+          <a href="{{ path('checkout_index') }}"><i class="fas fa-arrow-left"></i></a> &nbsp; Retour au informations de livraisons
+        </p>
+      </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+  <script src="js/loader.js"></script>
+{% endblock %}

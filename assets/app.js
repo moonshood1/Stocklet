@@ -7,6 +7,13 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import "./styles/app.css";
+import "./styles/404.css";
+import "./styles/500.css";
+import "./styles/cart.css";
+import "./styles/contact.css";
+import "./styles/timer.css";
+import "./styles/ultime.css";
+import "./styles/user.css";
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 // import $ from 'jquery';

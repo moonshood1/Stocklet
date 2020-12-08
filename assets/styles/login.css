@@ -1,0 +1,307 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap");
+@font-face {
+  font-family: Gilroy-bold;
+  src: url(../fonts/Gilroy-ExtraBold.otf);
+}
+@font-face {
+  font-family: Gilroy-regular;
+  src: url(../fonts/Gilroy-Light.otf);
+}
+@font-face {
+  font-family: AvenirNextLTPro-Regular;
+  src: url(../fonts/AvenirNextLTPro-Regular.otf);
+}
+@font-face {
+  font-family: AvenirNextLTPro-Bold;
+  src: url(../fonts/AvenirNextLTPro-Bold.otf);
+}
+body {
+  background: url(../images/back.PNG) fixed center;
+}
+
+.card {
+  top: 10px;
+  left: 480px;
+  width: 500px;
+  height: 640px;
+}
+.title {
+  margin-right: auto;
+  margin-top: 15px;
+  margin-left: 50px;
+  font-size: 45px;
+  color: #1e316a;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: bold;
+}
+
+.welcome {
+  margin-top: 10px;
+  margin-left: 50px;
+  font-size: 20px;
+  color: #161925;
+  font-weight: bold;
+  font-family: Gilroy-bold;
+}
+
+.signup {
+  margin-left: 50px;
+  margin-top: 5px;
+  font-size: 20px;
+  font-family: Gilroy-regular;
+  color: #161925;
+}
+
+.signup a {
+  color: #1e316a;
+  text-decoration: none;
+  font-family: Gilroy-bold;
+}
+
+form {
+  display: block;
+  margin-left: 50px;
+  margin-right: 70px;
+}
+
+form a {
+  color: #1e316a;
+  text-decoration: none;
+  font-family: Gilroy-regular;
+  font-size: 15px;
+  margin-top: 27px;
+}
+
+form label {
+  font-size: 15px;
+  font-family: Gilroy-regular;
+  color: #707070;
+}
+
+form input {
+  width: 400px;
+  height: 32px;
+  border: 1px solid #bcbcc0;
+  border-radius: 8px;
+  background-color: #f1f0e8;
+}
+form label#_password {
+  margin-top: 15px;
+}
+
+form input#checkbox {
+  margin-top: 15px;
+  width: 10px;
+  height: 10px;
+}
+
+form label#checkbox {
+  color: #161925;
+  font-size: 15px;
+  font-family: Gilroy-regular;
+}
+
+form button {
+  border-radius: 8px;
+  margin-top: 30px;
+  width: 400px;
+  height: 40px;
+  background-color: #1e316a;
+  color: #ffffff;
+}
+form button:hover {
+  background-color: #f1f0e8;
+  color: #1e316a;
+}
+
+form button p {
+  font-family: Gilroy-bold;
+  font-size: 20px;
+  margin-top: 4px;
+  margin-bottom: 17px;
+}
+
+.social {
+  width: 100%;
+  margin-left: 48px;
+  margin-right: 60px;
+}
+
+.social #google {
+  border-radius: 8px;
+  background-color: #ffffff;
+  width: 400px;
+  height: 40px;
+  color: #161925;
+  font-family: Gilroy-regular;
+}
+
+.social #fb {
+  margin-top: 9px;
+  margin-right: 9px;
+  border-radius: 8px;
+  background-color: #1877f2;
+  width: 200px;
+  height: 40px;
+  color: #ffffff;
+  font-family: Gilroy-regular;
+}
+
+.social #tw {
+  margin-top: 9px;
+  border-radius: 8px;
+  background-color: #1a91da;
+  width: 190px;
+  height: 40px;
+  color: #ffffff;
+  font-family: Gilroy-regular;
+}
+
+.logo {
+  width: 21px;
+  height: 21px;
+}
+@media only screen and (max-width: 770px) {
+  body {
+    background: #bcbcc0;
+  }
+  .card {
+    top: 10px;
+    left: 150px;
+    width: 480px;
+    height: 640px;
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  body {
+    background: #bcbcc0;
+  }
+  .card {
+    top: 100px;
+    left: 60px;
+    width: 300px;
+    height: 480px;
+  }
+  .title {
+    margin-right: auto;
+    margin-top: 5px;
+    margin-left: 30px;
+    font-size: 25px;
+  }
+
+  .welcome {
+    margin-top: 5px;
+    margin-left: 30px;
+    font-size: 16px;
+  }
+
+  .signup {
+    margin-left: 30px;
+    margin-top: 5px;
+    font-size: 14px;
+  }
+
+  form {
+    display: block;
+    margin-left: 30px;
+    margin-right: auto;
+  }
+
+  form a {
+    font-size: 13px;
+    margin-top: 22px;
+  }
+
+  form label {
+    font-size: 13px;
+  }
+
+  form input {
+    width: 250px;
+    height: 25px;
+  }
+  form label#_password {
+    margin-top: 10px;
+  }
+
+  form input#checkbox {
+    margin-top: 15px;
+    width: 10px;
+    height: 10px;
+  }
+
+  form label#checkbox {
+    font-size: 12px;
+  }
+
+  form button {
+    border-radius: 8px;
+    margin-top: 15px;
+    width: 250px;
+    height: 30px;
+    background-color: #1e316a;
+    color: #ffffff;
+  }
+
+  form button p {
+    font-size: 16px;
+  }
+
+  p#other {
+    font-size: 12px;
+  }
+
+  .social {
+    width: 100%;
+    margin-left: 30px;
+  }
+
+  .social #google {
+    width: 250px;
+    height: 30px;
+  }
+
+  .social #fb {
+    margin-top: 9px;
+    width: 125px;
+    height: 30px;
+    color: #ffffff;
+    font-family: Gilroy-regular;
+  }
+
+  .social #tw {
+    margin-top: 9px;
+    width: 112px;
+    height: 30px;
+  }
+
+  .logo {
+    width: 21px;
+    height: 21px;
+  }
+}
+
+@media only screen and (max-width: 376px) {
+  body {
+    background: #bcbcc0;
+  }
+  .card {
+    top: 55px;
+    left: 35px;
+    width: 300px;
+    height: 480px;
+  }
+}
+
+@media only screen and (max-width: 321px) {
+  body {
+    background: #bcbcc0;
+  }
+  .card {
+    top: 0px;
+    left: 0px;
+    width: 300px;
+    height: 480px;
+  }
+}

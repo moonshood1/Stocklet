@@ -1,3 +1,679 @@
-body {
-    background-color: lightgray;
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap");
+@font-face {
+  font-family: AvenirNextLTPro-Regular;
+  src: url(../fonts/AvenirNextLTPro-Regular.otf);
+}
+@font-face {
+  font-family: AvenirNextLTPro-Bold;
+  src: url(../fonts/AvenirNextLTPro-Bold.otf);
+}
+@font-face {
+  font-family: AvenirNextLTPro-Medium;
+  src: url(../fonts/AvenirNextLTPro-Medium.otf);
+}
+@font-face {
+  font-family: antipasto;
+  src: url(../fonts/antipasto.bold.ttf);
+}
+
+/* css du loader */
+#loader {
+  border: 12px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 12px solid #444444;
+  width: 70px;
+  height: 70px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.center {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+/* Grand conteneur */
+.wrap {
+  display: flex;
+}
+.left {
+  background-color: #f1f0e8;
+  flex-basis: 50%;
+  box-sizing: border-box;
+}
+
+.left .brand {
+  font-family: "Josefin Sans", "sans-serif";
+  font-weight: bold;
+  margin-top: 2%;
+  margin-left: 2%;
+  color: #1a237e;
+  font-size: 25px;
+}
+
+.right {
+  background-color: rgba(251, 251, 249, 1);
+  flex-basis: 50%;
+  height: 95vh;
+  overflow: auto;
+}
+
+/* Canvas Overlay */
+.bs-canvas-overlay {
+  opacity: 0;
+  z-index: -1;
+}
+
+.bs-canvas-overlay.show {
+  opacity: 0.85;
+  z-index: 1100;
+}
+
+.bs-canvas {
+  top: 0;
+  width: 0;
+  z-index: 1110;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.bs-canvas-right {
+  right: 0;
+}
+
+.bs-canvas-anim {
+  transition: all 0.4s ease-out;
+  -webkit-transition: all 0.4s ease-out;
+  -moz-transition: all 0.4s ease-out;
+  -ms-transition: all 0.4s ease-out;
+}
+
+/**  Barre de progression et Timer */
+.progress-container {
+  background-color: #1a237e;
+  height: 65px;
+  width: 100%;
+}
+
+.progress-progression {
+  background: linear-gradient(to right, #5bb7c0, #99f8db);
+  box-shadow: 0 3px 3px -5px #5bb7c0, 0 2px 5px #5bb7c0;
+  height: 100%;
+  width: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* transition: width 0.2s linear;*/
+  transition: 2s ease;
+  z-index: 5;
+}
+
+.progress-content,
+.progress-countdown {
+  color: #fff;
+  font-size: 40px;
+}
+
+.progress-content {
+  padding-left: 15px;
+  margin-right: auto;
+  float: left;
+  font-family: AvenirNextLTPro-Medium;
+}
+
+.progress-countdown {
+  padding-right: 5px;
+  margin-top: 2px;
+  margin-left: 76%;
+  float: right;
+  position: absolute;
+  z-index: 7;
+}
+.tel {
+  display: none;
+}
+
+/* Barre de navigation  */
+.navbar {
+  background-color: #ffe3e3;
+  padding-top: 0;
+  padding-bottom: 0;
+  height: auto;
+}
+.navbar-brand {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: bold;
+  color: #1e316a !important;
+  font-size: 35px;
+}
+
+.navbar-nav {
+  padding-right: 30px;
+  font-size: 12px;
+  font-family: Gilroy-regular;
+}
+
+.nav-link {
+  color: #1e316a;
+}
+
+.dropdown-menu {
+  font-size: 14px;
+}
+
+.dropdown-item {
+  color: #1e316a;
+}
+
+.dropdown-item:hover {
+  color: #ffff;
+  background-color: #1e316a;
+}
+
+@media (max-width: 992px) {
+  .navbar-expand-lg .navbar-toggler {
+    display: block;
+    background-color: #1e316a;
+    color: #ffff;
+    border-radius: 100%;
+    height: 35px;
+    width: 35px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+  }
+  .navbar-expand-lg .navbar-toggler {
+    color: #ffff;
+  }
+  .navbar-expand-lg .navbar-toggler i {
+    height: 20px;
+    width: 20px;
+    display: block;
+    margin-top: 4px;
+    margin-left: 6px;
+  }
+}
+
+/* Zoom sur image de gauche */
+.zoomed {
+  -webkit-box-shadow: -5px -5px 35px #000000;
+  -moz-box-shadow: 5px 5px 35px #000000;
+  box-shadow: 5px 5px 35px #000000;
+  border: 10px solid white;
+  background-color: #fff;
+  z-index: 10;
+}
+
+/* premier contenu */
+
+.first {
+  background-color: rgba(251, 251, 249, 0);
+  margin-top: 120px;
+  margin-left: 62px;
+  margin-bottom: 70px;
+}
+
+.first .brand {
+  font-weight: bold;
+  font-size: 20px;
+  font-family: AvenirNextLTPro-Bold;
+  color: #1e316a;
+}
+
+.first .productName {
+  font-weight: bold;
+  font-size: 37px;
+  font-family: AvenirNextLTPro-Bold;
+  color: #1e316a;
+}
+
+.first .price {
+  font-weight: lighter;
+  margin-top: 54px;
+  font-size: 30px;
+  font-family: AvenirNextLTPro-Regular;
+  color: #1e316a;
+}
+
+.first .desc1 {
+  font-size: 16px;
+  font-family: AvenirNextLTPro-Regular;
+  color: #1e316a;
+  margin-top: 37px;
+}
+.first .desc2 {
+  font-size: 16px;
+  font-family: AvenirNextLTPro-Regular;
+  color: #1e316a;
+  margin-top: 2px;
+}
+
+.first p.add_to_cart {
+  margin-top: 45px;
+}
+.first a.add_to_cart {
+  padding: 7px;
+  font-size: 16px;
+  background-color: #fce4ec;
+  color: #1a237e;
+  text-decoration: none;
+  font-family: AvenirNextLTPro-Regular;
+  letter-spacing: 0.04cm;
+  text-transform: uppercase;
+  border: 2px solid #fce4ec;
+}
+
+.first a.add_to_cart:hover {
+  background-color: #1a237e;
+  color: #fce4ec;
+}
+
+.first .ship {
+  margin-top: 5px;
+  color: rgba(30, 49, 106, 0.52);
+  font-size: 12px;
+  font-family: AvenirNextLTPro-Medium;
+}
+
+.image-principale {
+  background: #f8eff2;
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  display: none;
+}
+
+.image-principale img {
+  vertical-align: middle;
+}
+
+.image-principale .content {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 100%;
+  padding-left: 15px;
+}
+
+a.add_to_cart {
+  padding: 7px;
+  font-size: 16px;
+  background-color: #fce4ec;
+  color: #1a237e;
+  text-decoration: none;
+  font-family: AvenirNextLTPro-Regular;
+  letter-spacing: 0.04cm;
+  text-transform: uppercase;
+  border: 2px solid #fce4ec;
+}
+
+/* Second contenu */
+
+.second {
+  background-color:/* rgba(255, 255, 255, 0.5)*/ #fff;
+  margin-top: 5px;
+  padding-left: 62px;
+}
+
+.second .spec {
+  font-size: 30px;
+  color: #1e316a;
+  font-family: AvenirNextLTPro-Bold;
+}
+
+.second .spec_content {
+  margin-top: 20px;
+  font-size: 16px;
+  font-family: AvenirNextLTPro-Regular;
+  color: #1e316a;
+}
+
+.second .title1_spec {
+  margin-top: 50px;
+  color: #1e316a;
+  font-size: 20px;
+  font-family: AvenirNextLTPro-Bold;
+}
+
+.second .content_spec1 {
+  color: #1e316a;
+  font-size: 16px;
+  font-family: AvenirNextLTPro-Regular;
+}
+
+.second .title2_spec {
+  margin-top: 43px;
+  color: #1e316a;
+  font-size: 20px;
+  font-family: AvenirNextLTPro-Bold;
+}
+
+.second .content_spec2 {
+  margin-top: 15px;
+  color: #1e316a;
+  font-size: 16px;
+  font-family: AvenirNextLTPro-Regular;
+}
+
+.second .title3_spec {
+  margin-top: 43px;
+  color: #1e316a;
+  font-size: 20px;
+  font-family: AvenirNextLTPro-Bold;
+}
+
+.second .content_spec3 {
+  margin-top: 15px;
+  color: #1e316a;
+  font-size: 16px;
+  font-family: AvenirNextLTPro-Regular;
+}
+/* Carousel */
+.owl-carousel {
+  margin-top: 0px;
+}
+
+/* Commentaires  */
+
+.comments {
+  background-color: #fbfbf9;
+  margin-top: 67px;
+  margin-left: 63px;
+  overflow: hidden;
+}
+
+.comments .comment_title {
+  color: #1e316a;
+  font-size: 30px;
+  font-family: AvenirNextLTPro-Bold;
+}
+
+.comments .comments_nb {
+  margin-top: 7px;
+  color: rgba(30, 49, 106, 0.52);
+  font-size: 14px;
+  font-family: AvenirNextLTPro-Medium;
+}
+
+.comment_butt {
+  padding: 14px 32px 11px 34px;
+  font-size: 10px;
+  text-align: center;
+  background-color: #1e316a;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: AvenirNextLTPro-Medium;
+  border: 2px solid #1e316a;
+  margin-left: 50px;
+}
+.comment_butt:hover {
+  background-color: #ffffff;
+  color: #1e316a;
+}
+
+.comment_action_butt {
+  padding: 14px 32px 11px 34px;
+  font-size: 10px;
+  text-align: center;
+  background-color: #1e316a;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: AvenirNextLTPro-Medium;
+  border: 2px solid #1e316a;
+}
+.comment_action_butt:hover {
+  background-color: #ffffff;
+  color: #1e316a;
+}
+
+/* Contact */
+section .contact {
+  margin-left: 63px;
+  margin-top: 56px;
+}
+
+section .contact.contact-pre {
+  font-size: 30px;
+  color: #ffffff;
+  font-family: AvenirNextLTPro-Bold;
+}
+
+.message_title {
+  margin-top: 10px;
+  color: #1e316a;
+  font-size: 12px;
+  font-family: AvenirNextLTPro-Medium;
+}
+
+.message_content {
+  margin-top: 1px;
+  color: #1e316a;
+  font-size: 30px;
+  font-family: AvenirNextLTPro-Bold;
+}
+
+.callus_title {
+  color: #1e316a;
+  font-size: 12px;
+  font-family: AvenirNextLTPro-Medium;
+}
+
+.callus_content {
+  color: #1e316a;
+  font-size: 30px;
+  font-family: AvenirNextLTPro-Bold;
+}
+
+.features {
+  margin-top: 50px;
+  color: #ffffff;
+  font-size: 14px;
+  font-family: AvenirNextLTPro-Medium;
+}
+
+/* Les images */
+.avatar {
+  max-width: 128px;
+  max-height: 128px;
+  border-radius: 50%;
+}
+
+.avatar-admin {
+  max-width: 128px;
+  max-height: 128px;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.avatar-medium {
+  max-width: 64px;
+  max-height: 64px;
+}
+
+.avatar-mini {
+  max-width: 24px;
+  max-height: 24px;
+}
+
+nav {
+  display: none !important;
+}
+
+.comment_text {
+  display: none;
+}
+
+@media only screen and (max-width: 767px) {
+  nav {
+    display: flex !important;
+  }
+  .depends {
+    display: block;
+  }
+  .image-principale {
+    background: #f8eff2;
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    display: block;
+  }
+  .wrap {
+    display: block;
+    height: 1100px;
+  }
+  .left {
+    display: none;
+  }
+  .right {
+    overflow: hidden;
+    height: auto;
+  }
+  .menu {
+    display: none;
+  }
+  .progress-container {
+    height: 45px;
+  }
+
+  .progress-countdown {
+    color: #fff;
+    font-size: 30px;
+  }
+
+  .progress-content {
+    padding-left: 5px;
+  }
+
+  .progress-countdown {
+    padding-right: 5px;
+    margin-top: 2px;
+    margin-left: 20%;
+  }
+
+  .tel {
+    display: flex;
+    font-size: 28px;
+    margin-top: 8px;
+  }
+
+  .pc {
+    display: none;
+  }
+
+  .first {
+    margin-top: 5px;
+    margin-left: 15px;
+    margin-bottom: 20px;
+  }
+  .first .brand {
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  .first .productName {
+    font-weight: bold;
+    font-size: 25px;
+  }
+  .first p.price {
+    display: none;
+  }
+  .first p.add_to_cart {
+    display: none;
+  }
+
+  .first .desc1 {
+    font-size: 14px;
+  }
+
+  .first .desc2 {
+    font-size: 14px;
+  }
+
+  .second {
+    margin-top: 2px;
+    padding-left: 15px;
+  }
+
+  .second .spec {
+    font-size: 25px;
+  }
+  .second .spec_content {
+    margin-top: 15px;
+  }
+  .second .title1_spec {
+    margin-top: 35px;
+    font-size: 20px;
+  }
+
+  .second .content_spec1 {
+    font-size: 14px;
+  }
+
+  .second .title2_spec {
+    margin-top: 5px;
+    font-size: 20px;
+  }
+
+  .second .content_spec2 {
+    margin-top: 5px;
+    font-size: 14px;
+  }
+
+  .second .title3_spec {
+    margin-top: 5px;
+    font-size: 20px;
+  }
+
+  .second .content_spec3 {
+    margin-top: 15px;
+    font-size: 14px;
+  }
+
+  .owl-carousel {
+    margin-top: 0px;
+  }
+  .comments {
+    margin-top: 4px;
+    margin-left: 15px;
+    margin-bottom: 25px;
+  }
+  .comments .comment_title {
+    font-size: 25px;
+  }
+  .comments .comments_nb {
+    margin-top: 4px;
+    font-size: 10px;
+  }
+  .comment_butt {
+    display: none;
+  }
+  .comment_text {
+    display: inline;
+    font-size: 12px;
+    color: #1a237e;
+  }
+  section .contact {
+    display: none;
+  }
+  .bs-offset-main {
+    display: none;
+  }
+  .wrapper {
+    display: none;
+  }
 }

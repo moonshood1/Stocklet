@@ -8,6 +8,8 @@ use App\Entity\PasswordUpdate;
 use App\Form\RegistrationType;
 use App\Form\PasswordUpdateType;
 use App\Repository\PaymentRepository;
+use App\Repository\UserRepository;
+use App\Services\Mailer\MailerService;
 use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -77,7 +79,7 @@ class AccountController extends AbstractController
      * @param UserPasswordEncoderInterface $encoder
      * @return Response
      */
-    public function register(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
+    public function register(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, MailerService $mailerService)
     {
         $user = new User();
         $form = $this->createForm(RegistrationType::class, $user);
@@ -86,16 +88,48 @@ class AccountController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $hash = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
+            $user->setToken(sha1(mt_rand(1, 90000) . 'SALT'));
 
             $manager->persist($user);
             $manager->flush();
 
-            return $this->redirectToRoute("account_login");
+            $mailerService->sendEmail(
+                $user->getEmail(),
+                $user->getToken(),
+                $user->getFirstName());
+
+            return $this->redirectToRoute("account_verifying");
         }
 
         return $this->render('account/registration.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/account_verifying", name="account_verifying")
+     */
+    public function accountVerify()
+    {
+        return $this->render('account/verifying.html.twig');
+    }
+
+    /**
+     * @Route("/account_confirm/{token}", name="account_confirm")
+     * @param string $token
+     */
+    public function confirmAccount($token, UserRepository $repo,EntityManagerInterface $manager)
+    {
+        $user = $repo->findOneBy(["token"=> $token]);
+
+        if ($user) {
+            $user->setToken(null);
+            $manager->persist($user);
+            $manager->flush(); 
+            
+            return $this->redirectToRoute("account_login");
+        }
+        return $this->json($token);
     }
 
     /**
