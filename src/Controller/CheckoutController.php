@@ -102,13 +102,10 @@ class CheckoutController extends AbstractController
      * @Route("/checkout-failed", name="checkout_failed")
      * @param CartService $cartservice
      */
-    public function failed(CartService $cartservice)
+    public function failed()
     {
-        $this->addFlash('error',"Un problème est survenu pendant votre paiement, nous vous prions de verifier le solde de votre wallet ou de réessayer");
+        $this->addFlash('error',"Un problème est survenu pendant votre paiement, nous vous prions de verifier le solde de votre wallet ou de réessayer ultérieurement");
         return $this->render('checkout/failed.html.twig', [
-            'product' => $cartservice->getFullCart()[0]['product'],
-            'total' => $cartservice->getTotal(),
-            'qty' => $cartservice->getFullCart()[0]['quantity'],
             'user'=> $this->getUser(),
         ]);        
     }

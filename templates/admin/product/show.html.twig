@@ -4,7 +4,8 @@
 
 {% block body %}
     <div class="content-container">
-        <div class="container-fluid">      
+        <div class="container-fluid">
+                {{ wo_render_breadcrumbs({separator: '>>'}) }}    
             <div class="jumbotron mt-2">
                 <h1 class="display-4">{{ product.productName }}</h1>
                 <hr class="my-4" />

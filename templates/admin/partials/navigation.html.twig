@@ -1,0 +1,54 @@
+<div class="card">
+  <div class="card-header"><h4> Administration Stocklet</h4></div>
+  <div class="card-body">
+    <p>
+      <i class="fas fa-chart-line" aria-hidden="true"></i>
+      <a href="{{ path('admin_home') }}"> Dashboard </a>
+    </p>
+    <p>
+      <i class="fas fa-eye" aria-hidden="true"></i>
+      <a href="{{ path('home') }}"  target="_blank"> Voir le site </a>
+    </p>
+    <p>
+      <i class="fas fa-layer-group" aria-hidden="true"></i>
+      <a href="{{ path('admin_products_index') }}"> Produits </a>
+    </p>
+    <p>
+      <i class="fas fa-bookmark" aria-hidden="true"></i>
+      <a href="{{ path('admin_category_index') }}"> Catégories </a>
+    </p>
+    <p>
+      <i class="fas fa-users" aria-hidden="true"></i>
+      <a href="{{ path('admin_user_index') }}"> Utilisateurs </a>
+    </p>
+    <p>
+      <i class="fas fa-comments" aria-hidden="true"></i>
+      <a href="{{ path('admin_comment_index') }}"> Commentaires </a>
+    </p>
+    <p>
+      <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+      <a href="{{ path('admin_order_index') }}"> Commandes </a>
+    </p>
+    <p>
+      <i class="fas fa-gift" aria-hidden="true"></i>
+      <a href="{{ path('admin_promo_index') }}"> Codes promos </a>
+    </p>
+  </div>
+</div>
+{% if app.user  %}
+  <div class="card mt-2">
+    <div class="card-header">Detail de l'administrateur</div>
+      <div class="card-body">
+          <p>
+          <i class="fas fa-user" aria-hidden="true"></i>
+            <a href="{{ path('admin_account') }}">
+              {{ app.user.firstName }}
+            </a>
+          </p>
+          <p>
+          <i class="fas fa-lock" aria-hidden="true"></i>
+          <a href="{{ path('admin_account_logout') }}">Déconnexion</a>
+        </p>
+    </div>
+  </div>
+{% endif  %} 

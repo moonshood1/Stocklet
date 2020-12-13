@@ -5,10 +5,11 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
-use App\Services\Pagination\PaginationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use App\Services\Pagination\PaginationService;
 use Symfony\Component\Routing\Annotation\Route;
+use WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminProductController extends AbstractController
@@ -16,11 +17,14 @@ class AdminProductController extends AbstractController
     /**
      * @Route("/admin/products/{page<\d+>?1}", name="admin_products_index")
      */
-    public function index(ProductRepository $repo, $page, PaginationService $pagination)
+    public function index(ProductRepository $repo, $page, PaginationService $pagination,Breadcrumbs $breadcrumbs)
     {
         $pagination->setEntityClass(Product::class)
                    ->setLimit(5)
                    ->setPage($page);
+                   
+        $breadcrumbs->prependRouteItem("Dashboard","admin_home")
+                    ->addRouteItem("Produits","admin_products_index");
 
         return $this->render('admin/product/index.html.twig', [
             'pagination' => $pagination,
@@ -36,7 +40,7 @@ class AdminProductController extends AbstractController
      * @param Product $product
      * @return Response
      */
-    public function create(Request $request, EntityManagerInterface $manager) 
+    public function create(Request $request, EntityManagerInterface $manager,Breadcrumbs $breadcrumbs) 
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class,$product);
@@ -48,6 +52,11 @@ class AdminProductController extends AbstractController
 
             return $this->redirectToRoute("admin_products_index");
         }
+
+        $breadcrumbs->prependRouteItem("Dashboard","admin_home")
+                    ->addRouteItem("Produits","admin_products_index")
+                    ->addRouteItem("Création","admin_products_create"); 
+
         return $this->render('admin/product/new.html.twig',[
             'form'=>$form->createView()
         ]);
@@ -61,7 +70,7 @@ class AdminProductController extends AbstractController
      * @param Product $product
      * @return Response
      */
-    public function edit(Product $product,Request $request,EntityManagerInterface $manager)
+    public function edit(Product $product,Request $request,EntityManagerInterface $manager,Breadcrumbs $breadcrumbs)
     {
         $form = $this->createForm(ProductType::class,$product);
 
@@ -74,6 +83,10 @@ class AdminProductController extends AbstractController
 
             return $this->redirectToRoute("admin_products_index");
         } 
+
+        $breadcrumbs->prependRouteItem("Dashboard","admin_home")
+                    ->addRouteItem("Produits","admin_products_index")
+                    ->addRouteItem("Modification","admin_products_edit",['id'=> $product->getId()]);        
         
         return $this->render('admin/product/edit.html.twig',[
             'product'=>$product,
@@ -141,8 +154,12 @@ class AdminProductController extends AbstractController
      * @param Product $product
      * @return void
      */
-    public function show(Product $product)
+    public function show(Product $product,Breadcrumbs $breadcrumbs)
     {
+        $breadcrumbs->prependRouteItem("Dashboard","admin_home")
+                    ->addRouteItem("Produits","admin_products_index")
+                    ->addRouteItem("Détail","admin_products_show",['id'=> $product->getId()]);
+
         return $this->render("admin/product/show.html.twig", [
             'product' => $product
         ]);

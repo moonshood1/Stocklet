@@ -1,29 +1,28 @@
-          <div class="card">
-            <div class="card-header">
-              <p class="account">Mon Compte</p>
-            </div>
-            <div class="card-body">
-              <p style="margin-top: 0">
-                <span><i class="fas fa-user"></i></span
-                ><a href=" {{ path('account_index') }} "> Infos personnelles</a> <br />
-              </p>
-              {% if user.password %}
-              <p>
-                <span><i class="fas fa-lock"></i></span
-                ><a href=" {{ path('account_password') }} "> Modifier mot de passe</a><br />
-              </p>
-              {% endif %}
-              <p>
-                <span><i class="fas fa-wallet"></i></span
-                ><a href="{{ path('account_payment_index') }}"> Paiements</a><br />
-              </p>
-              <p>
-                <span><i class="fas fa-list"></i></span
-                ><a href="{{ path('account_orders') }}"> Commandes</a><br />
-              </p>
-              <p>
-                <span><i class="fas fa-power-off"></i></span>
-                <a href=" {{ path('account_logout') }} "> Déconnexion </a>
-              </p>
-            </div>
-          </div>
+<div class="card">
+  <div class="card-header">
+    <p class="account">Mon Compte</p>
+  </div>
+  <div class="card-body">
+    <p style="margin-top: 0">
+      <span><i class="fas fa-user"></i></span>
+      <a href=" {{ path('account_index') }} "> Infos personnelles</a> <br />
+    </p>
+    {% if user.password %}
+      <p>
+        <span><i class="fas fa-lock"></i></span>
+        <a href=" {{ path('account_password') }} "> Modifier mot de passe</a><br />
+      </p>
+    {% endif %}
+    <p>
+      <span><i class="fas fa-wallet"></i></span>
+      <a href="{{ path('account_payment_index') }}"> Paiements</a><br />
+    </p>
+    <p>
+      <span><i class="fas fa-list"></i></span><a href="{{ path('account_orders') }}"> Commandes</a><br />
+    </p>
+    <p>
+      <span><i class="fas fa-power-off"></i></span>
+      <a href=" {{ path('account_logout') }} "> Déconnexion </a>
+    </p>
+  </div>
+</div>

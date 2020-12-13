@@ -132,6 +132,9 @@
     "league/oauth2-google": {
         "version": "3.0.3"
     },
+    "mhujer/breadcrumbs-bundle": {
+        "version": "1.5.2"
+    },
     "monolog/monolog": {
         "version": "2.1.1"
     },
@@ -489,6 +492,9 @@
     },
     "symfony/string": {
         "version": "v5.1.7"
+    },
+    "symfony/templating": {
+        "version": "v5.1.9"
     },
     "symfony/test-pack": {
         "version": "v1.0.6"

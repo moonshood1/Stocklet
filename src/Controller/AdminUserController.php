@@ -8,17 +8,21 @@ use App\Services\Pagination\PaginationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs;
 
 class AdminUserController extends AbstractController
 {
     /**
      * @Route("/admin/users/{page<\d+>?1} ", name="admin_user_index")
      */
-    public function index($page, PaginationService $pagination)
+    public function index($page, PaginationService $pagination,Breadcrumbs $breadcrumbs)
     {
         $pagination->setEntityClass(User::class)
                    ->setPage($page);
-                   
+
+        $breadcrumbs->prependItem("Dashboard", "admin_home")
+                    ->addRouteItem("Utilisateurs","admin_user_index");
+
         return $this->render('admin/user/index.html.twig', [   
             'pagination' => $pagination
         ]);
@@ -54,7 +58,7 @@ class AdminUserController extends AbstractController
      * @param User $user
      * @return void
      */
-    public function show(User $user,EntityManagerInterface $manager)
+    public function show(User $user,EntityManagerInterface $manager, Breadcrumbs $breadcrumbs)
     {
 
         // Nombre total de commandes sur le site
@@ -66,6 +70,10 @@ class AdminUserController extends AbstractController
              ->setParameter('id_util',$user->getId())
              ->getSingleScalarResult();
 
+        $breadcrumbs->prependItem("Dashboard", "admin_home")
+                    ->addRouteItem("Utilisateurs","admin_user_index")
+                    ->addRouteItem("Détail","admin_user_show",['id'=> $user->getId()]);
+                    
         return $this->render('admin/user/show.html.twig',[
             'user' => $user,
             'total' => $total

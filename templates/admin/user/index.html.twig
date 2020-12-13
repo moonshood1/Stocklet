@@ -4,42 +4,96 @@
 
 {% block body %}
     <div class="content-container">
-  <div class="container-fluid">
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <h1 class="display-4 text-center uppercase">Administration des utilisateurs</h1>
+        <div class="container-fluid">
+                {{ wo_render_breadcrumbs({separator: '>>'}) }}
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-4 text-center uppercase">Administration des utilisateurs</h1>
+                </div>
             </div>
-        </div>
-            <table class="table table-hover">
-                <thead class="thead-dark">
-                    <tr>
-                    <th scope="col">Prénoms </th>
-                    <th scope="col">Nom </th>
-                    <th scope="col">Email </th>
-                    <th scope="col">Adresse </th>
-                    <th scope="col" class="text-center">Telephone </th>
-                    <th scope="col" class="text-center">Nb/Commandes</th>
-                    <th scope="col" class="text-center">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for user in pagination.data %}
-                    <tr>
-                        <td>{{ user.firstName }}</td>                      
-                        <td>{{ user.lastName }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.address }}</td>
-                        <td class="text-center">{{ user.userPhone }}</td>
-                        <td class="text-center">{{ user.orders | length  }}</td>
-                        <td class="text-center">
-                            <a href="{{ path('admin_user_show', {'id': user.id} ) }}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
-                            <a href="{{ path('admin_user_delete', {'id': user.id} ) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            {{ pagination.display() }}          
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card mt-3">
+                    <div class="card-header">Statistiques de connexion et d'inscriptions</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                <b>Visites</b>
+                                    <p><b>45</b> visites / jour  </p>
+                                    <p><b>26</b> visites / Semaine  </p>
+                                    <p><b>52</b> visites / Mois  </p>
+                                </div>
+                                <div class="col-md-4">
+                                <b>inscriptions</b>
+                                    <p><b>2</b> inscriptions / jour  </p>
+                                    <p><b>11</b> inscriptions / Semaine </p>
+                                    <p><b>45</b> inscriptions / Mois : </p>
+                                </div>
+                                <div class="col-md-4">
+                                    <b>Les 3 pays qui visitent le plus </b>
+                                    <p><b>1 .</b> CIV 45 visites/ jour </p>
+                                    <p><b>2 .</b> SENEGAL 31 visites / jour  </p>
+                                    <p><b>3 .</b> CAMEROUN 12 / jour </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card mt-3">
+                        <div class="card-header"> Dernier utilisateur inscrit</div>
+                        <div class="card-body">
+                            <h5 class="card-title"> Louis Roger Guirika</h5>
+                            <hr>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla accusantium laboriosam molestias repellat placeat incidunt dolores sit accusamus? Quo ut fugit exercitationem nesciunt accusantium doloremque culpa ipsum voluptas quam ullam!</p>
+                            <hr>
+                            <a href="" class="btn btn-outline-secondary">Voir le profil</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-lg-12">
+                    <div class="card mt-3">
+                        <div class="card-body">
+                        <h4 class="card-title"> Tableau des utilisateurs</h4>
+                        <small>Ils sont triés par ordre d'inscription décroissant</small>
+                            <table class="table table-hover mt-4">
+                                <thead class="">
+                                    <tr>
+                                        <th scope="col">Prénoms </th>
+                                        <th scope="col">Nom </th>
+                                        <th scope="col">Email </th>
+                                        <th scope="col">Adresse </th>
+                                        <th scope="col" class="text-center">Telephone </th>
+                                        <th scope="col" class="text-center">Commandes</th>
+                                        <th scope="col" class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for user in pagination.data %}
+                                        <tr>
+                                            <td>{{ user.firstName }}</td>                      
+                                            <td>{{ user.lastName }}</td>
+                                            <td>{{ user.email }}</td>
+                                            <td>{{ user.address }}</td>
+                                            <td class="text-center">{{ user.userPhone }}</td>
+                                            <td class="text-center">{{ user.orders | length  }}</td>
+                                            <td class="text-center">
+                                                <a href="{{ path('admin_user_show', {'id': user.id} ) }}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                                                <a href="{{ path('admin_user_delete', {'id': user.id} ) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            {{ pagination.display() }}          
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

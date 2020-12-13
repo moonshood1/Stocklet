@@ -12,6 +12,15 @@
   src: url(../fonts/Gilroy-Medium.ttf);
 }
 
+.body {
+  background-color: #f1f0e8;
+}
+
+.card-body p a {
+  text-decoration: none;
+  color: #1e316a;
+}
+
 .card {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
@@ -101,7 +110,7 @@
   padding-left: 220px;
 }
 
-/*PEN STYLES*/
+/* Carte produit à la une*/
 
 .blog-card {
   display: -webkit-box;
@@ -233,6 +242,25 @@
 .blog-card:hover .details {
   left: 0%;
 }
+
+.navbar {
+  display: none;
+}
+
+@media only screen and (max-width: 767px) {
+  .navbar {
+    display: flex !important;
+  }
+
+  .sidebar-container {
+    display: none !important;
+  }
+
+  .content-container {
+    padding-left: 25px;
+  }
+}
+
 @media (min-width: 640px) {
   .blog-card {
     -webkit-box-orient: horizontal;

@@ -8,16 +8,20 @@ use App\Services\Pagination\PaginationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs;
 
 class AdminOrderController extends AbstractController
 {
     /**
      * @Route("/admin/order/{page<\d+>?1} ", name="admin_order_index")
      */
-    public function index(OrderRepository $repo, $page, PaginationService $pagination)
+    public function index(OrderRepository $repo, $page, PaginationService $pagination,Breadcrumbs $breadcrumbs)
     {
         $pagination->setPage($page)
                    ->setEntityClass(Order::class);
+
+        $breadcrumbs->prependRouteItem("Dashboard","admin_home")
+                    ->addRouteItem("Commandes","admin_order_index");           
 
         return $this->render('admin/order/index.html.twig', [
             'pagination'=> $pagination
@@ -56,7 +60,7 @@ class AdminOrderController extends AbstractController
      * @param Order $order
      * @return void
      */
-    public function show(Order $order,EntityManagerInterface $manager)
+    public function show(Order $order,EntityManagerInterface $manager,Breadcrumbs $breadcrumbs)
     {
         // Nombre total de commandes sur le site
         $total = $manager->createQuery(
@@ -67,6 +71,9 @@ class AdminOrderController extends AbstractController
              ->setParameter('id_util',$order->getUsers()->getId())
              ->getSingleScalarResult();
 
+        $breadcrumbs->prependRouteItem("Dashboard","admin_home")
+                    ->addRouteItem("Commandes","admin_order_index")
+                    ->addRouteItem("Détail","admin_order_show",['id'=> $order->getId()]);
 
         return $this->render('admin/order/show.html.twig',[
             'order' => $order,

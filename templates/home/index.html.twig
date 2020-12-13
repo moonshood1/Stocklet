@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="https://unpkg.com/@pqina/flip/dist/flip.min.css"/>
-<link rel="stylesheet" href="/css/app2.css">
-<link rel="stylesheet" href="/css/timer2.css">
+<link rel="stylesheet" href="/css/app4.css">
+<link rel="stylesheet" href="/css/timer4.css">
     <style>
       .wrapper {
         display: flex;
@@ -29,16 +29,14 @@
         object-fit: cover;
       }
     </style>
-    {% include "partials/header.html.twig" %}
+    {% include "partials/home_header.html.twig" %}
     {% include "partials/loader.html.twig" %}
     <div class="image-principale">
       {% include "partials/carouselPhone.html.twig" %}    
-        <div class="content">
-          <p class="module-price">
-            {{ product.unitPrice|number_format(0,'','  ') }} FCFA <br /><strike>{{ product.oldUnitPrice|number_format(0,'','  ') }} FCFA</strike> <br />
-          </p>
+        <div class="content" id="content">
           <p class="add_to_cart">
-            <a href="{{ path('cart_add', {'id': product.id}) }}" class="add_to_cart">Commander</a>
+            <a href="{{ path('cart_add', {'id': product.id}) }}" class="add_to_cart">Commander</a> 
+            {{ product.unitPrice|number_format(0,'','  ') }} FCFA <strike>{{ product.oldUnitPrice|number_format(0,'','  ') }} FCFA</strike> 
           </p>
         </div>
     </div>
@@ -145,7 +143,7 @@
           </p>
           {% if product.currentStock == 0 %}
             <p class="add_to_cart">
-              Malheureusement le stock du produit est epuisé , Revenez dans <b id="time"></b>  pour un nouveau produit
+              Malheureusement le stock du produit est epuisé , Revenez dans 6h  pour un nouveau produit
             </p>
             {% else %}
               <p class="add_to_cart">
@@ -186,7 +184,7 @@
           {% if app.user %}
           {% else %}
             <a href="{{ path('account_login') }}" class="comment_butt"> Connectez-vous pour commenter </a>
-            <a href="{{ path('account_login') }}" class="comment_text">Connectez-vous</a>
+            <a href="{{ path('account_login') }}" class="comment_butt_mobile">Connectez-vous</a>
             {% endif %}
           </p>
           {% for comment in product.comments %}
@@ -247,7 +245,7 @@
             </p>
             <div class="contact-card" style="padding-left: 62px; padding-right: 62px; background-color: #fff; width: 490px; ">
               <p class="message_title">Envoyez nous un mail</p>
-              <p class="message_content">hello@STOCKLET.com</p>
+              <p class="message_content">payqin@stocklet.ci</p>
               <hr />
               <p class="callus_title">Appelez nous </p>
               <p class="callus_content">08 99 01 69</p>
@@ -280,7 +278,9 @@
       {% set stock = product.currentStock / product.initialStock * 100 %}
         <div class="progress-progression" data-done="{{ stock }}">
           <span class="progress-content pc">{% if stock > 30 %} Le stock du produit est à  {{ stock|round }} % {% else %} {{ stock|round }} % {% endif %}</span>
-          <span class="progress-content tel">{{ stock|round }} %</span>
+          <span class="progress-content tel">
+            <p>Le Stock <br> est à {{ stock|round }} %</p> 
+          </span>
         </div>
         <div class="progress-countdown">
           <div class="tick" data-did-init="handleTickInit">
@@ -316,7 +316,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script>
 // fonction de timer + appel du switch à la fin
-
   $(document).ready(
       $.get("http://127.0.0.1:8000/demain",function (data,status) {
     window.localStorage.setItem('productDate',data.demain)
@@ -335,9 +334,17 @@
           tick.value = value;
         };
 
+        function launchSwitch() {
+          location.replace("http://127.0.0.1:8000/switch");
+
+          $.get("http://127.0.0.1:8000/demain",function (data) {
+          window.localStorage.setItem('productDate',data.demain);
+          })
+        }
+
         counter.onended = function () {
           // redirect, uncomment the next line
-          window.location = 'http://127.0.0.1:8000/switch';
+          launchSwitch();
         };
       }
 </script>
@@ -447,33 +454,18 @@ $(document).ready(function () {
 </script>
 
 <script>
-/* 
-  // Fonction de commentaire
-  var url_comment = "http://127.0.0.1:8000";
-  var comment_form = document.getElementById("comment_form");
-  var comment_list = document.getElementById("all_comments");
+// Fonction du scroll du bouton de commande
+myID = document.getElementById("content");
 
-  // Envoi des données du formulaire dans la bd
-  comment_form.addEventListener("submit", function (event) {
-    // Comportement par defaut enlevé (on ne recharge plus la page)
-    event.preventDefault();
-    // Appel a ajax
-    let xhr = new XMLHttpRequest();
+var myScrollFunc = function () {
+    var y = window.scrollY;
+    if (y >= 450) {
+        myID.className = "content sticky"
+    } else {
+        myID.className = "content"
+    }
+};
 
-    // Creation d'une formData pour prendre les elements du formulaire
-    let formData = new FormData(comment_form);
-
-    // Methode post sur l'url pour envoyer les données
-    xhr.open("POST", url_comment);
-    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-    xhr.send(formData);
-
-    // Rechargement de la div des commentaires
-    $("#all_comments").load(location.href + " #all_comments");
-
-    // on vide la textarea quand c'est envoyé
-    var content = document.getElementById("comment_content");
-    content.value = "";
-  }); */
+window.addEventListener("scroll", myScrollFunc);
 </script>
 {% endblock %}

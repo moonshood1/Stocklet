@@ -307,6 +307,8 @@
   color: #f1f1f1;
   width: 100%;
   padding-left: 15px;
+  height: 55px;
+  padding-top: 15px;
 }
 
 a.add_to_cart {
@@ -514,7 +516,7 @@ nav {
   display: none !important;
 }
 
-.comment_text {
+.comment_butt_mobile {
   display: none;
 }
 
@@ -532,6 +534,13 @@ nav {
     margin: 0 auto;
     display: block;
   }
+  .image-principale .content.sticky {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    transition: all 0.5s;
+  }
+
   .wrap {
     display: block;
     height: 1100px;
@@ -547,7 +556,7 @@ nav {
     display: none;
   }
   .progress-container {
-    height: 45px;
+    height: 60px;
   }
 
   .progress-countdown {
@@ -561,13 +570,13 @@ nav {
 
   .progress-countdown {
     padding-right: 5px;
-    margin-top: 2px;
+    margin-top: 10px;
     margin-left: 20%;
   }
 
   .tel {
     display: flex;
-    font-size: 28px;
+    font-size: 17px;
     margin-top: 8px;
   }
 
@@ -662,10 +671,19 @@ nav {
   .comment_butt {
     display: none;
   }
-  .comment_text {
+
+  .comment_butt_mobile {
+    padding: 5px 13px 4px 10px;
+    font-size: 10px;
+    text-align: center;
+    background-color: #1e316a;
+    color: #ffffff;
+    text-decoration: none;
+    font-family: AvenirNextLTPro-Medium;
+    border: 2px solid #1e316a;
+    margin-left: 30px;
     display: inline;
     font-size: 12px;
-    color: #1a237e;
   }
   section .contact {
     display: none;

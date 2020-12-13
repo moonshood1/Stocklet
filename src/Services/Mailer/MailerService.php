@@ -48,6 +48,8 @@ class MailerService
                     'details' => $details,
                     'invoice' => $invoiceNumber,
                 ]);
+
+        $this->mailer->send($email);        
     }
    
 }

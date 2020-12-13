@@ -258,7 +258,7 @@ body {
   margin-top: 150px;
 }
 
-.purchase button {
+.purchase a {
   color: white;
   width: 200px;
   height: 40px;
@@ -419,7 +419,7 @@ body {
     margin-top: 70px;
   }
 
-  .purchase button {
+  .purchase a {
     width: 150px;
     height: 40px;
   }

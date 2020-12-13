@@ -357,4 +357,8 @@ body {
   .edit {
     display: none;
   }
+
+  .vl {
+    display: none;
+  }
 }

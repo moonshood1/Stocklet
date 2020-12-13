@@ -7,13 +7,14 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs;
 
 class AdminHomeController extends AbstractController
 {
     /**
      * @Route("/admin", name="admin_home")
      */
-    public function index(EntityManagerInterface $manager, ProductRepository $repo)
+    public function index(EntityManagerInterface $manager, ProductRepository $repo,Breadcrumbs $breadcrumbs)
     {
         // Produit le plus commandé sur la semaine 
         $mostOrdered = $manager->createQuery(
@@ -41,6 +42,8 @@ class AdminHomeController extends AbstractController
         // Nombre de commandes par jour pour une semaine
             // Selectionner une periode
             $now = $manager->createQuery('SELECT p.createdAt FROM App\Entity\Product p WHERE p.id = 11')->getResult();
+
+        $breadcrumbs->addRouteItem("Dashboard","admin_home");
 
         return $this->render('admin/home/index.html.twig',[
             'stats' => compact('users','comments','products','orders','categories'),

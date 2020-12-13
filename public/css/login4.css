@@ -1,0 +1,155 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap");
+@font-face {
+  font-family: Gilroy-bold;
+  src: url(../fonts/Gilroy-ExtraBold.otf);
+}
+@font-face {
+  font-family: Gilroy-regular;
+  src: url(../fonts/Gilroy-Light.otf);
+}
+@font-face {
+  font-family: AvenirNextLTPro-Regular;
+  src: url(../fonts/AvenirNextLTPro-Regular.otf);
+}
+@font-face {
+  font-family: AvenirNextLTPro-Bold;
+  src: url(../fonts/AvenirNextLTPro-Bold.otf);
+}
+body {
+  background: url(../assets/images/back.PNG) fixed center;
+}
+
+.card {
+  top: 10px;
+  width: 500px;
+  height: auto;
+}
+.title {
+  font-size: 45px;
+  color: #1e316a;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: bold;
+}
+
+.welcome {
+  font-size: 17px;
+  color: #161925;
+  font-weight: bold;
+  font-family: Gilroy-bold;
+}
+
+.signup {
+  font-size: 17px;
+  font-family: Gilroy-regular;
+  color: #161925;
+}
+
+.signup a {
+  color: #1e316a;
+  text-decoration: none;
+  font-family: Gilroy-bold;
+}
+
+form {
+  display: block;
+}
+
+form a {
+  color: #1e316a;
+  text-decoration: none;
+  font-family: Gilroy-regular;
+  font-size: 15px;
+}
+
+form label {
+  font-size: 15px;
+  font-family: Gilroy-regular;
+  color: #707070;
+}
+
+form input {
+  width: 400px;
+  height: 32px;
+  border: 1px solid #bcbcc0;
+  border-radius: 8px;
+  background-color: #f1f0e8;
+}
+form label#_password {
+  margin-top: 15px;
+}
+
+form input#checkbox {
+  width: 10px;
+  height: 10px;
+}
+
+form label#checkbox {
+  color: #161925;
+  font-size: 15px;
+  font-family: Gilroy-regular;
+}
+
+form button {
+  border-radius: 8px;
+  width: 400px;
+  height: 40px;
+  background-color: #1e316a;
+  color: #ffffff;
+}
+form button:hover {
+  background-color: #f1f0e8;
+  color: #1e316a;
+}
+
+form button p {
+  font-family: Gilroy-bold;
+  font-size: 20px;
+}
+
+.social {
+  width: 100%;
+}
+
+.social #google {
+  border-radius: 8px;
+  background-color: #ffffff;
+  width: 400px;
+  height: 40px;
+  color: #161925;
+  font-family: Gilroy-regular;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.social #fb {
+  margin-top: 9px;
+  margin-right: 9px;
+  border-radius: 8px;
+  background-color: #1877f2;
+  width: 200px;
+  height: 40px;
+  color: #ffffff;
+  font-family: Gilroy-regular;
+}
+
+.social #tw {
+  margin-top: 9px;
+  border-radius: 8px;
+  background-color: #1a91da;
+  width: 190px;
+  height: 40px;
+  color: #ffffff;
+  font-family: Gilroy-regular;
+}
+
+.logo {
+  width: 21px;
+  height: 21px;
+}
+
+@media only screen and (max-width: 767px) {
+  form button,
+  form input,
+  .social #google {
+    width: 100%;
+  }
+}

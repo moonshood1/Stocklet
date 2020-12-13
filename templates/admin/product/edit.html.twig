@@ -5,44 +5,171 @@
 {% block body %}
     <div class="content-container">
         <div class="container-fluid">
-            <h1>
-                <a href="{{ path('admin_products_index') }}" class="btn btn-primary" style="border-radius:50%">
-                    <i class="fas fa-arrow-left fa-2x"></i> 
-                </a> 
-                Section de Modification 
-            </h1>
+            <div class="row">
+                <div class="col-lg-12">
+                        {{ wo_render_breadcrumbs({separator: '>>'}) }}
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>
+                                <a href="{{ path('admin_products_index') }}" class="btn btn-primary" style="border-radius:50%">
+                                    <i class="fas fa-arrow-left fa-2x"></i> 
+                                </a> 
+                                Section de modification de : {{product.productName}} 
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
             {{ form_start(form) }}
-                <h3 class="text-center"> Informations générales </h3>
-                <div class="row border border-dark rounded bg-light mx-2">
-                    <div class="col-md-3 mt-2"> {{ form_row(form.productName) }} {{ form_row(form.brand) }} {{ form_row(form.initialStock) }} {{ form_row(form.currentStock) }}</div>
-                    <div class="col-md-2 mt-2"> {{ form_row(form.unitPrice) }} {{form_row(form.oldUnitPrice)}} {{ form_row(form.category) }} </div>
-                    <div class="col-md-7 mt-2"> {{ form_row(form.productDescription1,{'attr': {'rows': '4'} }) }} {{ form_row(form.productDescription2 ,{'attr': {'rows': '4'} })}} </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <h4 class="card-title"> Informations générales </h4>
+                                    <small><i>Modifiez les informations de base sur le produit ainsi que deux petites descriptions</i> </small>
+                                <hr>
+                                {{ form_row(form.productName) }}
+                                {{ form_row(form.brand) }}
+                                <hr>
+                                    <small><i>Les différents stock du produit , le stock de départ et le stock actuel,Par defaut repetez les memes valeurs </i> </small>
+                                <hr>
+                                {{ form_row(form.initialStock) }}
+                                {{ form_row(form.currentStock) }}
+                                <hr>
+                                    <small><i>Les différents prix affichés dans le menu, l'ancien prix est le prix sans la promotion</i>  </small>
+                                <hr>
+                                {{ form_row(form.unitPrice) }}
+                                {{form_row(form.oldUnitPrice)}}
+                                <hr>
+                                    <small><i>Les catégories disponibles sont celles créées dans l'onglet catégorie</i>  </small>
+                                <hr>
+                                {{ form_row(form.category) }}
+                                <hr>
+                                    <small><i>Les deux descriptions du produit</i> </small>                               
+                                <hr>
+                                {{ form_row(form.productDescription1,{'attr': {'rows': '4'} }) }}
+                                {{ form_row(form.productDescription2 ,{'attr': {'rows': '4'} })}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="text-center mt-2"> Details du produit </h3>
-                <div class="row border border-dark rounded bg-light mx-2">
-                    <div class="col-md-4 mt-2"> {{ form_row(form.spec1Title) }} {{ form_row(form.spec1,{'attr': {'rows': '4'} }) }}</div>
-                    <div class="col-md-4 mt-2">{{ form_row(form.spec2Title) }} {{ form_row(form.spec2,{'attr': {'rows': '4'} }) }}</div>
-                    <div class="col-md-4 mt-2">{{ form_row(form.spec3Title) }} {{ form_row(form.spec3,{'attr': {'rows': '4'} }) }}</div>
+                {% form_theme form 'bootstrap_4_layout.html.twig' %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <h4 class="card-title"> Details du produit </h4>
+                                <small>
+                                    <i>Sections des caractéristiques du produit</i>
+                                </small>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-4">
+                                        {{ form_row(form.spec1Title) }}
+                                        {{ form_row(form.spec1,{'attr': {'rows': '4'} }) }}
+                                    </div>
+                                    <div class="col-4">
+                                        {{ form_row(form.spec2Title) }}
+                                        {{ form_row(form.spec2,{'attr': {'rows': '4'} }) }}
+                                    </div>
+                                    <div class="col-4">
+                                        {{ form_row(form.spec3Title) }}
+                                        {{ form_row(form.spec3,{'attr': {'rows': '4'} }) }}
+                                    </div>                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="text-center mt-2">Images du produit (URL)</h3>
-                <div class="row border border-dark rounded bg-light mx-2">
-                    <div class="col-md-3 mt-2">{{ form_row(form.leftPic1URL) }} {{ form_row(form.leftPic2URL) }} {{ form_row(form.leftPic3URL) }}</div>
-                    <div class="col-md-3 mt-2">{{ form_row(form.rightPic1Url) }} {{ form_row(form.rightPic2Url) }}</div>
-                    <div class="col-md-3 mt-2"> {{ form_row(form.rightPic3Url) }} {{ form_row(form.rightPic4Url) }}</div>
-                    <div class="col-md-3 mt-2"> {{ form_row(form.rightPic5Url) }}</div>
+                {% form_theme form 'bootstrap_4_layout.html.twig' %}
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <h4 class="card-title">Images du produit (par Url)</h4>
+                                    <small><i>Les images peuvent etre insérées avec des liens </i></small>
+                                <br>
+                                    <small><i><b> Le format .png , des carrés de préferences (700px x 700px) </b></i></small>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-6">
+                                        {{ form_row(form.leftPic1URL) }}
+                                        
+                                    </div>
+                                    <div class="col-6">
+                                        {{ form_row(form.leftPic2URL) }}
+                                    </div>
+                                    <div class="col-12">
+                                        {{ form_row(form.leftPic3URL) }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <small><i>Les images de droite (le carousel)</i></small>
+                                <br>
+                                <small><i><b>le format .jpeg ou .png , des rectangles de format (235px x 170px) ou (940px x 680px) pour les grandes images</b></i></small>
+                                <hr>                                    
+                                    {{ form_row(form.rightPic1Url) }}
+                                    {{ form_row(form.rightPic2Url) }}
+                                    {{ form_row(form.rightPic3Url) }}
+                                    {{ form_row(form.rightPic4Url) }}
+                                    {{ form_row(form.rightPic5Url) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <h4 class="card-title">Images du produit (par Upload)</h4>
+                                    <small><i>Les images peuvent aussi etre uploadées</i> </small>
+                                <br>
+                                <b>Les images uploadées avant sont toujours présentes, uploader de nouvelles les modifiera</b>
+                                <br>
+                                    <small><i><b> Le format .png , des carrés de préferences (700px x 700px) </b></i></small>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-6">
+                                        {{ form_row(form.leftPic1File) }}
+                                    </div>
+                                    <div class="col-6">
+                                        {{ form_row(form.leftPic2File) }}
+                                    </div>
+                                    <div class="col-12">
+                                        {{ form_row(form.leftPic3File) }}
+                                    </div>
+                                </div>
+                                <hr>
+                                    <small><i>Les images de droite (le carousel)</i></small>
+                                <br>
+                                    <small><i><b>le format .jpeg ou .png , des rectangles de format (235px x 170px) ou (940px x 680px) pour les grandes images</b></i></small>
+                                <hr>
+                                    {{ form_row(form.rightPic1File) }}
+                                    {{ form_row(form.rightPic2File) }}
+                                    {{ form_row(form.rightPic3File) }}
+                                    {{ form_row(form.rightPic4File) }}
+                                    {{ form_row(form.rightPic5File) }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="text-center mt-2">Images du produit (UPLOAD)</h3>
-                <div class="row border border-dark rounded bg-light mx-2">
-                    <div class="col-md-3 mt-2">{{ form_row(form.leftPic1File) }} {{ form_row(form.leftPic2File) }} {{ form_row(form.leftPic3File) }}</div>
-                    <div class="col-md-3 mt-2">{{ form_row(form.rightPic1File) }} {{ form_row(form.rightPic2File) }}</div>
-                    <div class="col-md-3 mt-2"> {{ form_row(form.rightPic3File) }} {{ form_row(form.rightPic4File) }}</div>
-                    <div class="col-md-3 mt-2"> {{ form_row(form.rightPic5File) }}</div>
-                </div>
-                <h3 class="text-center mt-2">Disponibilité et Date</h3>
-                <div class="row border border-dark rounded bg-light mx-2 mb-4">
-                    <div class="col-md-4 mt-2">{{ form_row(form.productAvailable) }}</div>
-                    <div class="col-md-4 mt-2">{{ form_row(form.endDate) }}</div>
-                    <div class="col-md-4 my-5"><button type="submit" class="btn btn-success" formnovalidate>Modifier</button></div>
+                {% form_theme form 'bootstrap_4_layout.html.twig' %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <h4 class="card-title">Disponibilité et date et validation</h4>
+                                <small><i>La date de fin d'affichage du produit. A la création du produit, cette date marque le début d'affichage du nouveau produit,
+                                 La date à choisir n'est pas encore arrivée</i></small>
+                                 <hr>
+                                 <small><i>Par defaut , la disponibilité peut ici etre modifiée mais attention a corriger la date de fin d'affichage</i></small>
+                                 <hr>
+                                {{ form_row(form.productAvailable) }}
+                                <hr>
+                                {{ form_row(form.endDate) }}
+                                <button type="submit" class="btn btn-lg btn-outline-warning w-100" formnovalidate>Modifier le produit</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             {{form_end(form)}} 
         </div>

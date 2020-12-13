@@ -5,41 +5,75 @@
 {% block body %}
     <div class="content-container">
         <div class="container-fluid">
+                {{ wo_render_breadcrumbs({separator: '>>'}) }}
             <div class="jumbotron jumbotron-fluid">
                 <div class="container">
                     <h1 class="display-4 text-center uppercase">Administration des Commentaires</h1>
                 </div>
             </div>
-            <table class="table table-hover">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Date</th>                        
-                        <th scope="col">Auteur</th>
-                        <th scope="col">Commentaire</th>
-                        <th scope="col">Reactions</th>
-                        <th scope="col">Produit</th>
-                        <th scope="col" class="text-center">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for comment in pagination.data %}
-                    <tr>
-                        <td>{{ comment.createdAt|date('d/m/Y - H:i') }}</td>
-                        <td> {{ comment.author.firstName }} {{ comment.author.lastName }} </td>
-                        <td>{{ comment.content|raw }}</td>
-                        <td>
-                            <i class="fas fa-frown"></i> {{ comment.dislikes|length }}
-                            <i class="fas fa-heart"></i> {{ comment.likes|length }} 
-                            <i class="fas fa-comments"></i> 0
-                        </td>
-                        <td>{{ comment.product.productName }}</td>
-                        <td class="text-center">
-                            <a href="{{ path('admin_comment_delete', {'id': comment.id }) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-            {{ pagination.display() }}  
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card mt-3">
+                        <div class="card-header"> Dernier commentaire </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="https://images.unsplash.com/photo-1607423730403-b7fc1eb83ce0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="" width="100%">
+                                </div>
+                                <div class="col-md-8">
+                                    <h5> Louis Roger Guirika</h5>
+                                    <br>
+                                    <blockquote>Très beau produit ! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto eaque dignissimos perferendis id ducimus, accusamus atque accusantium nisi omnis ut asperiores et?</blockquote>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <p class="text-right">Créé le 26/03/1997</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title"> Tableau des commentaires</h4>
+                            <small><i>L'administrateur est libre de supprimer les commentaires qu'il juge deplacés</i></small>
+                            <table class="table table-hover mt-4">
+                                <thead class="">
+                                    <tr>
+                                        <th scope="col">Date</th>                        
+                                        <th scope="col">Auteur</th>
+                                        <th scope="col">Commentaire</th>
+                                        <th scope="col">Reactions</th>
+                                        <th scope="col">Produit</th>
+                                        <th scope="col" class="text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for comment in pagination.data %}
+                                    <tr>
+                                        <td>{{ comment.createdAt|date('d/m/Y - H:i') }}</td>
+                                        <td> {{ comment.author.firstName }} {{ comment.author.lastName }} </td>
+                                        <td>{{ comment.content|raw }}</td>
+                                        <td>
+                                            <i class="fas fa-frown"></i> {{ comment.dislikes|length }}
+                                            <i class="fas fa-heart"></i> {{ comment.likes|length }} 
+                                            <i class="fas fa-comments"></i> 0
+                                        </td>
+                                        <td>{{ comment.product.productName }}</td>
+                                        <td class="text-center">
+                                            <a href="{{ path('admin_comment_delete', {'id': comment.id }) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            {{ pagination.display() }}  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

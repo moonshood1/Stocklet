@@ -526,6 +526,17 @@ class Product
         }
     }
 
+    /**
+     * Permet de mettre la disponibilité à false
+     * @ORM\PrePersist
+     */
+    public function prePersistAvailable() 
+    {
+        if (empty($this->productAvailable)) {
+            $this->productAvailable = false;
+        }
+    }
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();

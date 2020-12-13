@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs;
 
 class AdminAccountController extends AbstractController
 {
@@ -49,7 +50,7 @@ class AdminAccountController extends AbstractController
      * 
      * @return Response
      */
-    public function profile(Request $request, EntityManagerInterface $manager)
+    public function profile(Request $request, EntityManagerInterface $manager,Breadcrumbs $breadcrumbs)
     {
         $user = $this->getUser();
         $form = $this->createForm(AccountType::class,$user);
@@ -63,6 +64,11 @@ class AdminAccountController extends AbstractController
          return $this->redirectToRoute("admin_account");
 
         }
+
+        $breadcrumbs->prependRouteItem("Dashboard","admin_home")
+                    ->addRouteItem("Mon Compte","admin_account")
+                    ->addRouteItem("Modification du profil","admin_account_profile");
+
         return $this->render('admin/account/profile.html.twig',[
             'form' => $form->createView()
         ]);
@@ -74,7 +80,7 @@ class AdminAccountController extends AbstractController
      *
      * @return Response
      */
-    public function updatePassword(Request $request, UserPasswordEncoderInterface $encoder, EntityManagerInterface $manager)
+    public function updatePassword(Request $request, UserPasswordEncoderInterface $encoder, EntityManagerInterface $manager, Breadcrumbs $breadcrumbs)
     {
         $passwordUpdate = new PasswordUpdate();
 
@@ -100,6 +106,10 @@ class AdminAccountController extends AbstractController
             }
         }
 
+                $breadcrumbs->prependRouteItem("Dashboard","admin_home")
+                    ->addRouteItem("Mon Compte","admin_account")
+                    ->addRouteItem("Modification du mot de passe","admin_account_password");
+
         return $this->render('admin/account/password.html.twig', [
             'form' => $form->createView()
         ]);
@@ -107,9 +117,13 @@ class AdminAccountController extends AbstractController
     /**
      * @Route("/admin/account", name="admin_account")
      */
-    public function myAccount()
+    public function myAccount(Breadcrumbs $breadcrumbs)
     {
         $user = $this->getUser();
+
+        $breadcrumbs->prependRouteItem("Dashboard","admin_home")
+                    ->addRouteItem("Mon Compte","admin_account");
+
         return $this->render('admin/account/account.html.twig', [
             'user' => $user
         ]);

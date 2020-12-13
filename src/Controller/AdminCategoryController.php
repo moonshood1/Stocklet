@@ -10,17 +10,21 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs;
 
 class AdminCategoryController extends AbstractController
 {
     /**
      * @Route("/admin/category/{page<\d+>?1} ", name="admin_category_index")
      */
-    public function index(CategoryRepository $repo, $page, PaginationService $pagination)
+    public function index(CategoryRepository $repo, $page, PaginationService $pagination,Breadcrumbs $breadcrumbs)
     {
         $pagination->setEntityClass(Category::class)
                    ->setPage($page);
-                   
+           
+        $breadcrumbs->prependRouteItem("Dashboard","admin_home")
+                    ->addRouteItem("Categories","admin_category_index") ;
+
         return $this->render('admin/category/index.html.twig', [
             'pagination' => $pagination
         ]);
@@ -35,7 +39,7 @@ class AdminCategoryController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return void
      */
-    public function create(Request $request, EntityManagerInterface $manager)
+    public function create(Request $request, EntityManagerInterface $manager,Breadcrumbs $breadcrumbs)
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class,$category);
@@ -47,6 +51,11 @@ class AdminCategoryController extends AbstractController
 
             return $this->redirectToRoute("admin_category_index");
         }
+
+        $breadcrumbs->prependRouteItem("Dashboard","admin_home")
+                    ->addRouteItem("Categories","admin_category_index")
+                    ->addRouteItem("Création","admin_category_new");
+
         return $this->render('admin/category/new.html.twig',[
             'form' => $form->createView()
         ]);
@@ -62,7 +71,7 @@ class AdminCategoryController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return void
      */
-    public function edit(Category $category,Request $request,EntityManagerInterface $manager)
+    public function edit(Category $category,Request $request,EntityManagerInterface $manager , Breadcrumbs $breadcrumbs)
     {
         $form = $this->createForm(CategoryType::class,$category);
 
@@ -75,6 +84,10 @@ class AdminCategoryController extends AbstractController
 
             return $this->redirectToRoute("admin_category_index");
         } 
+
+        $breadcrumbs->prependRouteItem("Dashboard","admin_home")
+                    ->addRouteItem("Categories","admin_category_index")
+                    ->addRouteItem("Modification","admin_category_edit",['id'=> $category->getId()]);
         
         return $this->render('admin/category/edit.html.twig',[
             'category'=>$category,
