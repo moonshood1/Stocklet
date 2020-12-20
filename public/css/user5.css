@@ -334,7 +334,7 @@ body {
     display: none;
   }
 
-  .card {
+  .menu {
     display: none;
   }
   .contain_right {
@@ -360,5 +360,19 @@ body {
 
   .vl {
     display: none;
+  }
+  table {
+    width: auto !important;
+    font-size: 10px;
+  }
+
+  thead {
+    width: auto;
+    font-size: 5px;
+  }
+
+  td img {
+    width: 14px;
+    height: 6px;
   }
 }

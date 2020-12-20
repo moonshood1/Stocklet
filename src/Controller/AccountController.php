@@ -7,11 +7,13 @@ use App\Form\AccountType;
 use App\Entity\PasswordUpdate;
 use App\Form\RegistrationType;
 use App\Form\PasswordUpdateType;
+use App\Repository\OrderRepository;
 use App\Repository\PaymentRepository;
 use App\Repository\UserRepository;
 use App\Services\Mailer\MailerService;
 use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -204,11 +206,14 @@ class AccountController extends AbstractController
      * @param PaymentRepository $repo
      * @return void
      */
-    public function orders(PaymentRepository $repo)
+    public function orders(Request $request, PaginatorInterface $pagination, OrderRepository $repo)
     {
+       $orders = $repo->findBy(['users' => $this->getUser()]);
+       $page = $pagination->paginate($orders,$request->query->getInt('page', 1),4);
+
         return $this->render('account/orders.html.twig',[
-            'payments' => $repo->findAll(),
-            'user' => $this->getUser()
+            'user' => $this->getUser(),
+            'pagination' => $page
         ]);
     }
 

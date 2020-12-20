@@ -133,12 +133,26 @@
 
 .progress-countdown {
   padding-right: 5px;
-  margin-top: 2px;
-  margin-left: 76%;
+  margin-top: 8px;
+  margin-left: 80%;
   float: right;
   position: absolute;
   z-index: 7;
+  display: flex;
 }
+
+.progress-countdown div {
+  position: relative;
+  width: 60px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  margin: 0 8px;
+  color: #fff;
+  background-color: rgb(102, 82, 88);
+  border-radius: 3px;
+}
+
 .tel {
   display: none;
 }
@@ -569,9 +583,15 @@ nav {
   }
 
   .progress-countdown {
-    padding-right: 5px;
+    padding-right: 2px;
     margin-top: 10px;
-    margin-left: 20%;
+    margin-left: 55%;
+  }
+  .progress-countdown div {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin: 0 4px;
   }
 
   .tel {
@@ -659,7 +679,7 @@ nav {
   .comments {
     margin-top: 4px;
     margin-left: 15px;
-    margin-bottom: 25px;
+    margin-bottom: 50px;
   }
   .comments .comment_title {
     font-size: 25px;
@@ -681,7 +701,7 @@ nav {
     text-decoration: none;
     font-family: AvenirNextLTPro-Medium;
     border: 2px solid #1e316a;
-    margin-left: 30px;
+    margin-left: 0px;
     display: inline;
     font-size: 12px;
   }
