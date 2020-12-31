@@ -1,27 +1,90 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <h2>Merci {{ firstName }} {{ lastName }},Votre commande a été enregistrée.</h2> <br>
-            <h3> Details de la commande </h3> <br>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title"> Commande n<sup>o</sup> {{ invoice }} </h5> <br>
-                    <div class="row">
-                        {% for order in details %}
-                            <div class="col-6">
-                                {{ order.products.productName }}  x {{ order.productQuantity }}
-                            </div>
-                            <div class="col-6">
-                                <b> Total : </b> {{ order.orderTotalAmount }}
-                            </div>                         
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
+  <div class="container-fluid mb-4">
+    <div class="row mt-4">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Récapitulatif de votre commande Stocklet</h4>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+    <div class="row mt-4">
+      <div class="col-lg-12">
+        <div class="alert alert-light border border-dark">
+          <p>
+            Merci <b class="name">{{ firstName }} {{ lastName }} </b> , votre commande a
+            bien été enregistrée !
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-9">
+                <h5 class="card-title">
+                  Détail de la commande n<sup>o</sup> {{ invoice }}
+                </h5>
+              </div>
+              {% for order in details %}
+              <div class="col-3">
+                <p class="text-muted float-right">
+                  Date de commande : {{ order.orderDate|date('d/m/Y') }}
+                </p>
+              </div>
+            </div>
+            <div class="row ml-auto mr-auto">
+              <div class="col-md-12">
+                <p>
+                  <small class="text-muted">
+                    <i class="fas fa-store-alt"></i> Commandé chez :</small
+                  ><br />
+                  Stocklet.
+                </p>
+                <p>
+                  <small class="text-muted"
+                    ><i class="fas fa-wallet"></i> Cout total:</small
+                  >
+                  <br />
+                  {{ order.orderTotalAmount|number_format(0,'','  ') }} FCFA
+                </p>
+                <p>
+                  <small class="text-muted">
+                    <i class="fas fa-shopping-cart"></i> Produit:
+                  </small>
+                  <br />
+                  {{ order.products.productName }}
+                </p>
+              </div>
+            </div>
+            <div class="row mt-3 ml-auto mr-auto">
+              <div class="col-md-12">
+                <h5 class="card-title mt-4">Détail de la livraison</h5>
+                <p>
+                  <small class="text-muted">
+                    <i class="fas fa-location-arrow"></i> Adresse principale
+                    :</small
+                  ><br />
+                  {{ order.ShippingAddress1 }}
+                </p>
+                <br />
+                <p>
+                  <small class="text-muted">
+                    <i class="fas fa-location-arrow"></i> Adresse secondaire
+                    :</small
+                  ><br />
+                  {{ order.ShippingAddress2 }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 
-{% block title %} Livraison et paiement {% endblock %}
+{% block title %} Confirmation de commande {% endblock %}
 
 {% block body %}
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -11,13 +11,13 @@
     <div class="container">
       <div class="row mt-4">
         <div class="col">
-          {% for message in app.flashes('error') %}
-              <div class="alert alert-danger">
+          {% for message in app.flashes('success') %}
+              <div class="alert alert-success">
                   {{ message }}
               </div>
           {% endfor %}
           <div>
-            <p><a href="{{ path('cart_index') }}">Retour au panier </a></p>
+            <p><a href="{{ path('confirmation_index') }}">Voir le récapitulatif de la commande </a></p>
           </div>
         </div>
       </div>

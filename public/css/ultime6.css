@@ -354,6 +354,12 @@ input#payment_form_cvv {
   color: black;
 }
 
+a.return {
+  color: #161925;
+  text-decoration: none;
+  font-family: Gilroy-bold;
+}
+
 button#next {
   color: white;
   width: 200px;
@@ -410,6 +416,10 @@ button#next .disabled {
   display: none;
 }
 
+.showOnPhone {
+  display: none;
+}
+
 @media only screen and (max-width: 767px) {
   .container {
     overflow: hidden;
@@ -418,6 +428,14 @@ button#next .disabled {
     display: block;
   }
   .depends1 {
+    display: none;
+  }
+  .showOnPhone {
+    display: block;
+    margin-left: auto;
+    text-align: right;
+  }
+  .nav-item.dropdown {
     display: none;
   }
   .card {

@@ -4,7 +4,7 @@
 {% block body %}
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/cart5.css">
+<link rel="stylesheet" href="/css/cart6.css">
 {% include "partials/header.html.twig" %}
 {% include "partials/loader.html.twig" %}
     <div class="container">
@@ -69,10 +69,10 @@
         </div>
         <div class="purchase">
             <p class="float-left">
-            <a href="{{ path('home') }}"><i class="fas fa-arrow-left"></i></a> &nbsp; Retour au
-            menu
+            <a href="{{ path('home') }}" class="return"><i class="fas fa-arrow-left"></i> &nbsp; Retour au
+            menu</a>  
             </p>
-            <p class="float-right"><a href="{{ path('checkout_index') }}" style="text-decoration: none; color: #fff" id="next" class="btn"> Continuer</a></p>
+            <p class="float-right"><a href="{{ path('checkout_index') }}" style="text-decoration: none; color: #fff" id="next" class="btn continue"> Continuer</a></p>
         </div>
         {% else %}
             <h3 class="ml-2"> Votre panier est vide</h3><br>

@@ -326,11 +326,25 @@ body {
   display: none;
 }
 
+.showOnPhone {
+  display: none;
+}
+
 @media only screen and (max-width: 767px) {
   .depends {
     display: block;
   }
   .depends1 {
+    display: none;
+  }
+
+  .showOnPhone {
+    display: block;
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .nav-item.dropdown {
     display: none;
   }
 

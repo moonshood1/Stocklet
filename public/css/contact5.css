@@ -53,6 +53,10 @@ body {
   background-color: #1e316a;
 }
 
+.showOnPhone {
+  display: none;
+}
+
 @media (max-width: 992px) {
   .navbar-expand-lg .navbar-toggler {
     display: block;
@@ -140,4 +144,12 @@ button a {
 }
 
 @media only screen and (max-width: 767px) {
+  .showOnPhone {
+    display: block;
+    margin-left: auto;
+    text-align: right;
+  }
+  .nav-item.dropdown {
+    display: none;
+  }
 }

@@ -38,7 +38,7 @@ class CheckoutController extends AbstractController
                 $session->set('shippingDistrict',$shippingDistrict);
                 $session->set('shippingAddress1',$shippingAddress1);
                 $session->set('shippingAddress2',$shippingAddress2);
-                $session->set('invoiceNumber',sha1(mt_rand(1, 200) . 'SALT').'-'.date('Y').'-'.date('m').'-'.$this->getUser()->getId());
+                $session->set('invoiceNumber',strtoupper(md5(date('Y-m-d h:i:s'))));
 
                 return $this->redirectToRoute("payment_index");
             }; 
@@ -149,12 +149,18 @@ class CheckoutController extends AbstractController
         // Envoi du mail à la fin de la commande 
         $mailerService->sendOrderDetails(
             $this->getUser()->getEmail(),
-            $order,$session->get('invoiceNumber'),
+            $order,
+            $session->get('invoiceNumber'),
             $this->getUser()->getFirstName(),
             $this->getUser()->getLastName());
 
 
-        return $this->redirectToRoute("home");
+        //return $this->redirectToRoute("confirmation_index");
+
+        $this->addFlash('success',"Votre commande a bien été enregistrée! Vous recevrez un mail récapitulatif");
+        return $this->render('checkout/confirmed.html.twig',[
+            'user' => $this->getUser()
+        ]);
     }
 
     /**

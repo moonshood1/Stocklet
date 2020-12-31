@@ -37,7 +37,7 @@
                                         {% for order in pagination %}
                                             <tbody>
                                                 <tr>
-                                                    <td> {{ order.id }} </td>
+                                                    <td> {{ order.invoiceNumber }} </td>
                                                     <td> {{ order.products.productName }} </td>
                                                     <td class="text-center"><img src="https://www.payqin.com/wp-content/uploads/2020/09/n3-1.png" alt="" height="20" width="60"/></td>
                                                     <td> {{ order.orderDate|date('d/m/Y - H:i') }} </td>

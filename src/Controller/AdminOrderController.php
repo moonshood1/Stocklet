@@ -15,7 +15,7 @@ class AdminOrderController extends AbstractController
     /**
      * @Route("/admin/order/{page<\d+>?1} ", name="admin_order_index")
      */
-    public function index(OrderRepository $repo, $page, PaginationService $pagination,Breadcrumbs $breadcrumbs)
+    public function index($page, PaginationService $pagination,Breadcrumbs $breadcrumbs,EntityManagerInterface $manager,OrderRepository $repo)
     {
         $pagination->setPage($page)
                    ->setEntityClass(Order::class);

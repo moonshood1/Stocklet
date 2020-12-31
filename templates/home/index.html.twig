@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Accueil{% endblock %}
 {% block body %}
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -353,7 +353,7 @@
 </script>
 <script>
 // Switch   
-const url = "http://127.0.0.1:8000/demain";
+const url = "https://stocklet.ci/demain";
 const v = axios.get(url).then(function (response) {
   // Initialisation du minuteur
 
@@ -379,7 +379,7 @@ const v = axios.get(url).then(function (response) {
     document.getElementById("timer-second").innerText = s;
 
     // Appel de ma fonction switch à la fin du timer
-    const switchUrl = "http://127.0.0.1:8000/switch";
+    const switchUrl = "https://stocklet.ci/switch";
     function launchSwitch() {
       location.replace(switchUrl);
     }

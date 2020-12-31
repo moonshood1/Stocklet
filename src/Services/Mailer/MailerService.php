@@ -27,7 +27,6 @@ class MailerService
 
                 // les varialbles qu'on passe au template
                 ->context([
-                    'expiration_date' => new \DateTime('+7 days'),
                     'username' => $userFullName,
                     'token' => $token
                 ]);
@@ -46,7 +45,7 @@ class MailerService
                     'firstName'=> $userFirstName,
                     'lastName' => $userLastName,
                     'details' => $details,
-                    'invoice' => $invoiceNumber,
+                    'invoice' => $invoiceNumber
                 ]);
 
         $this->mailer->send($email);        

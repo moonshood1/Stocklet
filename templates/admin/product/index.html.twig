@@ -6,33 +6,9 @@
 <div class="content-container">
   <div class="container-fluid">
         {{ wo_render_breadcrumbs({separator: '>>'}) }}
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1 class="display-4 text-center uppercase">Administration des produits de Stocklet</h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card mt-3">
-                <div class="card-header">Statistiques des produits </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p>Quanité de produits vendus / jour : <b>4</b></p>
-                            <p>Quanité de produits vendus / semaine : <b>7</b></p>
-                            <p>Quanité de produits vendus / mois : <b>14</b></p>
-                        </div>
-                        <div class="col-md-6">
-                                <p>Quantité moyenne écoulée par produit : <b>5</b></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-        <h3 class="my-4">Produit à la une aujourd'hui</h3>
+        <h3 class="my-4">Produit à la une </h3>
         {% if online is null %}
-            <p><i>Aucun produit en ligne aujourd'hui</i></p>
+            <p><i>Aucun produit en ligne</i></p>
         {% else %}
         <div class="blog-card">
             <div class="meta">

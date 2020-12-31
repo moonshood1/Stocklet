@@ -5,7 +5,7 @@
 {% block body %}
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/ultime5.css">
+<link rel="stylesheet" href="/css/ultime6.css">
 {% include "partials/header.html.twig" %}
 {% include "partials/loader.html.twig" %}
     <div class="container">
@@ -17,16 +17,10 @@
           <p class="infos">Informations du client</p>
           <form action="">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" class="form-control" id="email" disabled value="{{ user.email }}"/>
-                    </div>
-                </div>    
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="phone">Numéro de téléphone </label>
-                        <input type="text" class="form-control" id="phone" disabled value="{{ user.userPhone }}"/>
                     </div>
                 </div>
             </div>
@@ -67,8 +61,8 @@
       <hr />
       <div class="purchase">
         <p class="float-left">
-          <a href="{{ path('cart_index') }}"><i class="fas fa-arrow-left"></i></a> &nbsp; Retour au
-          panier
+          <a href="{{ path('cart_index') }}" class="return"><i class="fas fa-arrow-left"></i>&nbsp; Retour au
+          panier</a> 
         </p>
       </div>
     </div>    

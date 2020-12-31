@@ -13,6 +13,39 @@
     {% if app.user %}
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
+            <div class="showOnPhone">
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path('home') }}">
+                  <i class="fas fa-home"></i> Accueil
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path('account_profile') }}">
+                  <i class="fas fa-edit"></i>Modifier les infos
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path('account_password') }}">
+                  <i class="fas fa-lock"></i> Mot de passe
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path('account_orders') }}">
+                  <i class="fas fa-list"></i> Commandes
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path('cart_index') }}">
+                  <i class="fa fa-shopping-bag"></i> Mon Panier
+                </a>
+              </li>
+              <hr>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path('account_logout') }}">
+                  <i class="fas fa-power-off"></i> Déconnexion
+                </a>
+              </li>  
+            </div>
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -45,14 +78,8 @@
                 </a>
               </div>
               <div class="depends">
-                <a class="dropdown-item" href="{{ path('account_index') }}">
-                  <i class="fas fa-user"></i> Infos personnelles
-                </a>
                 <a class="dropdown-item" href="{{ path('account_profile') }}">
-                  <i class="fas fa-edit"></i>Modifier les Infos
-                </a>
-                <a class="dropdown-item" href="{{ path('account_payment_index') }}">
-                  <i class="fas fa-wallet"></i> Paiements
+                  <i class="fas fa-edit"></i>Modifier les infos
                 </a>
                 <a class="dropdown-item" href="{{ path('account_password') }}">
                   <i class="fas fa-lock"></i> Mot de passe
@@ -65,9 +92,6 @@
                 <i class="fa fa-shopping-bag"></i> Mon Panier
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{{ path('contact_index') }}">
-                <i class="fas fa-phone"></i> Contacts
-              </a>
               <a class="dropdown-item" href="{{ path('account_logout') }}">
                 <i class="fas fa-power-off"></i> Déconnexion
               </a>
@@ -103,10 +127,6 @@
                   <i class="fas fa-user-plus"></i> Inscription
                 </a>             
               </div>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{{ path('contact_index') }}">
-                <i class="fas fa-phone"></i> Contacts
-              </a>
             </div>
           </li>
         </ul>

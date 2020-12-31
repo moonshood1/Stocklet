@@ -243,21 +243,9 @@
   left: 0%;
 }
 
-.navbar {
-  display: none;
-}
-
 @media only screen and (max-width: 767px) {
-  .navbar {
-    display: flex !important;
-  }
-
-  .sidebar-container {
-    display: none !important;
-  }
-
   .content-container {
-    padding-left: 25px;
+    padding-left: 220px;
   }
 }
 

@@ -1,0 +1,101 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block body %}
+    <div class="content-container">
+        <div class="container-fluid">
+        {{ wo_render_breadcrumbs({separator: '>>'}) }}
+            <h5 class="mt-4 text-center">Produits stocklet.</h5>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-body">
+                        <h5 class="card-title"> Produits vendus les 7 derniers jours </h5>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nom du produit</th>
+                                    <th class="text-center">Qté vendue</th>
+                                    <th class="text-center">Stock restant</th>
+                                </tr>
+                            </thead>
+                            {% for product in prods %}
+                            <tbody>
+                                <tr>
+                                    <td>{{ product.productName }}</td>
+                                    <td class="text-center">{{ product.orders|length }}</td>
+                                    <td class="text-center">{{ product.currentStock }}</td>
+                                </tr>
+                            </tbody>           
+                            {% endfor %}
+                        </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-body">
+                        <h5 class="card-title"> Produits les plus vendus toutes périodes confondues </h5>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Nom du produit</th>
+                                        <th>Montant total</th>                                        
+                                        <th class="text-center">Nombre de commandes</th>
+                                    </tr>
+                                </thead>
+                                {% for prod in allProds %}
+                                <tbody>
+                                    <tr>
+                                        <td>{{ prod.productName }}</td>
+                                        <td>{{ prod.sales|number_format(0,'','  ') }} FCFA </td>
+                                        <td class="text-center">{{ prod.ordersTotal }} </td>
+                                    </tr>
+                                </tbody>                            
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {# <h5 class="mt-5 text-center">Utilisateurs</h5>
+            <div class="row mt-2">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-body">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, incidunt! Qui et, voluptas aliquid sed sapiente rerum magni similique reprehenderit, praesentium eaque dolorem alias veniam sunt minima saepe expedita repellat.</p>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veniam similique error, consequuntur esse tempore, deleniti dignissimos quis ab nam nihil doloremque in nisi temporibus quam earum? Voluptatem esse nostrum animi?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veniam similique error, consequuntur esse tempore, deleniti dignissimos quis ab nam nihil doloremque in nisi temporibus quam earum? Voluptatem esse nostrum animi?</p>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veniam similique error, consequuntur esse tempore, deleniti dignissimos quis ab nam nihil doloremque in nisi temporibus quam earum? Voluptatem esse nostrum animi?</p>
+                        </div>
+                    </div>
+                </div>            
+            </div>
+            <h5 class="mt-5 text-center">Commandes</h5>
+            <div class="row mt-2">
+                <div class="col-8">
+                    <div class="card">
+                        <div class="card-body">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, incidunt! Qui et, voluptas aliquid sed sapiente rerum magni similique reprehenderit, praesentium eaque dolorem alias veniam sunt minima saepe expedita repellat.</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, incidunt! Qui et, voluptas aliquid sed sapiente rerum magni similique reprehenderit, praesentium eaque dolorem alias veniam sunt minima saepe expedita repellat.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veniam similique error, consequuntur esse tempore, deleniti dignissimos quis ab nam nihil doloremque in nisi temporibus quam earum? Voluptatem esse nostrum animi?</p>
+                        </div>
+                    </div>
+                </div>            
+            </div> #}
+        </div>
+    </div>
+{% endblock %}

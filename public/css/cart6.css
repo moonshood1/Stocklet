@@ -258,12 +258,18 @@ body {
   margin-top: 150px;
 }
 
-.purchase a {
+a.continue {
   color: white;
   width: 200px;
   height: 40px;
   border-radius: 8px;
   background-color: #1e316a;
+  font-family: Gilroy-bold;
+}
+
+a.return {
+  color: #161925;
+  text-decoration: none;
   font-family: Gilroy-bold;
 }
 
@@ -305,9 +311,21 @@ body {
   max-height: 100px;
 }
 
+.showOnPhone {
+  display: none;
+}
+
 @media only screen and (max-width: 767px) {
   .container {
     overflow: hidden;
+  }
+  .showOnPhone {
+    display: block;
+    margin-left: auto;
+    text-align: right;
+  }
+  .nav-item.dropdown {
+    display: none;
   }
   .card {
     margin-top: 10px;
@@ -419,7 +437,7 @@ body {
     margin-top: 70px;
   }
 
-  .purchase a {
+  a.continue {
     width: 150px;
     height: 40px;
   }

@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
-use App\Repository\CommentRepository;
 use App\Services\Pagination\PaginationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +14,7 @@ class AdminCommentController extends AbstractController
     /**
      * @Route("/admin/comment/{page<\d+>?1} ", name="admin_comment_index")
      */
-    public function index(CommentRepository $repo,$page, PaginationService $pagination,Breadcrumbs $breadcrumbs)
+    public function index($page, PaginationService $pagination,Breadcrumbs $breadcrumbs)
     {
         $pagination->setEntityClass(Comment::class)
                    ->setLimit(7)

@@ -1,11 +1,117 @@
-Bonjour {{ username }}<br>
-
-Bienvenue sur Stocklet.ci , suite a votre inscription , nous vous envoyons cet email qui contient votre token de confirmation de compte
-<br>
-Veuillez suivre ce lien afin de confirmer votre inscription
-<br>
-
-<a href="{{ url('account_confirm',{'token': token}) }}">Cliquez pour confirmer </a>
-
-<br>
-Ce lien expire dans {{ expiration_date|date('d-m-Y H:i:s') }}
+<link rel="stylesheet" href="/css/emails.css" />
+<link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous"
+/>
+<link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+    integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
+    crossorigin="anonymous"
+/>
+    <div class="container">
+      <div class="row h-100">
+        <div class="col my-5 justify-content-center">
+          <div class="content ml-auto mr-auto text-center">
+            <h4>Stocklet.</h4>
+            <p>
+              <small>
+                Merci d'avoir créé un nouveau compte sur Stocklet.
+              </small>
+              <br />
+              <small>
+                Afin de bénéficier de toutes les fonctionnalités du site, vous
+                devez verifier l'adresse email sur votre compte
+              </small>
+            </p>
+            <p>
+              <a
+                href="{{ url('account_confirm',{'token': token}) }}"
+                class="btn btn-outline-primary mt-3"
+                >Verifier maintenant</a
+              >
+            </p>
+            <hr />
+          </div>
+          <div class="content ml-auto mr-auto">
+            <p>
+              <small
+                >Il s'agit d'une étape importante pour la création de votre
+                nouveau compte car cela va vous permettre de :
+                <ul>
+                  <li>passer des commandes sur Stocklet.</li>
+                  <li>
+                    accéder à tous les services de Stocklet. notamment les
+                    commentaires ou le service client
+                  </li>
+                </ul></small
+              >
+            </p>
+            <p>
+              <small>
+                Vous pouvez corriger ou mettre à jour vos données d'inscription
+                en vous connectant à votre compte sur stocklet ou en vous
+                rendant sur :
+                <a href="https://stocklet.ci/account/profile">votre compte</a>
+              </small>
+            </p>
+            <p>
+              <small>
+                Vous devez saisir votre adresse e-mail et votre mot de passe
+                toutes les fois que vous utilisez votre compte.
+              </small>
+            </p>
+            <p>
+              <small
+                >Si vous ne souhaitiez pas créer de compte, il se peut qu'une
+                autre personne se soit inscrite par erreur en utilisant vos
+                données. Veuillez contacter le service à la clientèle en
+                utilisant les coordonnées disponibles à :
+                <a href="https://stocklet.ci">Service client Stocklet</a>
+              </small>
+            </p>
+            <hr />
+            <p>
+              <small>
+                Pour plus d'informations sur nos conditions d'utilisation, nos
+                politiques et les questions les plus fréquemment posées (FAQ),
+                cliquez sur les liens ci-dessous :
+              </small>
+            </p>
+            <p>
+              <small>
+                Conditions d'utilisation et Accord utilisateur :
+                <a href="https://stocklet.ci/contact/terms"
+                  >Conditions d'utilisations</a
+                >
+              </small>
+            </p>
+            <p>
+              <small>
+                FAQ et service clientèle :
+                <a href="https://stocklet.ci/contact/faq">FAQ</a>
+              </small>
+            </p>
+            <p>
+              <small>
+                Charte de confidentialité:
+                <a href="https://stocklet.ci/contact/privacy">Charte</a>
+              </small>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+  crossorigin="anonymous"
+></script>

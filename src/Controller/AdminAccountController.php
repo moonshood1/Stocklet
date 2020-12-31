@@ -5,8 +5,11 @@ namespace App\Controller;
 use App\Form\AccountType;
 use App\Entity\PasswordUpdate;
 use App\Form\PasswordUpdateType;
+use App\Repository\CommentRepository;
+use App\Repository\OrderRepository;
 use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -117,15 +120,24 @@ class AdminAccountController extends AbstractController
     /**
      * @Route("/admin/account", name="admin_account")
      */
-    public function myAccount(Breadcrumbs $breadcrumbs)
+    public function myAccount(Breadcrumbs $breadcrumbs, PaginatorInterface $pagination, OrderRepository $repo,Request $request,CommentRepository $commentRepo)
     {
         $user = $this->getUser();
+
+        $orders = $repo->findBy(['users' => $user]);
+        $orderPage = $pagination->paginate($orders,$request->query->getInt('page',1),4);
+
+
+        $comments = $commentRepo->findBy(['author'  => $user]);
+        $commentPage = $pagination->paginate($comments,$request->query->getInt('page',1),4);
 
         $breadcrumbs->prependRouteItem("Dashboard","admin_home")
                     ->addRouteItem("Mon Compte","admin_account");
 
         return $this->render('admin/account/account.html.twig', [
-            'user' => $user
+            'user' => $user,
+            'comment_pagination' => $commentPage,
+            'order_pagination' => $orderPage
         ]);
     }
 }
