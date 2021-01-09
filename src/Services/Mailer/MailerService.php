@@ -34,7 +34,7 @@ class MailerService
         $this->mailer->send($email); 
     }
 
-    public function sendOrderDetails($userEmail,$details,$invoiceNumber,$userFirstName, $userLastName)
+    public function sendOrderDetails($userEmail,$invoices,$invoiceNumber,$userFirstName, $userLastName)
     {
         $email = (new TemplatedEmail())
                 ->from('payqin@stocklet.ci')
@@ -44,7 +44,7 @@ class MailerService
                 ->context([
                     'firstName'=> $userFirstName,
                     'lastName' => $userLastName,
-                    'details' => $details,
+                    'invoices' => $invoices,
                     'invoice' => $invoiceNumber
                 ]);
 

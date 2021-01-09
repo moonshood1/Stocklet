@@ -208,7 +208,7 @@ class AccountController extends AbstractController
      */
     public function orders(Request $request, PaginatorInterface $pagination, OrderRepository $repo)
     {
-       $orders = $repo->findBy(['users' => $this->getUser()]);
+       $orders = $repo->findBy(['users' => $this->getUser()],['id'=> 'DESC']);
        $page = $pagination->paginate($orders,$request->query->getInt('page', 1),4);
 
         return $this->render('account/orders.html.twig',[

@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="https://unpkg.com/@pqina/flip/dist/flip.min.css"/>
-<link rel="stylesheet" href="/css/app5.css">
-<link rel="stylesheet" href="/css/timer5.css">
+<link rel="stylesheet" href="/css/app_0.css">
+<link rel="stylesheet" href="/css/timer_0.css">
     <style>
       .wrapper {
         display: flex;
@@ -34,10 +34,14 @@
     <div class="image-principale">
       {% include "partials/carouselPhone.html.twig" %}    
         <div class="content" id="content">
-          <p class="add_to_cart">
-            <a href="{{ path('cart_add', {'id': product.id}) }}" class="add_to_cart">Commander</a> 
-            {{ product.unitPrice|number_format(0,'','  ') }} FCFA <strike>{{ product.oldUnitPrice|number_format(0,'','  ') }} FCFA</strike> 
-          </p>
+        {% if product.currentStock != 0 %}
+            <p class="add_to_cart">
+              <a href="{{ path('cart_add', {'id': product.id}) }}" class="add_to_cart">Commander</a> 
+              {{ product.unitPrice|number_format(0,'','  ') }} FCFA <strike>{{ product.oldUnitPrice|number_format(0,'','  ') }} FCFA</strike> 
+            </p>
+            {% else %}
+              <p class="stockFinished"> Le stock du produit est epuisé , revenez une fois le décompte terminé pour un nouveau produit</p>
+        {% endif %}
         </div>
     </div>
     <div class="wrap" id="all_comments">
@@ -143,17 +147,16 @@
           </p>
           {% if product.currentStock == 0 %}
             <p class="add_to_cart">
-              Malheureusement le stock du produit est epuisé , Revenez dans 6h  pour un nouveau produit
+             <b> Malheureusement le stock du produit est epuisé , Revenez une fois le decompte terminé pour un nouveau produit</b>
             </p>
             {% else %}
               <p class="add_to_cart">
-                <a href="{{ path('cart_add', {'id': product.id}) }}" class="add_to_cart">Commander</a>
+                <a href="{{ path('cart_add', {'id': product.id}) }}" class="add_to_cart">Commander</a> <br>
+              </p>
+              <p class="ship">
+                Livrasion comprise. Livré sous 7 jours maximum
               </p>
           {% endif %}
-
-          <p class="ship">
-            Livrasion comprise. Livré sous 7 jours maximum
-          </p>
         </div>
         <div style="height: 836" class="second">
           <p class="spec">Caractéristiques</p>
@@ -273,39 +276,22 @@
         </section>
       </div>
     </div>
-    {% if product.currentStock > 0 %}
       <div class="progress-container fixed-bottom">
       {% set stock = product.currentStock / product.initialStock * 100 %}
         <div class="progress-progression" data-done="{{ stock }}">
-          <span class="progress-content pc">{% if stock > 30 %} Le stock du produit est à  {{ stock|round }} % {% else %} {{ stock|round }} % {% endif %}</span>
+          <span class="progress-content pc">
+            {% if stock > 42 %} Le stock du produit est à  {{ stock|round }} % {% else %} {{ stock|round }} % restant {% endif %}
+          </span>
           <span class="progress-content tel">
-            <p>Le Stock <br> est à {{ stock|round }} %</p> 
+            <p>{% if stock == 0 %} {{ stock|round }} % restant {% else %} Le Stock <br> est à {{ stock|round }} % {% endif %} </p> 
           </span>
         </div>
         <div class="progress-countdown">
           <div id ="timer-hour"></div><span style="font-weight:700; color: rgb(102, 82, 88)">:</span>
           <div id ="timer-minute"></div><span style="font-weight:700; color: rgb(102, 82, 88)">:</span>
           <div id ="timer-second"></div>
-        {#  <div class="tick" data-did-init="handleTickInit">
-            <div
-              data-repeat="true"
-              data-layout="horizontal fit"
-              data-transform="preset(d, h, m, s) -> delay"
-            >
-              <div class="tick-group">
-                <div
-                  data-key="value"
-                  data-repeat="true"
-                  data-transform="pad(00) -> split -> delay"
-                >
-                  <span data-view="flip"></span>
-                </div>
-              </div>
-            </div>
-          </div> #}
         </div>
       </div>
-    {% endif %}
 {% endblock %}
 {% block javascripts %}
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

@@ -14,7 +14,9 @@ class CheckoutType extends ApplicationType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('shippingCity', TextType::class, $this->getConfiguration("Ville",""))
+            ->add('shippingCity', TextType::class, $this->getConfiguration("Ville","Abidjan",[
+                'disabled' => true
+            ]))
             ->add('shippingDistrict', TextType::class, $this->getConfiguration("Quartier",""))
             ->add('shippingAddress1', TextType::class, $this->getConfiguration("Adresse Complète",""))
             ->add('shippingAddress2', TextType::class, $this->getConfiguration("Adresse secondaire",""))

@@ -4,7 +4,7 @@
 {% block body %}
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/ultime6.css">
+<link rel="stylesheet" href="/css/ultime_0.css">
 {% include "partials/header.html.twig" %}
 {% include "partials/loader.html.twig" %}
     <div class="container">
@@ -38,14 +38,15 @@
                 </div>
               </div>
               <div class="col-md-6 mt-2">
+              {% for order in invoice %}
                 <div class="confirm_right" style="padding-left: 0">
                   <ul>
-                    <li>{{ user.firstName }} {{ user.lastName }}</li>
-                    <li>{{ city }}</li>
-                    <li>{{ district }}</li>
-                    <li>{{ adresse1 }}</li>
-                    <li>{{ adresse2|raw|slice(0,20)}}..</li>
-                    <li>{{ user.userPhone }}</li>
+                    <li>{{ order.users.firstName }} {{ order.users.lastName }}</li>
+                    <li>{{ order.shippingCity }}</li>
+                    <li>{{ order.shippingDistrict }}</li>
+                    <li>{{ order.shippingAddress1 }}</li>
+                    <li>{{ order.shippingAddress2|raw|slice(0,20)}}..</li>
+                    <li>{{ order.users.userPhone }}</li>
                   </ul>
                   <hr />
                   <ul>
@@ -57,20 +58,17 @@
               </div>
               <div class="col onPhone">
                 <ul>
-                  <li>Nom --------- <b>{{ user.firstName }} {{ user.lastName }}</b></li>
-                  <li>Ville --------- <b>{{ city }}</b></li>
-                  <li>Quartier -------- <b>{{ district }} </b></li>
-                  <li>Adresse 1 -------- <b>{{ adresse1 }} </b></li>
-                  <li>Adresse 2 --------- <b>{{ adresse2|raw|slice(0,20)}}..</b></li>
-                  <li>Téléphone --------- <b>{{ user.userPhone }}</b></li>
+                  <li>Nom --------- <b>{{ order.users.firstName }} {{ order.users.lastName }}</b></li>
+                  <li>Ville --------- <b>{{ order.shippingCity }}</b></li>
+                  <li>Quartier -------- <b>{{ order.shippingDistrict }} </b></li>
+                  <li>Adresse 1 -------- <b>{{ order.shippingAddress1 }} </b></li>
+                  <li>Adresse 2 --------- <b>{{ order.shippingAddress2|raw|slice(0,20)}}..</b></li>
+                  <li>Téléphone --------- <b>{{ order.users.userPhone }}</b></li>
                 </ul>
               </div>
             </div>
+            {% endfor %}
           </div>
-        </div>
-        <div class="col-md-4 offset-md-2">
-        {% include "partials/summary.html.twig" %}
-          {# <p class="float-left"><button id="next"><a href="{{ path('order_confirmed') }}" style="text-decoration: none; color: #fff"> Finaliser la commande</a></button></p> #}
         </div>
       </div>
       <div class="purchase">
@@ -86,5 +84,4 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="js/loader.js"></script>
-  {% include "partials/timer.html.twig" %}
 {% endblock %}

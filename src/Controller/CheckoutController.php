@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Order;
 use App\Form\CheckoutType;
+use App\Repository\OrderRepository;
 use App\Services\Cart\CartService;
 use App\Services\Mailer\MailerService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -73,28 +74,15 @@ class CheckoutController extends AbstractController
     /**
      * @IsGranted("ROLE_USER")
      * @Route("/checkout-confirm", name="confirmation_index")
-     * @param CartService $cartservice
-     * @return void
      */
-    public function confirm(CartService $cartservice,Request $request) 
+    public function confirm(Request $request) 
     {
         $session = $request->getSession();
-
-        $shippingCity = $session->get('shippingCity');
-        $shippingDistrict = $session->get('shippingDistrict');
-        $shippingAddress1 = $session->get('shippingAddress1');
-        $shippingAddress2 = $session->get('shippingAddress2');
-
+        $invoice = $session->get("orderRecap");
 
         return $this->render('checkout/confirmation.html.twig', [
-            'product' => $cartservice->getFullCart()[0]['product'],
-            'total' => $cartservice->getTotal(),
-            'qty' => $cartservice->getFullCart()[0]['quantity'],
             'user'=>$this->getUser(),
-            'city' => $shippingCity,
-            'district' => $shippingDistrict,
-            'adresse1' => $shippingAddress1,
-            "adresse2" => $shippingAddress2
+            'invoice' => $invoice
         ]);
     }
 
@@ -104,24 +92,20 @@ class CheckoutController extends AbstractController
      */
     public function failed()
     {
-        $this->addFlash('error',"Un problème est survenu pendant votre paiement, nous vous prions de verifier le solde de votre wallet ou de réessayer ultérieurement");
+        $this->addFlash('error',"Un problème est survenu pendant votre paiement, nous vous prions de vérifier le solde de votre wallet ou de réessayer ultérieurement");
         return $this->render('checkout/failed.html.twig', [
             'user'=> $this->getUser(),
         ]);        
     }
 
     /**
-     * @IsGranted("ROLE_USER")
-     * @Route("/finalisation", name="order_confirmed")
+     * @Route("/checkout-success", name="checkout_success")
      */
-    public function final(CartService $cartservice,Request $request,EntityManagerInterface $manager,MailerService $mailerService)
+    public function success(CartService $cartservice,Request $request,EntityManagerInterface $manager,MailerService $mailerService)
     {
         // Initialisation de la session  et du stock actuel
         $session = $request->getSession();
         $currentStock = $cartservice->getFullCart()[0]['product']->getCurrentStock();
-
-        // Appel du chrono pour le numéro de facture du client
-        $chrono = $this->getUser()->getChrono();
 
         // Creation de la commande et attribution des différentes valeurs
         $order = new Order();
@@ -136,29 +120,33 @@ class CheckoutController extends AbstractController
               ->setShippingAddress2($session->get('shippingAddress2'))
               ->setInvoiceNumber($session->get('invoiceNumber'));
 
+        $orderRecap[] = $order; 
+        $session->set("orderRecap",$orderRecap);   
+
         $manager->persist($order);
 
         // Mise a jour du stock apres la validation
         $product = $cartservice->getFullCart()[0]['product'];
         $product->setCurrentStock($currentStock - $cartservice->getFullCart()[0]['quantity']);       
         $manager->flush();
-        
+
         // On vide le panier apres commande
         $cartservice->clearCart();
 
+        // Appel de la commande enregistrée pour la passer au service de mail
+        $invoices = $session->get("orderRecap");    
+        
         // Envoi du mail à la fin de la commande 
         $mailerService->sendOrderDetails(
             $this->getUser()->getEmail(),
-            $order,
+            $invoices,
             $session->get('invoiceNumber'),
             $this->getUser()->getFirstName(),
             $this->getUser()->getLastName());
 
 
-        //return $this->redirectToRoute("confirmation_index");
-
         $this->addFlash('success',"Votre commande a bien été enregistrée! Vous recevrez un mail récapitulatif");
-        return $this->render('checkout/confirmed.html.twig',[
+        return $this->render('checkout/success.html.twig',[
             'user' => $this->getUser()
         ]);
     }

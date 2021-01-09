@@ -377,7 +377,7 @@ body {
   }
   table {
     width: auto !important;
-    font-size: 10px;
+    font-size: 5px;
   }
 
   thead {
@@ -388,5 +388,9 @@ body {
   td img {
     width: 14px;
     height: 6px;
+  }
+
+  ul.pagination {
+    font-size: 5px;
   }
 }
