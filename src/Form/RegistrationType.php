@@ -22,11 +22,7 @@ class RegistrationType extends ApplicationType
             ->add('lastName', TextType::class,$this->getConfiguration("Nom",""))
             ->add('email', EmailType::class,$this->getConfiguration("Adresse Email",""))
             ->add('password',PasswordType::class,$this->getConfiguration("Mot de passe",""))
-            ->add('confirmPassword',PasswordType::class,$this->getConfiguration("Confirmation du mot de passe",""))
-            ->add('picture', UrlType::class, $this->getConfiguration("Url de votre avatar",""))
-            ->add('imageFile', FileType::class,$this->getConfiguration("Upload de votre avatar",""),['required'=> false])
-            ->add('address', TextType::class,$this->getConfiguration("Adresse",""))
-            ->add('userPhone', TextType::class,$this->getConfiguration("Numéro de téléphone",""));
+            ->add('confirmPassword',PasswordType::class,$this->getConfiguration("Confirmation du mot de passe",""));
     }
 
     public function configureOptions(OptionsResolver $resolver)

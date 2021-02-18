@@ -2,21 +2,19 @@
 {% block title %}Récapitulatif de commande {% endblock %}
 
 {% block body %}
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/ultime_0.css">
-{% include "partials/header.html.twig" %}
-{% include "partials/loader.html.twig" %}
-    <div class="container">
-      <div class="card">
-        {% include "partials/menu.html.twig" %}
-      </div>
-      <div class="row">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/ultime_0.css">
+  {% include "partials/header.html.twig" %}
+  {% include "partials/loader.html.twig" %}
+  <div class="container">
+    <div class="card">
+      {% include "partials/menu.html.twig" %}
+    </div>
+    <div class="row">
+      {% for order in invoice %}      
         <div class="col-md-6">
-          <p class="conf">
-            Récapitulatif <br />
-            <small style="font-family: Gilroy-regular; font-size: 15px;color: #707070;">Informations de livraison</small>
-          </p>
+          <small style="font-family: Gilroy-regular; font-size: 15px; color: #707070">Informations de livraison</small>
           <div class="confirmation_card">
             <div class="row">
               <div class="col-md-6 mt-2">
@@ -38,7 +36,6 @@
                 </div>
               </div>
               <div class="col-md-6 mt-2">
-              {% for order in invoice %}
                 <div class="confirm_right" style="padding-left: 0">
                   <ul>
                     <li>{{ order.users.firstName }} {{ order.users.lastName }}</li>
@@ -57,27 +54,83 @@
                 </div>
               </div>
               <div class="col onPhone">
-                <ul>
-                  <li>Nom --------- <b>{{ order.users.firstName }} {{ order.users.lastName }}</b></li>
-                  <li>Ville --------- <b>{{ order.shippingCity }}</b></li>
-                  <li>Quartier -------- <b>{{ order.shippingDistrict }} </b></li>
-                  <li>Adresse 1 -------- <b>{{ order.shippingAddress1 }} </b></li>
-                  <li>Adresse 2 --------- <b>{{ order.shippingAddress2|raw|slice(0,20)}}..</b></li>
-                  <li>Téléphone --------- <b>{{ order.users.userPhone }}</b></li>
-                </ul>
+                <div class="row">
+                  <div class="col-4">
+                    <ul class="text-muted">
+                      <li>Nom</li>
+                      <li>Ville</li>
+                      <li>Quartier</li>
+                      <li>Adresse 1</li>
+                      <li>Adresse 2</li>
+                      <li>Téléphone</li>
+                    </ul>
+                  </div>
+                  <div class="col-8">
+                    <ul class="text-right">
+                      <li>{{ order.users.firstName }} {{ order.users.lastName }}</li>
+                      <li>{{ order.shippingCity }}</li>
+                      <li>{{ order.shippingDistrict }}</li>
+                      <li>{{ order.shippingAddress1 }}</li>
+                      <li>{{ order.shippingAddress2|raw|slice(0,20)}}..</li>
+                      <li>{{ order.users.userPhone }}</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
-            {% endfor %}
           </div>
         </div>
-      </div>
-      <div class="purchase">
-        <hr />
-        <p class="float-left">
-          <a href="{{ path('home')}}" class="return"><i class="fas fa-arrow-left"></i></a> &nbsp; Retour à l'accueil
-        </p>
-      </div>
+        <div class="col-md-6">
+          <small style="font-family: Gilroy-regular; font-size: 15px; color: #707070">Informations sur le produit</small>
+          <div class="confirmation_card product_conf">
+            <div class="row">
+              <div class="col-md-4">
+                <img 
+                  {% if order.products.leftPic1URL is null and order.products.leftPic1Name %}
+                    src="/uploads/images/product_left/{{ order.products.leftPic1Name }}"
+                  {% else %}
+                    src="{{ order.products.leftPic1URL}}"
+                  {% endif %} 
+                  alt="" width="100%"
+                />
+              </div>
+              <div class="col-md-8">
+                <h5 class="mt-2">{{ order.products.productName }}</h5>
+                <p class="text-muted">{{ order.products.productDescription1|raw }}</p>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-4">
+                <p class="text-muted text-center ml-2">
+                  <ul class="text-muted" style="padding-left: 6px;">
+                    <li>Prix</li>
+                    <li>Quantité</li>
+                    <li>Montant total</li>
+                  </ul>
+                </p>
+              </div>
+              <div class="col-8">
+                <p class="text-right">
+                  <ul style="padding-right: 0px;">
+                    <li> {{ order.productUnitPrice|number_format(0,'','  ') }} FCFA</li>
+                    <li> {{ order.productQuantity }} </li>
+                    <li> {{ order.orderTotalAmount|number_format(0,'','  ')}} FCFA</li>
+                  </ul>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
     </div>
+    <div class="purchase">
+      <hr />
+      <p class="float-left">
+        <a href="{{ path('home')}}" class="return"><i class="fas fa-arrow-left"></i></a> &nbsp; Retour à l'accueil
+      </p>
+    </div>
+  </div>
 {% endblock %}
 {% block javascripts %}
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

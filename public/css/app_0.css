@@ -468,6 +468,22 @@ section .contact.contact-pre {
   font-family: AvenirNextLTPro-Bold;
 }
 
+section .contact .contact-card {
+  display: flex;
+}
+
+section .contact .contact-card .contact_right {
+  width: 50%;
+}
+
+section .contact .contact-card .contact_left {
+  width: 50%;
+}
+
+section .contact .contact-card .contact_left p {
+  margin-top: 25%;
+}
+
 .message_title {
   margin-top: 10px;
   color: #1e316a;
@@ -478,7 +494,7 @@ section .contact.contact-pre {
 .message_content {
   margin-top: 1px;
   color: #1e316a;
-  font-size: 30px;
+  font-size: 16px;
   font-family: AvenirNextLTPro-Bold;
 }
 
@@ -490,7 +506,7 @@ section .contact.contact-pre {
 
 .callus_content {
   color: #1e316a;
-  font-size: 30px;
+  font-size: 16px;
   font-family: AvenirNextLTPro-Bold;
 }
 

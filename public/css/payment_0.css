@@ -1,0 +1,28 @@
+.logo-payqin {
+  height: auto;
+  width: 90px;
+}
+
+.card-paiement {
+  width: 400px;
+  border-radius: 2%;
+}
+
+.btn_payqin {
+  text-align: center;
+  background-color: black;
+  height: 55px;
+  color: white;
+  width: 100%;
+  border: 1px solid rgb(112, 124, 248);
+}
+
+.btn_payqin img.img_btn_payqin {
+  margin-top: -6px;
+}
+
+.btn_payqin:hover {
+  color: white;
+  opacity: 0.7;
+  transition: opacity 500ms ease-in-out;
+}

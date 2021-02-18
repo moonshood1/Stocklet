@@ -6,6 +6,17 @@
 <link rel="stylesheet" href="/css/contact_0.css">
 {% include "partials/loader.html.twig" %}
 {% include "partials/header.html.twig" %}
+  {% for message in app.flashes('success') %}
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="alert alert-success">
+            {{ message }}
+          </div> 
+        </div>
+      </div>
+    </div>
+  {% endfor %}
     <div class="container mt-5">
       <div class="row">
         <div class="col-md-6">
@@ -16,27 +27,22 @@
           </p>
           <p class="mt-5 text-right mail_logo">
             <i class="fas fa-envelope fa-2x"></i> <br />
-            <p class="text-right mail_content" style="margin-top: -10px;"> payqin@stocklet.ci</p>
+            <p class="text-right mail_content" style="margin-top: -10px;"> hello@stocklet.ci</p>
           </p>
           <p class="mt-2 text-right phone_logo">
             <i class="fas fa-phone fa-2x"></i> <br />
-            <p class="text-right mail_content" style="margin-top: -10px;"> +225 08 99 01 69</p>
+            <p class="text-right mail_content" style="margin-top: -10px;"> +225 27 22 59 84 37</p>
           </p>
         </div>
-        <div class="col-md-6">
-          <form action="">
-              <div class="form-group">
-                <input type="text" name="name" id="name" class="form-control" placeholder="Votre Nom">
-              </div>
-              <div class="form-group">
-                <input type="email" name="email" id="email" class="form-control" placeholder="Entrez une adresse email valide">
-              </div>
-              <div class="form-group">
-                <textarea class="form-control" id="message" rows="5" placeholder="Votre message"></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary btn-lg btn-block">Envoyer</button>
-          </form>
-        </div>
+          <div class="col-md-6">
+            {{ form_start(form) }}
+                {{ form_row(form.user_userName) }}
+                {{ form_row(form.user_email) }}
+                {{ form_row(form.user_subject) }}
+                {{ form_row(form.content,{'attr':{'rows':5}}) }}
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Envoyer</button>
+            {{ form_end(form) }}
+          </div>
       </div>
     </div>
 {% endblock %}

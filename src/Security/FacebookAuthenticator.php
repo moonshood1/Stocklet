@@ -1,70 +1,81 @@
-<?php
-
+<?php 
 
 namespace App\Security;
 
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use League\OAuth2\Client\Provider\FacebookUser;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
-use KnpU\OAuth2ClientBundle\Client\Provider\FacebookClient;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use KnpU\OAuth2ClientBundle\Client\Provider\FacebookClient;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-class FacebookAuthenticator extends SocialAuthenticator 
+class FacebookAuthenticator extends SocialAuthenticator
 {
-    private $router;
-    private $repo;
     private $clientRegistry;
-    private $manager;
+    private $em;
+    private $router;
 
-    public function __construct(ClientRegistry $clientRegistry, RouterInterface $router,EntityManagerInterface $manager,UserRepository $repo)
+    public function __construct(ClientRegistry $clientRegistry, EntityManagerInterface $em, RouterInterface $router)
     {
-        $this->router = $router;
-        $this->repo = $repo;
         $this->clientRegistry = $clientRegistry;
-        $this->manager = $manager;
-    }
-
-    public function start(Request $request, ?AuthenticationException $authException = null)
-    {
-        return new RedirectResponse($this->router->generate('account_login'));
+        $this->em = $em;
+	    $this->router = $router;
     }
 
     public function supports(Request $request)
     {
-        return $request->attributes->get('_route') === 'oauth_facebook_check';
+        return $request->attributes->get('_route') === 'connect_facebook_check';
     }
 
     public function getCredentials(Request $request)
     {
-        return $this->fetchAccessToken($this->getClient());
+        return $this->fetchAccessToken($this->getFacebookClient());
     }
+
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        /**  @var FacebookUser $facebookUser */
-        $facebookUser = $this->getClient()->fetchUserFromToken($credentials);
+        /** @var FacebookUser $facebookUser */
+        $facebookUser = $this->getFacebookClient()->fetchUserFromToken($credentials);
         return $this->repo->findOrCreateFromFacebookOauth($facebookUser);
     }
-
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
+    
+    /**
+     * @return FacebookClient
+     */
+    private function getFacebookClient():FacebookClient
     {
-        
+        return $this->clientRegistry
+            ->getClient('facebook_main');
+    }
+    
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+    {
+        $targetUrl = $this->router->generate('home');
+
+        return new RedirectResponse($targetUrl);
+    
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        return new RedirectResponse('/');
+        $message = strtr($exception->getMessageKey(), $exception->getMessageData());
+
+        return new Response($message, Response::HTTP_FORBIDDEN);
     }
 
-    private function getClient(): FacebookClient
+    public function start(Request $request, AuthenticationException $authException = null)
     {
-        return $this->clientRegistry->getClient('facebook');
+        return new RedirectResponse(
+            '/', 
+            Response::HTTP_TEMPORARY_REDIRECT
+        );
     }
+
 }

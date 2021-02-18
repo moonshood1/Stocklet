@@ -8,7 +8,7 @@
       <div class="col my-auto d-flex justify-content-center">
         <div class="card bg-light ml-auto mr-auto pb-5 pl-3">
           <div class="card-body">
-            <h5 class="title mt-3">Stocklet.</h5>
+            <img src="../../assets/images/stocklet.png" alt="" class="mb-3" height="43">
             <p class="welcome">Bon Retour sur Stocklet</p>
             <p class="signup mt-3">Nouveau membre?<a href="{{ path('account_register')}}"> Créer un compte</a></p>
               {% if hasError %}
@@ -27,7 +27,6 @@
                   <input type="email" name="_username" id="_username" class="_username mb-3" />
                   <br />
                     <span class="text-left"><label for="_password" id="_password">Mot de passe</label></span>
-                    <span class="text-right"><a href="#" class="forgot">Mot de passe oublié?</a></span>
                   <br />
                   <input type="password" name="_password" id="_password" class="_password"/>
                   <br />
@@ -41,6 +40,7 @@
                 <p class="mt-2"style="font-family: Gilroy-regular; font-size: 15px"> Ou se connecter avec</p>
                 <div class="social">
                   <a href="{{ path('oauth_google_connexion') }} " style="text-decoration:none; color:black;" id="google" class="btn border"><img src="../../assets/images/go.png" alt="" class="logo"> Google</a>
+                  <a href="{{ path('connect_facebook_start') }} " style="text-decoration:none; color:black;" id="google" class="btn border mt-2"><img src="../../assets/images/fb.png" alt="" class="logo"> Facebook</a>
                 </div>
             </div>
           </div>

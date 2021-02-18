@@ -46,7 +46,7 @@
     </div>
     <div class="wrap" id="all_comments">
       <div class="left">
-        <h2 class="brand">Stocklet</h2>
+        <img src="https://res.cloudinary.com/dhc0siki5/image/upload/v1613657985/Stocklet/stocklet_fjv8fz.png" alt="" class="ml-1 mt-2" height="33">
         <div class="wrapper mt-5">
           <div class="navigation">
             <ul>
@@ -81,14 +81,14 @@
           <div class="bs-offset-main bs-canvas-anim">
             <p class="text-right mr-5 mt-2">
                 <a href="#" class="position-fixed" data-toggle="canvas" data-target="#bs-canvas-right" aria-expanded="false" aria-controls="bs-canvas-right"
-                  style="height: 25px;
-                  width: 25px;
+                  style="height: 35px;
+                  width: 35px;
                   background-color: #1a237e;
                   border-radius: 50%;
                   display: inline-block;
                   align-items: center;
                   text-align: center;">
-                  <i class="fas fa-bars" style="color:#fff"></i>
+                  <i class="fas fa-bars" style="color:#fff ; padding-top: 25%;"></i>
                 </a>               
             </p>
           </div>
@@ -111,14 +111,14 @@
         <div class="bs-offset-main bs-canvas-anim">
             <p class="text-right mr-5 mt-2">
                 <a href="#" class="position-fixed" data-toggle="canvas" data-target="#bs-canvas-right" aria-expanded="false" aria-controls="bs-canvas-right"
-                  style="height: 25px;
-                  width: 25px;
+                  style="height: 35px;
+                  width: 35px;
                   background-color: #1a237e;
                   border-radius: 50%;
                   display: inline-block;
                   align-items: center;
                   text-align: center;">
-                  <i class="fas fa-bars" style="color:#fff"></i>
+                  <i class="fas fa-bars" style="color:#fff; padding-top: 25%;"></i>
                 </a>               
             </p>
           </div>
@@ -241,32 +241,35 @@
             </div>
           {% endif %} 
         </div>
+        {% include "partials/mobile_footer.html.twig" %}
         <section style="background-color: #1e316a">
           <div style="height: 410px" class="contact">
             <p class="contact_pre" style="color: white;  font-family: 'AvenirNextLTPro-Bold'; font-size: 30px;">
               Contactez nous quand vous le souhaitez.
             </p>
-            <div class="contact-card" style="padding-left: 62px; padding-right: 62px; background-color: #fff; width: 490px; ">
-              <p class="message_title">Envoyez nous un mail</p>
-              <p class="message_content">payqin@stocklet.ci</p>
-              <hr />
-              <p class="callus_title">Appelez nous </p>
-              <p class="callus_content">08 99 01 69</p>
+            <div class="contact-card" style="padding-left: 62px; padding-right: 62px; background-color: #fff; width: 520px; ">
+              <div class="contact_right">
+                <p class="message_title pt-3">Envoyez nous un mail</p>
+                <p class="message_content">hello@stocklet.ci</p>
+                <hr />
+                <p class="callus_title">Appelez nous </p>
+                <p class="callus_content">+225 27 22 59 84 37</p>
+              </div>
+              <div class="contact_left">
+                  <p><img src="https://res.cloudinary.com/dhc0siki5/image/upload/v1613660976/Stocklet/bouton_payement-02_qkpq3a.jpg" alt="" width="100%"></p>
+              </div>
             </div>
             <p class="features">
             <div class="row" style="padding:0; margin:0;">
               <div class="col-md-2">
                 <p><a href="{{ path('contact_index') }}" style="color:#fff">  Contacts</a></p>
-                <p><a href="{{ path('about_index') }}" style="color:#fff">  A Propos</a></p>
-                <p><a href="{{ path('offices_index') }}" style="color:#fff">  Bureaux</a></p>
+                <p><a href="{{ path('faq_index') }}" style="color:#fff">  FAQ'S</a></p>
               </div>
-              <div class="col-md-4">
-                <p class="text-center"><a href="{{ path('garanties_index') }}" style="color:#fff"> Garanties</a></p>
-                <p class="text-center"><a href="{{ path('livraisons_index') }}" style="color:#fff"> Livraisons</a></p>
-                <p class="text-center"><a href="{{ path('retours_index') }}" style="color:#fff"> Retours</a></p>
+               <div class="col-md-4">
+                <p class="text-center"><a href="#" style="color:#fff"><i class="fab fa-facebook"></i> Facebook</a></p>
+                <p class="text-center"><a href="#" style="color:#fff"><i class="fab fa-instagram"></i> Instagram</a></p>
               </div>
-              <div class="col-md-6 mb-4">
-                <p><a href="{{ path('faq_index') }}" style="color:#fff"> FAQ's</a></p>
+              <div class="col-md-6">
                 <p><a href="{{ path('terms_index') }}" style="color:#fff"> Termes & Conditions</a></p>
                 <p><a href="{{ path('privacy_index') }}" style="color:#fff"> Politique de confidentialité</a></p>
               </div>

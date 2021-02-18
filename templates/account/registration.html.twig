@@ -13,6 +13,9 @@
             <div class="card-body px-2">
               <p class="welcome">Bon Retour sur Stocklet</p>
               <p class="signup mt-3">Déja membre ?<a href="{{ path('account_login')}}"> Se connecter</a></p>
+              <div class="social">
+                <a href="{{ path('oauth_google_connexion') }} " style="text-decoration:none; color:black;" id="google" class="btn border"><img src="../../assets/images/go.png" alt="" class="logo"> S'inscrire avec Google</a>
+              </div>
               {{ form_start(form) }}
               <hr>
               <h5>Informations d'identité </h5>
@@ -25,7 +28,7 @@
                   {{ form_row(form.firstName) }}
                 </div>  
               </div>
-              {% form_theme form 'bootstrap_4_layout.html.twig' %}
+              {# {% form_theme form 'bootstrap_4_layout.html.twig' %}
               <hr>
               <h5>Contacts et Adresse </h5>
               <small>Dans cette section , vous indiquez votre lieu de residence pour les livraisons et votre contact</small>
@@ -36,7 +39,7 @@
                   {{ form_row(form.address) }}
                 </div>
               </div>
-              <hr>
+              <hr> 
               {% form_theme form 'bootstrap_4_layout.html.twig' %}
               <h5>Images de profil </h5>
               <small>Vous pouvoiz uploader une image à partir d'une source locale ou entrer le lien d'une image stockée en ligne</small>
@@ -49,7 +52,7 @@
                   {{ form_row(form.imageFile) }}
                 </div>
               </div>
-              <hr>
+              <hr>#}
               {% form_theme form 'bootstrap_4_layout.html.twig' %}
               <h5>Informations de connexion</h5>
               <small>Votre email de connexion et votre mot de passe</small>

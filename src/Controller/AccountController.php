@@ -7,11 +7,11 @@ use App\Form\AccountType;
 use App\Entity\PasswordUpdate;
 use App\Form\RegistrationType;
 use App\Form\PasswordUpdateType;
+use App\Repository\UserRepository;
 use App\Repository\OrderRepository;
 use App\Repository\PaymentRepository;
-use App\Repository\UserRepository;
-use App\Services\Mailer\MailerService;
 use Symfony\Component\Form\FormError;
+use App\Services\Mailer\MailerService;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -53,15 +54,22 @@ class AccountController extends AbstractController
     }
 
     /**
-     * @Route("oauth/facebook/connect", name="oauth_facebook_connexion")
-     * @param ClientRegistry $clientRegistry
-     * @return Response
+     * @Route("/connect/facebook", name="connect_facebook_start")
      */
-    public function connectToFacebook(ClientRegistry $clientRegistry)
+    public function connectAction(ClientRegistry $clientRegistry)
     {
-        return $clientRegistry->getClient('facebook')
-            ->redirect(['public_profile'],['email']);
+        return $clientRegistry
+            ->getClient('facebook_main')
+            ->redirect(['public_profile','email'],['email'] );
     }
+
+    /**
+     * @Route("/connect/facebook/check", name="connect_facebook_check")
+     */
+    public function connectCheckAction(Request $request, ClientRegistry $clientRegistry)
+    {
+
+    }    
 
     /**
      * @Route("/logout", name="account_logout")

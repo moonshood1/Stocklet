@@ -14,6 +14,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(
+ *  fields = {"email"},
+ *  message = "une autre utilisateur a déja cette adresse email, merci de la modifier"
+ * )
  * @Vich\Uploadable
  * @ORM\HasLifecycleCallbacks()
  */

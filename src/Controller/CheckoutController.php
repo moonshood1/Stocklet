@@ -30,7 +30,7 @@ class CheckoutController extends AbstractController
             $session = $request->getSession();
             
             if ($form->isSubmitted() && $form->isValid()) {
-                $shippingCity = $request->request->get('checkout')['shippingCity'];
+                $shippingCity = "Abidjan";
                 $shippingDistrict = $request->request->get('checkout')['shippingDistrict'];
                 $shippingAddress1 = $request->request->get('checkout')['shippingAddress1'];
                 $shippingAddress2 = $request->request->get('checkout')['shippingAddress2'];
@@ -39,7 +39,7 @@ class CheckoutController extends AbstractController
                 $session->set('shippingDistrict',$shippingDistrict);
                 $session->set('shippingAddress1',$shippingAddress1);
                 $session->set('shippingAddress2',$shippingAddress2);
-                $session->set('invoiceNumber',strtoupper(md5(date('Y-m-d h:i:s'))));
+                $session->set('invoiceNumber',substr(strtoupper(md5(date('Y-m-d h:i:s'))),0,-15));
 
                 return $this->redirectToRoute("payment_index");
             }; 

@@ -36,7 +36,8 @@ class UserRepository extends ServiceEntityRepository
 
             if ($user) {return $user;};
 
-            $user = (new User)->setEmail($googleUser->getEmail())
+            $user = (new User)
+            ->setEmail($googleUser->getEmail())
             ->setFirstName($googleUser->getFirstName())
             ->setLastName($googleUser->getLastName())
             ->setPicture($googleUser->getAvatar());
@@ -58,7 +59,8 @@ class UserRepository extends ServiceEntityRepository
 
             if ($user) {return $user;};
 
-            $user = (new User)->setEmail($facebookUser->getEmail())
+            $user = (new User)
+            ->setEmail($facebookUser->getEmail())
             ->setFirstName($facebookUser->getFirstName())
             ->setLastName($facebookUser->getLastName())
             ->setPicture($facebookUser->getPictureUrl());

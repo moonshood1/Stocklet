@@ -2,11 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\OrderRepository;
-use App\Services\Cart\CartService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=OrderRepository::class)
@@ -61,16 +60,36 @@ class Order
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 15,
+     *      minMessage = "Le nom du quartier est trop court",
+     *      maxMessage = "Le nom du quartier est trop long")
+     * @Assert\Regex("/^\w+/")
      */
     private $shippingDistrict;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Ce champ est obligatoire")
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 45,
+     *      minMessage = "L'adresse complète est trop courte",
+     *      maxMessage = "L'adresse complète est trop longue")
+     * @Assert\Regex("/^\w+/")
      */
     private $shippingAddress1;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 45,
+     *      minMessage = "L'adresse complète est trop courte",
+     *      maxMessage = "L'adresse complète est trop longue")
+     * @Assert\Regex("/^\w+/")
      */
     private $shippingAddress2;
 

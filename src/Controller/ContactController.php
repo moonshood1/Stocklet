@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Form\ContactType;
+use App\Services\Mailer\MailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ContactController extends AbstractController
@@ -10,10 +13,34 @@ class ContactController extends AbstractController
     /**
      * @Route("/contact", name="contact_index")
      */
-    public function contact()
+    public function contact(Request $request,MailerService $mailer)
     {
+        $form = $this->createForm(ContactType::class);
+        $form->handleRequest($request);
+
+        $payqin_email = "hello@payqin.ci";
+        $user_email = $request->request->get('contact')['user_email'];
+        $user_subject = $request->request->get('contact')['user_subject'];
+        $message = $request->request->get('contact')['content'];
+        $username =  $request->request->get('contact')['user_userName'];
+
+        if ($form->isSubmitted()) {
+            $mailer->contactPayQin(
+                $payqin_email,
+                $user_email,
+                $user_subject,
+                $message,
+                $username
+            );
+
+            $this->addFlash("success","Votre email a bien été envoyé !");
+
+            return $this->redirectToRoute("contact_index");
+        }
+
         return $this->render('contact/index.html.twig',[
-            'user' => $this->getUser()
+            'user' => $this->getUser(),
+            'form' => $form->createView()
         ]);
     }
 

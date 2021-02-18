@@ -52,12 +52,9 @@
 }
 
 .left .brand {
-  font-family: "Josefin Sans", "sans-serif";
-  font-weight: bold;
   margin-top: 2%;
   margin-left: 2%;
-  color: #1a237e;
-  font-size: 25px;
+  max-width: 130px;
 }
 
 .right {

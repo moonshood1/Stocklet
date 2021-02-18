@@ -21,12 +21,8 @@ class MailerService
             ->from('payqin@stocklet.ci')
             ->to($userEmail)
             ->subject('Validation de l\'inscription sur STOCKLET')
-
-            // Chemin vers le template du mail
             ->htmlTemplate("partials/emails/signup.html.twig")
-
-                // les varialbles qu'on passe au template
-                ->context([
+            ->context([
                     'username' => $userFullName,
                     'token' => $token
                 ]);
@@ -49,6 +45,21 @@ class MailerService
                 ]);
 
         $this->mailer->send($email);        
+    }
+
+
+    public function contactPayQin($payqin_email,$user_email,$user_subject,$message, $username)
+    {
+        $email = (new TemplatedEmail())
+                ->from($user_email)
+                ->to($payqin_email)
+                ->subject($user_subject)
+                ->htmlTemplate("partials/emails/contactPayQin.html.twig")
+                ->context([
+                    'username' => $username,
+                    'message' => $message]);
+        
+        $this->mailer->send($email);
     }
    
 }

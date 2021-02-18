@@ -8,17 +8,32 @@
 <link rel="stylesheet" href="/css/ultime_0.css"> 
 {% include "partials/header.html.twig" %}
 {% include "partials/loader.html.twig" %}
+    <style>
+      .card.notif {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23) !important;
+        border-color: red !important;
+        border-radius: 5px;
+      }
+
+      p {
+        color: red !important;
+      }
+
+      a.notif {
+        color: black !important;
+      }
+    </style>
     <div class="container">
       <div class="row mt-4">
-        <div class="col">
+        <div class="col-lg-12">
           {% for message in app.flashes('error') %}
-              <div class="alert alert-danger">
-                  {{ message }}
-              </div>
+            <div class="card notif">
+              <p class="m-4 text-center">{{ message }}</p>
+            </div>
+            <p class="mt-4">
+              <a href="{{ path('cart_index') }}" class="notif"><i class="fas fa-arrow-left"></i> Retour au panier </a>
+            </p>
           {% endfor %}
-          <div>
-            <p><a href="{{ path('cart_index') }}">Retour au panier </a></p>
-          </div>
         </div>
       </div>
     </div>

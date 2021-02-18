@@ -5,7 +5,8 @@
 {% block body %}
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/ultime_0.css"> 
+<link rel="stylesheet" href="/css/ultime_0.css">
+<link rel="stylesheet" href="/css/payment_0.css"> 
 {% include "partials/header.html.twig" %}
 {% include "partials/loader.html.twig" %}
     <div class="container">
@@ -80,7 +81,34 @@
         </div>
         <div class="col-md-4 offset-md-2">
         {% include "partials/summary.html.twig" %}
-          <p class="float-left"><button id="next">Procéder au paiement</button></p>
+          <p class="float-left">
+            <div class="card card-paiement">
+              <div class="card-body">
+                <h4 class="card-title">
+                  <input type="radio" id="payqin" name="drone" checked />
+                  <label for="payqin">
+                    <img
+                      class="logo-payqin"
+                      src="https://www.payqin.com/wp-content/uploads/2020/09/n3-1.png"
+                      alt=""
+                  /></label>
+                </h4>
+                <p class="card-text">
+                  <input type="checkbox" id="payqin" name="payqin" checked />
+                  <label for="payqin"
+                    >Je certifie être majeur(e) et avoir lu et accepté :</label
+                  >
+                </p>
+                <p>
+                    <ul>
+                      <li>Les <a href="#"> Conditions Générales de Vente</a> Stocklet.</li>
+                      <li>Que commander un produit sur Stocklet implique une obligation de paiement.</li>
+                    </ul>
+                </p>
+                <button class="btn btn_payqin" id="pay"> <b>Payer avec</b>  <img src="https://res.cloudinary.com/dhc0siki5/image/upload/v1613650040/payqin/payment_button_ouvyfn.png" alt="" class="img_btn_payqin"></button>
+              </div>
+            </div>
+          </p>
         </div>
       </div>
       <div class="payment_purchase">
@@ -135,7 +163,7 @@
       }
     )
 // Fonction au click appel, des deux fonctions
-  $("#next").click(function(){
+  $("#pay").click(function(){
     postNow();
   });
 </script>
