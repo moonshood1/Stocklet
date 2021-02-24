@@ -1,22 +1,29 @@
-{% extends "base.html.twig" %}
-
-{% block title %}Page introuvable{% endblock %}
-{% block body %}
-<link rel="stylesheet" href="/css/404_0.css">
-<section class="page_404">
-	<div class="container">
-		<div class="row">	
-            <div class="col-sm-12 text-center">
-                <div class="four_zero_four_bg">
-                    <h1 class="text-center ">404</h1>
-                </div>
-                <div class="contant_box_404">
-                    <h3 class="h2">On dirait que vous etes perdus</h3>	
-                    <p>La page que vous cherchez n'existe pas</p>
-                    <a href=" {{ path('home') }} " class="link_404">Retour à Stocklet</a>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/404_1.css">
+        <title>STOCKLET - Page introuvale</title>
+    </head>
+    <body>
+        <section class="page_404">
+            <div class="container">
+                <div class="row">	
+                    <div class="col-sm-12 text-center">
+                        <div class="four_zero_four_bg">
+                            <h1 class="text-center ">404</h1>
+                        </div>
+                        <div class="contant_box_404">
+                            <h3 class="h2">On dirait que vous êtes perdus</h3>	
+                            <p>La page que vous cherchez n'existe pas</p>
+                            <a href=" {{ path('home') }} " class="link_404">Retour à Stocklet</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-		</div>
-	</div>
-</section>
-{% endblock %}
+        </section>
+    </body>
+</html>

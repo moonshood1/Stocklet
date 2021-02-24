@@ -10,6 +10,40 @@
   font-family: Gilroy-medium;
   src: url(../fonts/Gilroy-Medium.ttf);
 }
+
+/* css du loader */
+#loader {
+  border: 12px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 12px solid #444444;
+  width: 70px;
+  height: 70px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.center {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.center {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
 .page_404 {
   padding: 40px 0;
   background: #fff;
@@ -21,7 +55,7 @@
 }
 
 .four_zero_four_bg {
-  background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+  background-image: url(https://res.cloudinary.com/dhc0siki5/image/upload/v1614075982/Stocklet/IMG-20201204-WA0021_plmuij.jpg);
   height: 400px;
   background-position: center;
 }
@@ -32,6 +66,7 @@
 }
 
 .four_zero_four_bg h3 {
+  margin-top: 55px;
   font-family: Gilroy-bold;
   font-size: 80px;
 }

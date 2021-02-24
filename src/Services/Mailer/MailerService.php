@@ -30,6 +30,20 @@ class MailerService
         $this->mailer->send($email); 
     }
 
+    public function sendEmailAfterOauth($userEmail,$userFullName,$password)
+    {
+        $email = (new TemplatedEmail())
+            ->from('payqin@stocklet.ci')
+            ->to($userEmail)
+            ->subject("Confirmation de l'inscription sur STOCKLET")
+            ->htmlTemplate("partials/emails/confirm.html.twig")
+            ->context([
+                'username' => $userFullName,
+                'password' => $password
+            ]);
+        $this->mailer->send($email);
+    }
+
     public function sendOrderDetails($userEmail,$invoices,$invoiceNumber,$userFirstName, $userLastName)
     {
         $email = (new TemplatedEmail())
@@ -59,6 +73,17 @@ class MailerService
                     'username' => $username,
                     'message' => $message]);
         
+        $this->mailer->send($email);
+    }
+
+    public function sendTest($user_email)
+    {
+        $email = (new TemplatedEmail())
+                ->from('hello@stocklet.ci')
+                ->to($user_email)
+                ->subject("Bonjour")
+                ->htmlTemplate("partials/emails/test.html.twig");
+
         $this->mailer->send($email);
     }
    

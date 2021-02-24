@@ -12,10 +12,12 @@ use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\CommentLikeRepository;
 use App\Repository\CommentDisLikeRepository;
+use App\Services\Mailer\MailerService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class HomeController extends AbstractController
 {
@@ -24,6 +26,7 @@ class HomeController extends AbstractController
      */
     public function index(ProductRepository $product,Request $request,EntityManagerInterface $manager,CommentRepository $commentRepo):Response
     {
+
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);

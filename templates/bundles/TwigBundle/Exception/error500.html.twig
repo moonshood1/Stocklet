@@ -1,33 +1,29 @@
-{% extends "base.html.twig" %}
-{% block title %}Erreur Interne{% endblock %}
-
-{% block body %}
-<link rel="stylesheet" href="/css/500_0.css">
-<div class="full-screen">
-    <div class='container'>
-        <span class="error-num">5</span>
-        <div class='eye'></div>
-        <div class='eye'></div>
-        <p class="sub-text">Erreur interne! Quelque chose s'est mal passé.Nous <span class="italic">essayons</span> de trouver une solution.</p>
-        <a href="{{ path('home') }}">Retour a Stocklet</a>
-    </div>
-</div>    
-{% endblock %}
-{% block javascripts %}
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script>
-        $(".full-screen").mousemove(function(event) {
-            var eye = $(".eye");
-            var x = (eye.offset().left) + (eye.width() / 2);
-            var y = (eye.offset().top) + (eye.height() / 2);
-            var rad = Math.atan2(event.pageX - x, event.pageY - y);
-            var rot = (rad * (180 / Math.PI) * -1) + 180;
-            eye.css({
-                '-webkit-transform': 'rotate(' + rot + 'deg)',
-                '-moz-transform': 'rotate(' + rot + 'deg)',
-                '-ms-transform': 'rotate(' + rot + 'deg)',
-                'transform': 'rotate(' + rot + 'deg)'
-            });
-        });
-    </script>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/500_1.css">
+        <title>STOCKLET - Erreur interne</title>
+    </head>
+    <body>
+        <section class="page_404">
+            <div class="container">
+                <div class="row">	
+                    <div class="col-sm-12 text-center">
+                        <div class="four_zero_four_bg">
+                            <h1 class="text-center ">500</h1>
+                        </div>
+                        <div class="contant_box_404">
+                            <h3 class="h2">Erreur Interne</h3>	
+                            <p>Quelque chose s'est mal passé.Nous essayons de trouver une solution.</p>
+                            <a href=" {{ path('home') }} " class="link_404">Retour à Stocklet</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

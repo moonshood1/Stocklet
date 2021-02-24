@@ -195,18 +195,18 @@
               <div class="col-sm-2">
               <img 
                 {% if comment.author.picture is null and comment.author.pictureName is null  %}
-                src="https://randomuser.me/api/portraits/men/84.jpg"  
+                src="https://via.placeholder.com/150C"  
                 {% elseif comment.author.picture is null %}
                   src="/images/avatar/{{comment.author.pictureName}}" 
                   {% else %}
-                    src="{{comment.author.picture}}" 
+                    src="{{comment.author.picture}}"
                 {% endif %}
                 alt=""
                 class="avatar avatar-medium"/>
               </div>
               <div class="col-sm-8">
                 <small style="font-family: AvenirNextLTPro-Bold; font-size: 14px; color: #1e316a;">{{ comment.author.firstName }} {{ comment.author.lastName }}
-                  <small style="font-family: AvenirNextLTPro-Medium; color: rgba(30, 49, 106, 0.32); font-size: 12px;">inscrit depuis 1 an </small>
+                  <small style="font-family: AvenirNextLTPro-Medium; color: rgba(30, 49, 106, 0.32); font-size: 12px;">inscrit depuis le {{comment.author.RegisteredAt|date('d-m-Y')}} </small>
                 </small>
                 <p style="font-family: AvenirNextLTPro-Regular;margin-top: 15px;color: #1e316a;font-size: 14px;">{{ comment.content }} <br />
                   <a href="{{ path('comment_like',{'id': comment.id}) }}" class="btn-btn-link js-like" style="text-decoration:none;">
@@ -256,22 +256,18 @@
                 <p class="callus_content">+225 27 22 59 84 37</p>
               </div>
               <div class="contact_left">
-                  <p><img src="https://res.cloudinary.com/dhc0siki5/image/upload/v1613660976/Stocklet/bouton_payement-02_qkpq3a.jpg" alt="" width="100%"></p>
+                  <p><img src="https://res.cloudinary.com/dhc0siki5/image/upload/v1613730987/Stocklet/bouton_payement_cor2-01_bibzjb.png" alt="" width="100%"></p>
               </div>
             </div>
             <p class="features">
             <div class="row" style="padding:0; margin:0;">
-              <div class="col-md-2">
+              <div class="col-md-6">
                 <p><a href="{{ path('contact_index') }}" style="color:#fff">  Contacts</a></p>
                 <p><a href="{{ path('faq_index') }}" style="color:#fff">  FAQ'S</a></p>
               </div>
-               <div class="col-md-4">
-                <p class="text-center"><a href="#" style="color:#fff"><i class="fab fa-facebook"></i> Facebook</a></p>
-                <p class="text-center"><a href="#" style="color:#fff"><i class="fab fa-instagram"></i> Instagram</a></p>
-              </div>
-              <div class="col-md-6">
-                <p><a href="{{ path('terms_index') }}" style="color:#fff"> Termes & Conditions</a></p>
-                <p><a href="{{ path('privacy_index') }}" style="color:#fff"> Politique de confidentialité</a></p>
+               <div class="col-md-6">
+                <p class=""><a href="#" style="color:#fff"><i class="fab fa-facebook"></i> Facebook</a></p>
+                <p class=""><a href="#" style="color:#fff"><i class="fab fa-instagram"></i> Instagram</a></p>
               </div>
             </div>
             </p>
