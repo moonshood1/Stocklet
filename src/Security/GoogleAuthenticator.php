@@ -60,7 +60,7 @@ class GoogleAuthenticator extends SocialAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
     {
-        return new RedirectResponse('/');
+        return new RedirectResponse('/account');
     }
 
     private function getClient(): GoogleClient

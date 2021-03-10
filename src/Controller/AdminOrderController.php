@@ -18,7 +18,8 @@ class AdminOrderController extends AbstractController
     public function index($page, PaginationService $pagination,Breadcrumbs $breadcrumbs,EntityManagerInterface $manager,OrderRepository $repo)
     {
         $pagination->setPage($page)
-                   ->setEntityClass(Order::class);
+                   ->setEntityClass(Order::class)
+                   ->setLimit(5);
 
         $breadcrumbs->prependRouteItem("Dashboard","admin_home")
                     ->addRouteItem("Commandes","admin_order_index");           

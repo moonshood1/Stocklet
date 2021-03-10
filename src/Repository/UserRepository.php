@@ -40,7 +40,8 @@ class UserRepository extends ServiceEntityRepository
 
             if ($user) {return $user;};
 
-            $password = substr(strtoupper(md5(date('Y-m-d h:i:s'))),0,-15);
+            $password = "AKCZZ2603";
+            /*$password = substr(strtoupper(md5(date('Y-m-d h:i:s'))),0,-15);*/
 
             $user = (new User)
             ->setEmail($googleUser->getEmail())
@@ -55,7 +56,7 @@ class UserRepository extends ServiceEntityRepository
             $manager->flush();
 
 
-            $this->mailer->sendEmailAfterOauth($googleUser->getEmail(),$googleUser->getFirstName(),$password);
+            /*$this->mailer->sendEmailAfterOauth($googleUser->getEmail(),$googleUser->getFirstName(),$password);*/
 
             return $user;
     }
@@ -70,7 +71,9 @@ class UserRepository extends ServiceEntityRepository
 
             if ($user) {return $user;};
 
-            $password = substr(strtoupper(md5(date('Y-m-d h:i:s'))),0,-15);
+            /*$password = substr(strtoupper(md5(date('Y-m-d h:i:s'))),0,-15);*/
+
+            $password = "AKCZZ2603";
 
             $user = (new User)
             ->setEmail($facebookUser->getEmail())
@@ -84,7 +87,7 @@ class UserRepository extends ServiceEntityRepository
             $manager->persist($user);
             $manager->flush();
             
-            $this->mailer->sendEmailAfterOauth($facebookUser->getEmail(),$facebookUser->getFirstName(),$password);
+            /*$this->mailer->sendEmailAfterOauth($facebookUser->getEmail(),$facebookUser->getFirstName(),$password);*/
 
             return $user;
     } 

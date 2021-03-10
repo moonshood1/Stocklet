@@ -48,7 +48,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title"> Actions possibles </h5>
-                            <a href="#" class="btn btn-outline-primary"><i class="fas fa-edit"></i> Modifier le produit</a>
+                            <a href="{{ path('admin_products_edit',{'id': product.id}) }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i> Modifier le produit</a>
                             <a href="#" class="btn btn-outline-warning"><i class="fas fa-check-circle"></i> Modifier la disponibilité</a>
                             <a href="#" class="btn btn-outline-danger"><i class="fas fa-trash"></i> Supprimer le produit</a>
                         </div>

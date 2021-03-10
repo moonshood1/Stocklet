@@ -3,12 +3,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="/css/login_0.css">
+<link rel="icon" href="https://res.cloudinary.com/dhc0siki5/image/upload/v1614213038/Stocklet/favicon_guvdrk.png" type="image/png"/>
   <div class="container">
     <div class="row h-100">
       <div class="col my-auto d-flex justify-content-center">
         <div class="card bg-light ml-auto mr-auto pb-5 pl-3">
           <div class="card-body">
-            <img src="../../assets/images/stocklet.png" alt="" class="mb-3" height="43">
+            <img src="https://res.cloudinary.com/dhc0siki5/image/upload/v1613657985/Stocklet/stocklet_fjv8fz.png" alt="" class="mb-3" height="43">
             <p class="welcome">Bon Retour sur Stocklet</p>
             <p class="signup mt-3">Nouveau membre?<a href="{{ path('account_register')}}"> Créer un compte</a></p>
               {% if hasError %}
@@ -43,9 +44,9 @@
                   <a href="{{ path('connect_facebook_start') }} " style="text-decoration:none; color:black;" id="google" class="btn border mt-2"><img src="../../assets/images/fb.png" alt="" class="logo"> Facebook</a>
                 </div>
             </div>
+            <p class="text-center"><a href="{{ path('home')}} ">Visiter Stocklet</a></p>
           </div>
         </div>        
-
       </div>
     </div>
   </div>

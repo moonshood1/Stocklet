@@ -52,6 +52,16 @@ class HomeController extends AbstractController
     }
 
     /**
+     * @Route("/send_test", name="send_test_mail")
+     * @param MailerService $mailerService
+     */
+    public function sendGmail(MailerService $mailerService)
+    {
+        $mailerService->sendTest("louisrogerguirika@gmail.com");
+        return new Response("mail envoyé");
+    }
+
+    /**
      * @Route("/demain", name="product_date")
      *
      * @return Response

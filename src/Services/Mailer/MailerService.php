@@ -79,7 +79,7 @@ class MailerService
     public function sendTest($user_email)
     {
         $email = (new TemplatedEmail())
-                ->from('hello@stocklet.ci')
+                ->from('louisrogerguirika@gmail.com')
                 ->to($user_email)
                 ->subject("Bonjour")
                 ->htmlTemplate("partials/emails/test.html.twig");

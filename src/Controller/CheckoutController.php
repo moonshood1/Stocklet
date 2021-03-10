@@ -160,11 +160,11 @@ class CheckoutController extends AbstractController
     {  
         $session = $request->getSession();
 
-        $shopId = "5dea9f276f0d90123988ed74";
+        $shopId = "602bd79a115c0100126cd9a9";
         $amount = $cartservice->getTotal();
         $customerNumber = $this->getUser()->getId();
         $orderNumber = $session->get('invoiceNumber');
-        $secret = "RoJv4p2xL7L8H6XLUQbpSqbE";
+        $secret = "WT6P9AAbuM5DlAPYCC6swPSS";
         $signature = $shopId.';'.$amount.';'.$secret;
         $trash = md5($signature);
         $hash = strtoupper($trash);

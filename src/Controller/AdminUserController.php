@@ -20,9 +20,10 @@ class AdminUserController extends AbstractController
     public function index($page, PaginationService $pagination,Breadcrumbs $breadcrumbs)
     {
         $pagination->setEntityClass(User::class)
-                   ->setPage($page);
+                   ->setPage($page)
+                   ->setLimit(40);
 
-        $breadcrumbs->prependItem("Dashboard", "admin_home")
+        $breadcrumbs->prependRouteItem("Dashboard", "admin_home")
                     ->addRouteItem("Utilisateurs","admin_user_index");
 
         return $this->render('admin/user/index.html.twig', [   
@@ -49,6 +50,8 @@ class AdminUserController extends AbstractController
         } else {
             $manager->remove($user);
             $manager->flush();
+
+            return $this->redirectToRoute("admin_user_index");
         }
     }
 
@@ -75,7 +78,7 @@ class AdminUserController extends AbstractController
         $orders = $repo->findBy(['users' => $user]);
         $page = $pagination->paginate($orders,$request->query->getInt('page',1),4);
 
-        $breadcrumbs->prependItem("Dashboard", "admin_home")
+        $breadcrumbs->prependRouteItem("Dashboard", "admin_home")
                     ->addRouteItem("Utilisateurs","admin_user_index")
                     ->addRouteItem("Détail","admin_user_show",['id'=> $user->getId()]);
                     
